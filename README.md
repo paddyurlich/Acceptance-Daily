@@ -6,9 +6,15 @@ Change to cell input format so that firstly the cells in question are selected i
 2. Cluster and site cells are added together to create the "post" stats. 
 
 ================================
-Cluster
+New Site
 ================================
-Pre and post cluster
+Post date new site stats
+
+================================
+Cluster - Pre and post cluster
+================================
+Pre date innclude only cluster cells. 
+Post date include cluster cells and new site
 
 ================================
 Sector

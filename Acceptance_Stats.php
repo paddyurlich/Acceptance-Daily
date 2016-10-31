@@ -11,16 +11,15 @@
 <?php include 'main_function_carrier.php' ?> <!-- returnStats3G_carrier -->
 <?php include 'main_function_sector.php' ?> <!-- returnStats3G_sector -->
 <?php include 'main_function_cluster_daily_bh.php' ?> <!-- returnStats3G_daily_bh -->
-
-
-
-
-
-
-returnStats3G_carrier();
+<?php include 'main_function_carrier _daily_bh.php' ?> 
 
 <?php
 
+  //=============================
+  // get values for drops downs (cells and dates)
+  //=============================
+  
+  
   $dateList = getDateList();
   $cellList = getCellList();
   $cellList4G = getCellList4G();
@@ -30,14 +29,8 @@ returnStats3G_carrier();
   set_time_limit(360);
 
   //=============================
-  // helper vars
+  // set selected start and end dates
   //=============================
-
-  $selectedCells_pre = isset($_GET['cell']) ? $_GET['cell'] : null ;
-  $selectedCells_post = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;
-
-  $selectedCells_4G_pre = isset($_GET['cell4Gpre']) ? $_GET['cell4Gpre'] : null ;
-  $selectedCells_4G_post = isset($_GET['cell4Gpost']) ? $_GET['cell4Gpost'] : null ;
 
   $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null ;
   $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null ;
@@ -45,33 +38,99 @@ returnStats3G_carrier();
   $startDate_post = isset($_GET['startDate_post']) ? $_GET['startDate_post'] : null ;
   $endDate_post = isset($_GET['endDate_post']) ? $_GET['endDate_post'] : null ;
 
-  $formComplete = (is_null($selectedCells_pre)  || is_null($startDate) || is_null($endDate)) ? false : true ;
+  // ======================
+  // 3G calc
+  // ======================
 
-  $stats_pre =  returnStats3G("pre", $selectedCells_pre, $startDate, $endDate);
-  $stats_post =  returnStats3G("post", $selectedCells_post, $startDate_post, $endDate_post);
+  $selectedCells_3G_newSite = isset($_GET['cell']) ? $_GET['cell'] : null ;
 
-  $stats_pre_3G_daily_bh =  returnStats3G_daily_bh("pre", $selectedCells_pre, $startDate, $endDate);
-  $stats_post_3G_daily_bh =  returnStats3G_daily_bh("post", $selectedCells_post, $startDate_post, $endDate_post);
+  $selectedCells_3G_cluster = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;
 
-  $stats_4G_pre =  returnStats4G("pre", $selectedCells_4G_pre, $startDate, $endDate);
-  $stats_4G_post =  returnStats4G("post", $selectedCells_4G_post, $startDate_post, $endDate_post);
+  $selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
+  
+  if(isset($selectedCells_3G_cluster)){
+    $selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
+  } else {
+    $selectedCells_3G_newSite_and_cluster = $selectedCells_3G_newSite;
+  }
+
+  // notes: 
+  //=================
+  //pre stats = cluster
+  //post stats = cluster and new_site
 
 
+  $stats_3G_post_newSite =  returnStats3G("post", $selectedCells_3G_newSite, $startDate, $endDate);
+  $stats_3G_pre_cluster =  returnStats3G("pre", $selectedCells_3G_cluster, $startDate, $endDate);
+  $stats_3G_post_cluster_and_newSite =  returnStats3G("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
 
-  $stats_post_carrier_u09f1 =  returnStats3G_carrier("U09-1","post", $selectedCells_post, $startDate_post, $endDate_post);
-  $stats_post_carrier_u09f2 =  returnStats3G_carrier("U09-2","post", $selectedCells_post, $startDate_post, $endDate_post);
-  $stats_post_carrier_u21f1 =  returnStats3G_carrier("U21-1","post", $selectedCells_post, $startDate_post, $endDate_post);
-  $stats_post_carrier_u21f2 =  returnStats3G_carrier("U21-2","post", $selectedCells_post, $startDate_post, $endDate_post);
-  $stats_post_carrier_u21f3 =  returnStats3G_carrier("U21-3","post", $selectedCells_post, $startDate_post, $endDate_post);
+  $stats_3G_bh_post_newSite = returnStats3G_daily_bh("post", $selectedCells_3G_newSite, $startDate, $endDate);
+  $stats_3G_bh_pre_cluster =  returnStats3G_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
+  $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
-  $stats_post_sector_S1 =  returnStats3G_sector("1","post", $selectedCells_post, $startDate_post, $endDate_post);
-  $stats_post_sector_S2 =  returnStats3G_sector("2","post", $selectedCells_post, $startDate_post, $endDate_post);
-  $stats_post_sector_S3 =  returnStats3G_sector("3","post", $selectedCells_post, $startDate_post, $endDate_post);
+
+  // carrier daily
+  $stats_pre_carrier_u09f1 =  returnStats3G_carrier("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_pre_carrier_u09f2 =  returnStats3G_carrier("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_pre_carrier_u21f1 =  returnStats3G_carrier("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_pre_carrier_u21f2 =  returnStats3G_carrier("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_pre_carrier_u21f3 =  returnStats3G_carrier("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+
+  // carrier busy hour
+  $stats_carrier_bh_u09f1 =  returnStats3G_carrier_daily_bh("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_carrier_bh_u09f2 =  returnStats3G_carrier_daily_bh("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_carrier_bh_u21f1 =  returnStats3G_carrier_daily_bh("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_carrier_bh_u21f2 =  returnStats3G_carrier_daily_bh("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_carrier_bh_u21f3 =  returnStats3G_carrier_daily_bh("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+
+  // secotr daily
+  $stats_pre_sector_S1 =  returnStats3G_sector("1","pre", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_pre_sector_S2 =  returnStats3G_sector("2","pre", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_pre_sector_S3 =  returnStats3G_sector("3","pre", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   
 
+  // ======================
+  // 4G calc
+  // ======================
 
-  // var_dump($selectedCells_pre);
+  
+  // notes: 
+  //=================
+  //pre stats = cluster
+  //post stats = cluster and new_site
+
+  $selectedCells_4G_newSite = isset($_GET['cell4Gpre']) ? $_GET['cell4Gpre'] : null ;
+
+  $selectedCells_4G_cluster = isset($_GET['cell4Gpost']) ? $_GET['cell4Gpost'] : null ;
+
+  $selectedCells_4G_newSite_and_cluster = array_merge($selectedCells_4G_newSite, $selectedCells_4G_cluster);
+  
+  if(isset($selectedCells_4G_cluster)){
+    $selectedCells_4G_newSite_and_cluster = array_merge($selectedCells_4G_newSite, $selectedCells_4G_cluster);
+  } else {
+    $selectedCells_4G_newSite_and_cluster = $selectedCells_4G_newSite;
+  }
+
+
+  //$stats_4G_pre =  returnStats4G("pre", $selectedCells_4G_pre, $startDate, $endDate);
+  //$stats_4G_post =  returnStats4G("post", $selectedCells_4G_post, $startDate_post, $endDate_post);
+
+  $stats_4G_post_newSite =  returnStats4G("post", $selectedCells_4G_newSite, $startDate, $endDate);
+  $stats_4G_pre_cluster =  returnStats4G("pre", $selectedCells_4G_cluster, $startDate, $endDate);
+  $stats_4G_post_cluster_and_newSite =  returnStats4G("post", $selectedCells_4G_newSite_and_cluster, $startDate_post, $endDate_post);
+
+
+
+
+
+  // ======================
+  // helper vars
+  // ======================
+
+  $formComplete = (is_null($selectedCells_3G_newSite)  || is_null($startDate) || is_null($endDate)) ? false : true ;
+
+
   // var_dump($startDate);
   // var_dump($startDate);
   // var_dump($stats_pre);
@@ -82,8 +141,12 @@ returnStats3G_carrier();
   // var_dump($endDate_post);
   // var_dump($stats_post);
 
-
+  // var_dump($selectedCells_3G_newSite);
+  // var_dump($selectedCells_3G_cluster);
+  // var_dump($selectedCells_3G_newSite_and_cluster);
 ?>
+
+
 
 
 <!doctype html>
@@ -150,6 +213,11 @@ returnStats3G_carrier();
     
     <form action:"index.php" method: "get">
     
+    
+    <!-- ========== -->
+    <!-- first well -->
+    <!-- ========== -->
+
     <div class="well">
       <div class="row">
 
@@ -175,62 +243,6 @@ returnStats3G_carrier();
             </select>
         </div>
 
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>Cells (Pre) 3G</h2>
-             <hr>
-             <select name="cell[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
-                <option value=""></option>       
-                    <?php foreach($cellList as $k => $v) { ?>
-                        <option value=<?php echo $cellList[$k];?>
-                          
-                          <?php
-                            if (isset($selectedCells_pre)) {
-                              foreach ($selectedCells_pre as $key => $selectedCell) {
-                                echo isset($selectedCells_pre) && $cellList[$k] == $selectedCell ? ' selected' : '';
-                              }
-                            }
-                          ?>
-
-                          > <!--end of option tag -->
-
-                          <?php echo $cellList[$k]; ?>  
-
-                    <?php } ?> 
-              </select>
-        </div>
-
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>Cells (Pre) 4G</h2>
-             <hr>
-             <select name="cell4Gpre[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
-                <option value=""></option>       
-                    <?php foreach($cellList4G as $k => $v) { ?>
-                        <option value=<?php echo $cellList4G[$k];?>
-                          
-                          <?php
-                            if (isset($selectedCells_4G_pre)) {
-                              foreach ($selectedCells_4G_pre as $key => $selectedCell) {
-                                echo isset($selectedCells_4G_pre) && $cellList4G[$k] == $selectedCell ? ' selected' : '';
-                              }
-                            }
-                          ?>
-
-                          > <!--end of option tag -->
-
-                          <?php echo $cellList4G[$k]; ?>  
-
-                    <?php } ?> 
-              </select>
-        </div>
-
-      </div> <!--end first row --> 
-      </div> <!-- end well -->
-
-
-      <div class="well">
-      <div class="row">
-
-      
         <div class="col-md-3">  
           <h2>Post Dates</h2>
           <hr>
@@ -253,9 +265,45 @@ returnStats3G_carrier();
             </select>
         </div>
 
+      </div> <!--end first row --> 
+      </div> <!-- end first well -->
+
+      <!-- ========== -->
+      <!-- second well -->
+      <!-- ========== -->
+      
+      <div class="well">
+      <div class="row">
+
+      
+        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
+          <h2>3G Cells (new site)</h2>
+             <hr>
+             <select name="cell[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
+                <option value=""></option>       
+                    <?php foreach($cellList as $k => $v) { ?>
+                        <option value=<?php echo $cellList[$k];?>
+                          
+                          <?php
+                            if (isset($selectedCells_3G_newSite)) {
+                              foreach ($selectedCells_3G_newSite as $key => $selectedCell) {
+                                echo isset($selectedCells_3G_newSite) && $cellList[$k] == $selectedCell ? ' selected' : '';
+                              }
+                            }
+                          ?>
+
+                          
+
+                          > <!--end of option tag -->
+
+                          <?php echo $cellList[$k]; ?>  
+
+                    <?php } ?> 
+              </select>
+        </div>
 
         <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>Cells (Post) 3G</h2>
+          <h2>3G Cells (cluster)</h2>
           <hr>
              <select name="cellCluster2[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
                 <option value=""></option>       
@@ -263,9 +311,9 @@ returnStats3G_carrier();
                         <option value=<?php echo $cellList[$k] ?>
                           
                           <?php
-                            if (isset($selectedCells_post)) {
-                              foreach ($selectedCells_post as $key => $selectedCell) {
-                                echo isset($selectedCells_post) && $cellList[$k] == $selectedCell ? ' selected' : '';
+                            if (isset($selectedCells_3G_cluster)) {
+                              foreach ($selectedCells_3G_cluster as $key => $selectedCell) {
+                                echo isset($selectedCells_3G_cluster) && $cellList[$k] == $selectedCell ? ' selected' : '';
                               }
                             }
                           ?>
@@ -278,8 +326,43 @@ returnStats3G_carrier();
               </select>
         </div>
 
+       
+
+      </div> <!--end second row --> 
+      </div> <!-- end second well -->
+
+      <!-- ========== -->
+      <!-- third well -->
+      <!-- ========== -->
+      <div class="well">
+      <div class="row">
+          
+      <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
+          <h2>4G Cells (new site)</h2>
+             <hr>
+             <select name="cell4Gpre[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
+                <option value=""></option>       
+                    <?php foreach($cellList4G as $k => $v) { ?>
+                        <option value=<?php echo $cellList4G[$k];?>
+                          
+                          <?php
+                            if (isset($selectedCells_4G_pre)) {
+                              foreach ($selectedCells_4G_pre as $key => $selectedCell) {
+                                echo isset($selectedCells_4G_pre) && $cellList4G[$k] == $selectedCell ? ' selected' : '';
+                              }
+                            }
+                          ?>
+
+                          > <!--end of option tag -->
+
+                          <?php echo $cellList4G[$k]; ?>  
+
+                    <?php } ?> 
+              </select>
+        </div>
+
         <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>Cells (Post) 4G</h2>
+          <h2>4G Cells (cluster)</h2>
              <hr>
              <select name="cell4Gpost[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
                 <option value=""></option>       
@@ -301,10 +384,39 @@ returnStats3G_carrier();
                     <?php } ?> 
               </select>
         </div>
+        
 
 
-    </div> <!--end second row --> 
-    </div> <!-- end well -->
+    </div> <!--end third row --> 
+    </div> <!-- end third well -->
+
+
+    <!-- ========== -->
+    <!-- fourth well -->
+    <!-- ========== -->
+      <div class="well">
+      <div class="row">
+          
+      <div class="col-md-4">
+          <h2>Cluster cells (pre dates)</h2>
+             <hr>
+              <?php var_dump($selectedCells_3G_cluster) ?>
+              <?php var_dump($selectedCells_4G_cluster) ?>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Cluster and new sites (post date) </h2>
+             <hr>
+              <?php var_dump($selectedCells_3G_newSite_and_cluster) ?>
+              <?php var_dump($selectedCells_4G_newSite_and_cluster) ?>            
+        </div>
+        
+
+
+    </div> <!--end fourth row --> 
+    </div> <!-- end fourth well -->
+
+
 
 
 
@@ -316,7 +428,9 @@ returnStats3G_carrier();
     </div> <!--end of third row --> 
 
 </form> <!-- end of form --> 
+
 </div>
+
 </div>
 
 <!-- ===============================================================================================
@@ -328,17 +442,467 @@ returnStats3G_carrier();
 
 
 <h3 class="text-center">Performance Stats</h3> 
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#cluster">Cluster</a></li>
-  <li><a data-toggle="tab" href="#carrier">Carrier</a></li>
-  <li><a data-toggle="tab" href="#sector">Sector</a></li>
-</ul>
 
+
+<!--  ================================================================= --> 
+
+<div class="well">
+
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#newsite">New Site</a></li>
+    <li><a data-toggle="pill" href="#cluster">Cluster</a></li>
+    <li><a data-toggle="pill" href="#carrier">Carrier</a></li>
+    <li><a data-toggle="pill" href="#sector">Sector</a></li>
+  </ul>
+  
 <div class="tab-content">
-<!-- =============================================================================================
- cluster stats
-================================================================================================= --> 
-  <div id="cluster" class="tab-pane fade in active">
+
+<!-- =============================================================================== --> 
+<!-- NEW SITE STATS --> 
+<!-- =============================================================================== --> 
+
+<div id="newsite" class="tab-pane fade in active">
+    
+    </br>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <strong>Note: </strong> Stats based purely on new site performance (post dates).</br>
+        </div>
+      </div>
+    </div>
+
+
+  
+<div class="row">
+
+      <div class="col-md-6">
+        <h3>MAIN 3G KPI (%)</h3>
+        <?php $thisTable = "main"; ?>
+
+        <table class="table table-hover table-inverse table-sm table-condensed" >
+          <thead>
+            <tr>     
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <?php 
+                foreach ($fieldtype3G as $key => $value) {
+
+                  $table = $fieldtype3G[$key]['table'];
+
+                  if ($table != $thisTable) {
+                    continue;
+                  }
+
+                  $decPlaces = $fieldtype3G[$key]['dec'];
+                  $arrowType = $fieldtype3G[$key]['arrow'];
+                  $KPI = $fieldtype3G[$key]['alias'];
+
+                  $newSiteStats = (float)($stats_3G_post_newSite['post'][0][$key]);
+                        
+                  echo "<tr>";
+                    echo "<th>".$KPI."</th>";
+                    echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";         
+                  echo "</tr>";
+                }
+            ?>
+          </tbody>
+        </table>
+    </div>
+
+
+  <div class="col-md-6">
+    <h3>MAIN 4G KPI (%)</h3>
+    <?php $thisTable = "main"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+       
+        <?php 
+            foreach ($fieldtype4G as $key => $value) {
+
+              $table = $fieldtype4G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype4G[$key]['dec'];         
+              $KPI = $fieldtype4G[$key]['alias'];
+              $newSiteStats =  (float)($stats_4G_post_newSite ['post'][$key]);
+                          
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";            
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+  </div>
+</div> <!-- end first row -->
+
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>3G Traffic</h3>
+    <?php $thisTable = "traffic"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+        <thead>
+          <tr>     
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <?php 
+            foreach ($fieldtype3G as $key => $value) {
+
+              $table = $fieldtype3G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype3G[$key]['dec'];
+              $arrowType = $fieldtype3G[$key]['arrow'];
+              $KPI = $fieldtype3G[$key]['alias'];
+
+              $newSiteStats = (float)($stats_3G_post_newSite['post'][0][$key]);
+                     
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";         
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="col-md-6">
+    <h3>4G Traffic</h3>
+    <?php $thisTable = "traffic"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+       
+        <?php 
+            foreach ($fieldtype4G as $key => $value) {
+
+              $table = $fieldtype4G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype4G[$key]['dec'];         
+              $KPI = $fieldtype4G[$key]['alias'];
+              $newSiteStats =  (float)($stats_4G_post_newSite ['post'][$key]);
+                          
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";            
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+  </div>
+</div> <!-- end row --> 
+
+
+<div class="row">
+<div class="col-md-6">
+    <h3> Congestion </h3>
+    <?php $thisTable = "congestion" ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+        <thead>
+          <tr>     
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <?php 
+            foreach ($fieldtype3G as $key => $value) {
+
+              $table = $fieldtype3G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype3G[$key]['dec'];
+              $arrowType = $fieldtype3G[$key]['arrow'];
+              $KPI = $fieldtype3G[$key]['alias'];
+
+              $newSiteStats = (float)($stats_3G_post_newSite['post'][0][$key]);
+                     
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";         
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+</div>
+
+
+<div class="col-md-6">
+    <h3> 4G Basic </h3>
+    <?php $thisTable = "basic"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+       
+        <?php 
+            foreach ($fieldtype4G as $key => $value) {
+
+              $table = $fieldtype4G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype4G[$key]['dec'];         
+              $KPI = $fieldtype4G[$key]['alias'];
+              $newSiteStats =  (float)($stats_4G_post_newSite ['post'][$key]);
+                          
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";            
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+  </div>
+
+</div> <!-- end of third row -->
+
+
+
+<div class="row">
+<div class="col-md-6">
+    <h3> Resources / Power (Busy Hour) </h3>
+    <?php $thisTable = "Resource"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+        <thead>
+          <tr>     
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <?php 
+
+            foreach ($fieldtype3G as $key => $value) {
+
+              $table = $fieldtype3G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype3G[$key]['dec'];
+              $arrowType = $fieldtype3G[$key]['arrow'];
+              $KPI = $fieldtype3G[$key]['alias'];
+
+              $newSiteStats = (float)($stats_3G_bh_post_newSite['post'][0][$key]);
+
+
+
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";         
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <h3> Resources (4G) </h3>
+    <?php $thisTable = "resources"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+       
+        <?php 
+            foreach ($fieldtype4G as $key => $value) {
+
+              $table = $fieldtype4G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype4G[$key]['dec'];         
+              $KPI = $fieldtype4G[$key]['alias'];
+              $newSiteStats =  (float)($stats_4G_post_newSite ['post'][$key]);
+                          
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";            
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+  </div>
+</div>  <!-- end row -->
+
+<div class="row">
+<div class="col-md-6">
+    <h3> RTWP </h3>
+    <?php $thisTable = "rtwp"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+             <thead>
+          <tr>     
+          <th></th>
+          <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <?php 
+            foreach ($fieldtype3G as $key => $value) {
+
+              $table = $fieldtype3G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype3G[$key]['dec'];
+              $arrowType = $fieldtype3G[$key]['arrow'];
+              $KPI = $fieldtype3G[$key]['alias'];
+
+              $newSiteStats = (float)($stats_3G_post_newSite['post'][0][$key]);
+                     
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";         
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>  
+</div>
+
+<div class="col-md-6">
+    <h3> Interference (4G) </h3>
+    <?php $thisTable = "interference"; ?>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+       
+        <?php 
+            foreach ($fieldtype4G as $key => $value) {
+
+              $table = $fieldtype4G[$key]['table'];
+
+              if ($table != $thisTable) {
+                continue;
+              }
+
+              $decPlaces = $fieldtype4G[$key]['dec'];         
+              $KPI = $fieldtype4G[$key]['alias'];
+              $newSiteStats =  (float)($stats_4G_post_newSite ['post'][$key]);
+                          
+              echo "<tr>";
+                echo "<th>".$KPI."</th>";
+                echo "<td>".number_format($newSiteStats,$decPlaces)."</th>";            
+              echo "</tr>";
+            }
+        ?>
+
+      </tbody>
+    </table>
+</div>
+</div>  <!-- end row -->
+</div> <!--end of tab --> 
+
+<!-- =============================================================================== --> 
+<!-- CLUSTER STATS --> 
+<!-- =============================================================================== --> 
+
+<div id="cluster" class="tab-pane fade">
+</br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-danger">
+      <strong>Pre: </strong> Existing cells within cluster (ie before new site is integrated).</br>
+      <strong>Post: </strong> Cluster cells and new site ie Post ingeration performance.
+    </div>
+  </div>
+</div>
+
+
+  
     <div class="row">
       <div class="col-md-6">
         <h3>MAIN 3G KPI (%)</h3>
@@ -368,8 +932,8 @@ returnStats3G_carrier();
               $decPlaces = $fieldtype3G[$key]['dec'];
               $arrowType = $fieldtype3G[$key]['arrow'];
               $KPI = $fieldtype3G[$key]['alias'];
-              $pre = (float)($stats_pre['pre'][0][$key]);
-              $post = (float)($stats_post['post'][0][$key]);
+              $pre = (float)($stats_3G_pre_cluster['pre'][0][$key]);
+              $post = (float)($stats_3G_post_cluster_and_newSite['post'][0][$key]);
               $delta = (float)($post - $pre); 
 
               // SET ARROW DIRECTION = NORMAL
@@ -544,8 +1108,8 @@ returnStats3G_carrier();
             $decPlaces = $fieldtype3G[$key]['dec'];
             $arrowType = $fieldtype3G[$key]['arrow'];
             $KPI = $fieldtype3G[$key]['alias'];
-            $pre = (float)($stats_pre['pre'][0][$key]);
-            $post =  (float)($stats_post['post'][0][$key]);
+            $pre = (float)($stats_3G_pre_cluster['pre'][0][$key]);
+            $post =  (float)($stats_3G_post_cluster_and_newSite['post'][0][$key]);
             $delta = (float)($post - $pre);       
             
             // SET ARROW DIRECTION = NORMAL
@@ -720,8 +1284,8 @@ returnStats3G_carrier();
             $decPlaces = $fieldtype3G[$key]['dec'];
             $arrowType = $fieldtype3G[$key]['arrow'];
             $KPI = $fieldtype3G[$key]['alias'];
-            $pre = (float)($stats_pre['pre'][0][$key]);
-            $post =  (float)($stats_post['post'][0][$key]);
+            $pre = (float)($stats_3G_pre_cluster['pre'][0][$key]);
+            $post =  (float)($stats_3G_post_cluster_and_newSite['post'][0][$key]);
             $delta = (float)($post - $pre);   
 
             // SET ARROW DIRECTION = NORMAL
@@ -863,6 +1427,7 @@ returnStats3G_carrier();
       </tbody>
     </table>
   </div>
+
 </div> <!-- end of third row -->
 
 
@@ -897,9 +1462,9 @@ returnStats3G_carrier();
             $decPlaces = $fieldtype3G[$key]['dec'];
             $arrowType = $fieldtype3G[$key]['arrow'];
             $KPI = $fieldtype3G[$key]['alias'];            
-            $pre = (float)$stats_pre_3G_daily_bh['pre'][0][$key];
+            $pre = (float)$stats_3G_bh_pre_cluster['pre'][0][$key];
             //var_dump($stats_pre_3G_daily_bh);
-            $post = (float)$stats_post_3G_daily_bh['post'][0][$key];
+            $post = (float)$stats_3G_bh_post_cluster_and_newSite['post'][0][$key];
             $delta = (float)$post - $pre;
 
             // SET ARROW DIRECTION = NORMAL
@@ -955,23 +1520,287 @@ returnStats3G_carrier();
       </tbody>
     </table>
   </div>
-</div>  <!-- end row -->
 
+<div class="col-md-6">
+    <h3> Resources (4G) </h3>
 
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pre</th>
+          <th>Post</th>
+          <th>Delta</th>
+          <th></th>
+        </tr>
+      </thead>
 
+      <tbody>
 
+      <?php 
+          foreach ($fieldtype4G as $key => $value) {
+
+            $table = $fieldtype4G[$key]['table'];
+
+            if ($table != "resources") {
+              continue;
+            }
+
+            $decPlaces = $fieldtype4G[$key]['dec'];
+            $arrowType = $fieldtype4G[$key]['arrow'];
+            $KPI = $fieldtype4G[$key]['alias'];
+            $pre =  (float)($stats_4G_pre['pre'][$key]);
+            $post =  (float)($stats_4G_post['post'][$key]);
+            $delta = (float)($post - $pre); 
+
+            // SET ARROW DIRECTION = NORMAL
+            
+            if ($arrowType == "normal") {
+              
+              if ($delta > 0){
+                $arrow = "up";
+                $arrow_color = "green"; 
+              };
+
+              if ($delta < 0){
+                $arrow = "down";
+                $arrow_color = "red"; 
+              };
+
+              if ($delta == 0){
+                $arrow = "right";
+                $arrow_color = "blue"; 
+              };
+            }
+
+            // SET ARROW DIRECTION = INVSERE
+            if ($arrowType == "inverse") {
+              if ($delta > 0){
+                $arrow = "up";
+                $arrow_color = "red"; 
+              };
+
+              if ($delta < 0){
+                $arrow = "down";
+                $arrow_color = "green"; 
+              };
+
+              if ($delta == 0){
+                $arrow = "right";
+                $arrow_color = "blue"; 
+              };
+            }
+
+            $glyph = " <span class='glyphicon glyphicon-arrow-".$arrow."' style='color:".$arrow_color."'></span>";
+        
+            echo "<tr>";
+              echo "<th>".$KPI."</th>";
+              echo "<td>".number_format($pre,$decPlaces)."</th>";        
+              echo "<td>".number_format($post,$decPlaces)."</th>"; 
+              echo "<td>".number_format($delta,$decPlaces)."</th>"; 
+              echo "<td>".$glyph."</th>";        
+            echo "</tr>";
+          }
+      ?>
+
+      </tbody>
+    </table>
   </div>
 
-<!-- =============================================================================================
- carrier stats
-================================================================================================= --> 
-  <div id="carrier" class="tab-pane fade">
 
+</div>  <!-- end row -->
+
+<div class="row">
+
+<div class="col-md-6">
+    <h3> RTWP </h3>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pre</th>
+          <th>Post</th>
+          <th>Delta</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      <?php 
+          foreach ($fieldtype3G as $key => $value) {
+
+            $table = $fieldtype3G[$key]['table'];
+
+            if ($table != "rtwp") {
+              continue;
+            }
+
+            $decPlaces = $fieldtype3G[$key]['dec'];
+            $arrowType = $fieldtype3G[$key]['arrow'];
+            $KPI = $fieldtype3G[$key]['alias'];            
+            $pre = (float)$stats_3G_pre_cluster['pre'][0][$key];
+            //var_dump($stats_pre_3G_daily_bh);
+            $post = (float)$stats_3G_post_cluster_and_newSite['post'][0][$key];
+            $delta = (float)$post - $pre;
+
+            // SET ARROW DIRECTION = NORMAL
+            
+            if ($arrowType == "normal") {
+              
+              if ($delta > 0){
+                $arrow = "up";
+                $arrow_color = "green"; 
+              };
+
+              if ($delta < 0){
+                $arrow = "down";
+                $arrow_color = "red"; 
+              };
+
+              if ($delta == 0){
+                $arrow = "right";
+                $arrow_color = "blue"; 
+              };
+            }
+
+            // SET ARROW DIRECTION = INVSERE
+            if ($arrowType == "inverse") {
+              if ($delta > 0){
+                $arrow = "up";
+                $arrow_color = "red"; 
+              };
+
+              if ($delta < 0){
+                $arrow = "down";
+                $arrow_color = "green"; 
+              };
+
+              if ($delta == 0){
+                $arrow = "right";
+                $arrow_color = "blue"; 
+              };
+            }
+
+            $glyph = " <span class='glyphicon glyphicon-arrow-".$arrow."' style='color:".$arrow_color."'></span>";
+        
+            echo "<tr>";
+              echo "<th>".$KPI."</th>";
+              echo "<td>".number_format($pre,$decPlaces)."</th>";        
+              echo "<td>".number_format($post,$decPlaces)."</th>"; 
+              echo "<td>".number_format($delta,$decPlaces)."</th>"; 
+              echo "<td>".$glyph."</th>";        
+            echo "</tr>";
+          }
+      ?>
+
+      </tbody>
+    </table>
+  </div>
+
+<div class="col-md-6">
+    <h3> Interference (4G) </h3>
+
+    <table class="table table-hover table-inverse table-sm table-condensed" >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pre</th>
+          <th>Post</th>
+          <th>Delta</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      <?php 
+          foreach ($fieldtype4G as $key => $value) {
+
+            $table = $fieldtype4G[$key]['table'];
+
+            if ($table != "interference") {
+              continue;
+            }
+
+            $decPlaces = $fieldtype4G[$key]['dec'];
+            $arrowType = $fieldtype4G[$key]['arrow'];
+            $KPI = $fieldtype4G[$key]['alias'];
+            $pre =  (float)($stats_4G_pre['pre'][$key]);
+            $post =  (float)($stats_4G_post['post'][$key]);
+            $delta = (float)($post - $pre); 
+
+            // SET ARROW DIRECTION = NORMAL
+            
+            if ($arrowType == "normal") {
+              
+              if ($delta > 0){
+                $arrow = "up";
+                $arrow_color = "green"; 
+              };
+
+              if ($delta < 0){
+                $arrow = "down";
+                $arrow_color = "red"; 
+              };
+
+              if ($delta == 0){
+                $arrow = "right";
+                $arrow_color = "blue"; 
+              };
+            }
+
+            // SET ARROW DIRECTION = INVSERE
+            if ($arrowType == "inverse") {
+              if ($delta > 0){
+                $arrow = "up";
+                $arrow_color = "red"; 
+              };
+
+              if ($delta < 0){
+                $arrow = "down";
+                $arrow_color = "green"; 
+              };
+
+              if ($delta == 0){
+                $arrow = "right";
+                $arrow_color = "blue"; 
+              };
+            }
+
+            $glyph = " <span class='glyphicon glyphicon-arrow-".$arrow."' style='color:".$arrow_color."'></span>";
+        
+            echo "<tr>";
+              echo "<th>".$KPI."</th>";
+              echo "<td>".number_format($pre,$decPlaces)."</th>";        
+              echo "<td>".number_format($post,$decPlaces)."</th>"; 
+              echo "<td>".number_format($delta,$decPlaces)."</th>"; 
+              echo "<td>".$glyph."</th>";        
+            echo "</tr>";
+          }
+      ?>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>  <!-- end row -->
+</div>
+
+
+<!-- =============================================================================== --> 
+<!-- CARRIER STATS --> 
+<!-- =============================================================================== --> 
+
+    <div id="carrier" class="tab-pane fade">
       <br>
+
       <div class="row">
         <div class="col-md-12">
           <div class="alert alert-danger">
-            <strong>Note:</strong> carrier stats are based on "post" input fields.
+            <strong>Note:</strong> carrier stats are based on "new site" input fields and "post" dates.
           </div>
         </div>
       </div>
@@ -1007,11 +1836,11 @@ returnStats3G_carrier();
                   $decPlaces = $fieldtype3G[$key]['dec'];
                   $arrowType = $fieldtype3G[$key]['arrow'];
                   $KPI = $fieldtype3G[$key]['alias'];
-                  $stats_u09f1 = (float)($stats_post_carrier_u09f1['post'][0][$key]);
-                  $stats_u09f2 = (float)($stats_post_carrier_u09f2['post'][0][$key]);
-                  $stats_u21f1 = (float)($stats_post_carrier_u21f1['post'][0][$key]);
-                  $stats_u21f2 = (float)($stats_post_carrier_u21f2['post'][0][$key]);
-                  $stats_u21f3 = (float)($stats_post_carrier_u21f3['post'][0][$key]);
+                  $stats_u09f1 = (float)($stats_pre_carrier_u09f1[0][$key]);
+                  $stats_u09f2 = (float)($stats_pre_carrier_u09f2[0][$key]);
+                  $stats_u21f1 = (float)($stats_pre_carrier_u21f1[0][$key]);
+                  $stats_u21f2 = (float)($stats_pre_carrier_u21f2[0][$key]);
+                  $stats_u21f3 = (float)($stats_pre_carrier_u21f3[0][$key]);
                   
                   // SET ARROW DIRECTION = NORMAL
                   
@@ -1101,11 +1930,11 @@ returnStats3G_carrier();
                   $decPlaces = $fieldtype3G[$key]['dec'];
                   $arrowType = $fieldtype3G[$key]['arrow'];
                   $KPI = $fieldtype3G[$key]['alias'];
-                  $stats_u09f1 = (float)($stats_post_carrier_u09f1['post'][0][$key]);
-                  $stats_u09f2 = (float)($stats_post_carrier_u09f2['post'][0][$key]);
-                  $stats_u21f1 = (float)($stats_post_carrier_u21f1['post'][0][$key]);
-                  $stats_u21f2 = (float)($stats_post_carrier_u21f2['post'][0][$key]);
-                  $stats_u21f3 = (float)($stats_post_carrier_u21f3['post'][0][$key]);
+                  $stats_u09f1 = (float)($stats_pre_carrier_u09f1[0][$key]);
+                  $stats_u09f2 = (float)($stats_pre_carrier_u09f2[0][$key]);
+                  $stats_u21f1 = (float)($stats_pre_carrier_u21f1[0][$key]);
+                  $stats_u21f2 = (float)($stats_pre_carrier_u21f2[0][$key]);
+                  $stats_u21f3 = (float)($stats_pre_carrier_u21f3[0][$key]);
                   
                   // SET ARROW DIRECTION = NORMAL
                   
@@ -1162,18 +1991,209 @@ returnStats3G_carrier();
           </table>
         </div>
       </div> <!-- end of row -->
-  </div>
 
-<!-- =============================================================================================
- sector stats
-================================================================================================= --> 
-  <div id="sector" class="tab-pane fade">
+  <div class="row">
+        <div class="col-md-6">
+     
+        <h3> Congestion </h3>
+ 
+          <table class="table table-hover table-inverse table-sm table-condensed" >
+            <thead>
+              <tr>
+                <th></th>
+                <th>U09-1</th>
+                <th>U09-2</th>
+                <th>U21-1</th>
+                <th>U21-2</th>
+                <th>U21-3</th>
+              </tr>
+            </thead>
 
+            <tbody>
+
+            <?php 
+                foreach ($fieldtype3G as $key => $value) {
+
+                  $table = $fieldtype3G[$key]['table'];
+
+                  if ($table != "congestion") {
+                    continue;
+                  }
+
+                  $decPlaces = $fieldtype3G[$key]['dec'];
+                  $arrowType = $fieldtype3G[$key]['arrow'];
+                  $KPI = $fieldtype3G[$key]['alias'];
+                  $stats_u09f1 = (float)($stats_pre_carrier_u09f1[0][$key]);
+                  $stats_u09f2 = (float)($stats_pre_carrier_u09f2[0][$key]);
+                  $stats_u21f1 = (float)($stats_pre_carrier_u21f1[0][$key]);
+                  $stats_u21f2 = (float)($stats_pre_carrier_u21f2[0][$key]);
+                  $stats_u21f3 = (float)($stats_pre_carrier_u21f3[0][$key]);
+                  
+                  // SET ARROW DIRECTION = NORMAL
+                  
+                  if ($arrowType == "normal") {
+                    
+                    if ($delta > 0){
+                      $arrow = "up";
+                      $arrow_color = "green"; 
+                    };
+
+                    if ($delta < 0){
+                      $arrow = "down";
+                      $arrow_color = "red"; 
+                    };
+
+                    if ($delta == 0){
+                      $arrow = "right";
+                      $arrow_color = "blue"; 
+                    };
+                  }
+
+                  // SET ARROW DIRECTION = INVSERE
+                  if ($arrowType == "inverse") {
+                    if ($delta > 0){
+                      $arrow = "up";
+                      $arrow_color = "red"; 
+                    };
+
+                    if ($delta < 0){
+                      $arrow = "down";
+                      $arrow_color = "green"; 
+                    };
+
+                    if ($delta == 0){
+                      $arrow = "right";
+                      $arrow_color = "blue"; 
+                    };
+                  }
+
+                  $glyph = " <span class='glyphicon glyphicon-arrow-".$arrow."' style='color:".$arrow_color."'></span>";
+              
+                  echo "<tr>";
+                    echo "<th>".$KPI."</th>";
+                    echo "<td>".number_format($stats_u09f1,$decPlaces)."</th>";        
+                    echo "<td>".number_format($stats_u09f2,$decPlaces)."</th>"; 
+                    echo "<td>".number_format($stats_u21f1,$decPlaces)."</th>"; 
+                    echo "<td>".number_format($stats_u21f2,$decPlaces)."</th>"; 
+                    echo "<td>".number_format($stats_u21f3,$decPlaces)."</th>";                            
+                  echo "</tr>";
+                }
+            ?>
+
+            </tbody>
+          </table>
+        </div>
+      </div> <!-- end of row -->
+
+
+  <div class="row">
+        <div class="col-md-6">
+     
+        <h3> Resources (Busy Hour) </h3>
+ 
+          <table class="table table-hover table-inverse table-sm table-condensed" >
+            <thead>
+              <tr>
+                <th></th>
+                <th>U09-1</th>
+                <th>U09-2</th>
+                <th>U21-1</th>
+                <th>U21-2</th>
+                <th>U21-3</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+            <?php 
+                foreach ($fieldtype3G as $key => $value) {
+
+                  $table = $fieldtype3G[$key]['table'];
+
+                  if ($table != "Resource") {
+                    continue;
+                  }
+
+                  $decPlaces = $fieldtype3G[$key]['dec'];
+                  $arrowType = $fieldtype3G[$key]['arrow'];
+                  $KPI = $fieldtype3G[$key]['alias'];
+                  $stats_u09f1 = (float)($stats_carrier_bh_u09f1[0][$key]);
+
+                  //var_dump($stats_carrier_bh_u09f1);
+                  $stats_u09f2 = (float)($stats_carrier_bh_u09f2[0][$key]);
+                  $stats_u21f1 = (float)($stats_carrier_bh_u21f1[0][$key]);
+                  $stats_u21f2 = (float)($stats_carrier_bh_u21f2[0][$key]);
+                  $stats_u21f3 = (float)($stats_carrier_bh_u21f3[0][$key]);
+                  
+                  // SET ARROW DIRECTION = NORMAL
+                  
+                  if ($arrowType == "normal") {
+                    
+                    if ($delta > 0){
+                      $arrow = "up";
+                      $arrow_color = "green"; 
+                    };
+
+                    if ($delta < 0){
+                      $arrow = "down";
+                      $arrow_color = "red"; 
+                    };
+
+                    if ($delta == 0){
+                      $arrow = "right";
+                      $arrow_color = "blue"; 
+                    };
+                  }
+
+                  // SET ARROW DIRECTION = INVSERE
+                  if ($arrowType == "inverse") {
+                    if ($delta > 0){
+                      $arrow = "up";
+                      $arrow_color = "red"; 
+                    };
+
+                    if ($delta < 0){
+                      $arrow = "down";
+                      $arrow_color = "green"; 
+                    };
+
+                    if ($delta == 0){
+                      $arrow = "right";
+                      $arrow_color = "blue"; 
+                    };
+                  }
+
+                  $glyph = " <span class='glyphicon glyphicon-arrow-".$arrow."' style='color:".$arrow_color."'></span>";
+              
+                  echo "<tr>";
+                    echo "<th>".$KPI."</th>";
+                    echo "<td>".number_format($stats_u09f1,$decPlaces)."</th>";        
+                    echo "<td>".number_format($stats_u09f2,$decPlaces)."</th>"; 
+                    echo "<td>".number_format($stats_u21f1,$decPlaces)."</th>"; 
+                    echo "<td>".number_format($stats_u21f2,$decPlaces)."</th>"; 
+                    echo "<td>".number_format($stats_u21f3,$decPlaces)."</th>";                            
+                  echo "</tr>";
+                }
+            ?>
+
+            </tbody>
+          </table>
+        </div>
+      </div> <!-- end of row -->
+
+    </div>
+
+<!-- =============================================================================== --> 
+<!-- SECTOR STATS --> 
+<!-- =============================================================================== --> 
+
+
+    <div id="sector" class="tab-pane fade">
       <br>
       <div class="row">
         <div class="col-md-12">
           <div class="alert alert-danger">
-            <strong>Note:</strong> sector stats are based on "post" input fields.
+            <strong>Note:</strong> sector stats are based on "new site"  input fields and "post" dates.
           </div>
         </div>
       </div>
@@ -1208,9 +2228,9 @@ returnStats3G_carrier();
                   $decPlaces = $fieldtype3G[$key]['dec'];
                   $arrowType = $fieldtype3G[$key]['arrow'];
                   $KPI = $fieldtype3G[$key]['alias'];
-                  $stats_S1 = (float)($stats_post_sector_S1['post'][0][$key]);
-                  $stats_S2 = (float)($stats_post_sector_S2['post'][0][$key]);
-                  $stats_S3 = (float)($stats_post_sector_S3['post'][0][$key]);
+                  $stats_S1 = (float)($stats_pre_sector_S1['pre'][0][$key]);
+                  $stats_S2 = (float)($stats_pre_sector_S2['pre'][0][$key]);
+                  $stats_S3 = (float)($stats_pre_sector_S3['pre'][0][$key]);
 
                   
                   // SET ARROW DIRECTION = NORMAL
@@ -1298,9 +2318,9 @@ returnStats3G_carrier();
                   $decPlaces = $fieldtype3G[$key]['dec'];
                   $arrowType = $fieldtype3G[$key]['arrow'];
                   $KPI = $fieldtype3G[$key]['alias'];
-                  $stats_S1 = (float)($stats_post_sector_S1['post'][0][$key]);
-                  $stats_S2 = (float)($stats_post_sector_S2['post'][0][$key]);
-                  $stats_S3 = (float)($stats_post_sector_S3['post'][0][$key]);
+                  $stats_S1 = (float)($stats_pre_sector_S1['pre'][0][$key]);
+                  $stats_S2 = (float)($stats_pre_sector_S2['pre'][0][$key]);
+                  $stats_S3 = (float)($stats_pre_sector_S3['pre'][0][$key]);
 
 
                   
@@ -1358,13 +2378,13 @@ returnStats3G_carrier();
           </table>
         </div>
       </div> <!-- end of row -->
-
+    </div>
   </div>
-
-
 </div>
 
-  
+<!-- ===================================================================== --> 
+
+ 
 </div> <!-- end of container -->
 
 </body>
