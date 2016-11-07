@@ -154,8 +154,8 @@ function returnStats3G($pp, $selection, $startDate, $endDate){
 
       $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
 
-    //   echo "<br><br><br><br>";
-    //         echo "3G SQL = ".$SQL_string;
+      // echo "<br><br><br><br>";
+      //       echo "3G SQL = ".$SQL_string;
 
       //======================================================
       // GET RESULT OF QUERY AND PUT INTO ARRAY 

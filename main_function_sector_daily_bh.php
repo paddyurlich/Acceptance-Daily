@@ -1,6 +1,6 @@
 <?php
     
-function returnStats3G_sector($sector, $pp, $selection, $startDate, $endDate){
+function returnStats3G_sector_daily_bh($sector, $pp, $selection, $startDate, $endDate){
 
       
   if (isset($sector, $pp, $selection, $startDate, $endDate)) {
@@ -60,65 +60,79 @@ function returnStats3G_sector($sector, $pp, $selection, $startDate, $endDate){
       //======================================================
       // CREATE SQL QUERRY STRING - FOR CALULATED KPIS
       //======================================================
-             
-      $sql_string_first =  "(((sum(PU_Voice_RRC_Succ)/sum(PU_Voice_RRC_Att))*100) *
-                           ((sum(PU_Voice_RAB_Succ)/sum(PU_Voice_RAB_Att))*100))/100
-                           AS 'UMTS_CS_Acc (%)',";
+      $sql_string_first =   "AVG((( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Mean(dBm)` / 10))
+                            / 1000)
+                            / if((`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Max(dBm)` > 43), 40, 20))
+                            * 100)
+                            AS `TCP Util(%)`,";
 
-      $sql_string_first .=  "(100-((sum(PU_Voice_Ret_Num)/sum(PU_Voice_Ret_Den))*100))
-                           AS 'UMTS_CS_Ret (%)',";
-
-      $sql_string_first .=  "(((sum(PU_PS_RRC_Succ)/sum(PU_PS_RRC_Att))*100) *
-                           ((sum(PU_PS_RAB_Succ)/sum(PU_PS_RAB_Att))*100))/100
-                           AS 'UMTS_PS_Acc (%)',"; 
-
-      $sql_string_first .=  "(100-((sum(PU_PS_Ret_Num)/sum(PU_PS_Ret_Den))*100))
-                            AS 'UMTS_PS_Ret (%)', "; 
-
-      $sql_string_first .= "(sum(VS_HSDPA_MeanChThroughput_TotalMBytes) + sum(VS_HSUPA_MeanChThroughput_TotalMBytes)) *
-                            revenue_figures.data +
-                            (sum(VS_AMR_RB_Erlang_Sum) * revenue_figures.voice)
-                            AS 'Total Revenue ($)',";
+      $sql_string_first .=  "AVG((( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`Non-HS TCP Mean(dBm)` / 10))
+                            / 1000)
+                            / if((`ranPU`.`Acceptance_Stats_3G_daily_bh`.`Non-HS TCP Max(dBm)` > 43), 40, 20))
+                            * 100)
+                            AS `Non-HS TCP Util(%)`,";
+          
+         
+                            #RTWP UTIL (%) - based on RTWP min
+                            # 100 - ((min(W)/mean(W) * 100)
+      $sql_string_first .=  "AVG((100 - 
+                            (( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`RTWP Min(dBm)` / 10))
+                            / 1000)         
+                            /         
+                            ( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`RTWP Mean(dBm)` / 10))
+                            / 1000))*100))   
+                            AS `UL Load (%)`,";
+                            
+                            #RTWP UTIL (%) - based on fixed -107dBm
+                            # 100 - ((min(W)/mean(W) * 100)
+      $sql_string_first .=  "AVG((100 - 
+                            (( pow(10,(-107/10))/ 1000)         
+                            /         
+                            ( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`RTWP Mean(dBm)`/10))/1000))
+                            *100))   
+                            AS `UL Load (fixed floor) (%)`";
 
       //======================================================
       // CREATE BODY OF SQL STRING - sum
       //======================================================
 
-      $sql_string_main = "";
+    //   $sql_string_main = "";
 
-      for ($x = 18; $x <= $size_of_KPI_array ; $x++) {
-       $sql_string_main .= "sum(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_sum`,";
+    //   for ($x = 18; $x <= $size_of_KPI_array ; $x++) {
+    //    $sql_string_main .= "sum(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_sum`,";
 
-        //create KPI name array with just the required KPI is form 18 to 35
-        //$KPI_name_array[] = $KPI_field_array[$x]['Field'];
-
-      }
+    //   }
 
       //======================================================
       // CREATE BODY OF SQL STRING - average
       //======================================================
 
 
-      for ($x = 18; $x <= $size_of_KPI_array ; $x++) {
-        $sql_string_main .= "avg(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_avg`,";
+    //   for ($x = 18; $x <= $size_of_KPI_array ; $x++) {
+    //     $sql_string_main .= "avg(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_avg`,";
 
-        //create KPI name array with just the required KPI is form 18 to 35
-        $KPI_name_array[] = $KPI_field_array[$x]['Field'];
+    //     //create KPI name array with just the required KPI is form 18 to 35
+    //     $KPI_name_array[] = $KPI_field_array[$x]['Field'];
 
-      }
+    //   }
 
       //======================================================
       // BUILD ENTIRE SQL STRING
       //======================================================
       
+      $sql_string_main = "";
+      
       $sql_string_select = "SELECT ";
 
       $sql_string_main = substr($sql_string_main,0,-1);
     
-      $sql_string_end = " FROM ranPU.Acceptance_Stats_3G_daily, ranPU.revenue_figures WHERE (Acceptance_Stats_3G_daily.Date BETWEEN '".$startDate."' AND '".$endDate."') AND right(Acceptance_Stats_3G_daily.CELLNAME,1)='".$sector."' AND (".$selectedCells.")"; 
+      $sql_string_end = " FROM ranPU.Acceptance_Stats_3G_daily_bh, ranPU.revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND right(Acceptance_Stats_3G_daily_bh.CELLNAME,1)='".$sector."' AND (".$selectedCells.")"; 
 
       $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
 
+      //echo $SQL_string;
+      
+      
       //======================================================
       // GET RESULT OF QUERY AND PUT INTO ARRAY 
       //======================================================

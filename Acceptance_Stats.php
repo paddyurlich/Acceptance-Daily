@@ -1,7 +1,7 @@
 
 
 <?php include 'functions.php' ?>
-<?php include 'main_function.php' ?>
+<?php include 'main_function.php' ?> <!-- returnStats3G -->
 <?php include 'main_function_4G.php' ?>
 <?php include 'main_function_4G_sector.php' ?> <!-- returnStats4G_sector -->
 
@@ -12,8 +12,10 @@
 <?php include 'getFieldType4G.php' ?>
 <?php include 'main_function_carrier.php' ?> <!-- returnStats3G_carrier -->
 <?php include 'main_function_sector.php' ?> <!-- returnStats3G_sector -->
-<?php include 'main_function_cluster_daily_bh.php' ?> <!-- returnStats3G_daily_bh -->
-<?php include 'main_function_carrier _daily_bh.php' ?> 
+<?php include 'main_function_cluster_daily_bh.php' ?> <!-- returnStats3G_cluster_daily_bh -->
+<?php include 'main_function_carrier_daily_bh.php' ?> <!-- returnStats3G_carrier_daily_bh --> 
+<?php include 'main_function_sector_daily_bh.php' ?> <!-- returnStats3G_sector_daily_bh --> 
+
 
 <?php
 
@@ -62,14 +64,14 @@
   //post stats = cluster and new_site
 
 
-  $stats_3G_post_newSite =  returnStats3G("post", $selectedCells_3G_newSite, $startDate, $endDate);
+  $stats_3G_post_newSite =  returnStats3G("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   $stats_3G_pre_cluster =  returnStats3G("pre", $selectedCells_3G_cluster, $startDate, $endDate);
   $stats_3G_post_cluster_and_newSite =  returnStats3G("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
 
-  $stats_3G_bh_post_newSite = returnStats3G_daily_bh("post", $selectedCells_3G_newSite, $startDate, $endDate);
-  $stats_3G_bh_pre_cluster =  returnStats3G_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
-  $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
+  $stats_3G_bh_post_newSite = returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite, $startDate, $endDate);
+  $stats_3G_bh_pre_cluster =  returnStats3G_cluster_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
+  $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
 
   // carrier daily
@@ -80,17 +82,23 @@
   $stats_post_carrier_u21f3 =  returnStats3G_carrier("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
   // carrier busy hour
-  $stats_carrier_bh_u09f1 =  returnStats3G_carrier_daily_bh("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_carrier_bh_u09f2 =  returnStats3G_carrier_daily_bh("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_carrier_bh_u21f1 =  returnStats3G_carrier_daily_bh("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_carrier_bh_u21f2 =  returnStats3G_carrier_daily_bh("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_carrier_bh_u21f3 =  returnStats3G_carrier_daily_bh("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_carrier_bh_u09f1 =  returnStats3G_carrier_daily_bh("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_carrier_bh_u09f2 =  returnStats3G_carrier_daily_bh("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_carrier_bh_u21f1 =  returnStats3G_carrier_daily_bh("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_carrier_bh_u21f2 =  returnStats3G_carrier_daily_bh("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_carrier_bh_u21f3 =  returnStats3G_carrier_daily_bh("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
-  // secotr daily
+
+  // sector daily
   $stats_post_sector_S1 =  returnStats3G_sector("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   $stats_post_sector_S2 =  returnStats3G_sector("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   $stats_post_sector_S3 =  returnStats3G_sector("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  
+ 
+   // sector daily - busy hour
+  $stats_post_sector_bh_S1 =  returnStats3G_sector_daily_bh("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_sector_bh_S2 =  returnStats3G_sector_daily_bh("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_post_sector_bh_S3 =  returnStats3G_sector_daily_bh("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+
 
   // ======================
   // 4G calc
@@ -118,7 +126,7 @@
   //$stats_4G_pre =  returnStats4G("pre", $selectedCells_4G_pre, $startDate, $endDate);
   //$stats_4G_post =  returnStats4G("post", $selectedCells_4G_post, $startDate_post, $endDate_post);
 
-  $stats_4G_post_newSite =  returnStats4G("post", $selectedCells_4G_newSite, $startDate, $endDate);
+  $stats_4G_post_newSite =  returnStats4G("post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
   $stats_4G_pre_cluster =  returnStats4G("pre", $selectedCells_4G_cluster, $startDate, $endDate);
   $stats_4G_post_cluster_and_newSite =  returnStats4G("post", $selectedCells_4G_newSite_and_cluster, $startDate_post, $endDate_post);
 

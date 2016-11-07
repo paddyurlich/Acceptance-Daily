@@ -5,7 +5,7 @@
 // $startDate = "2016-09-20 00:00:00";
 // $endDate = "2016-10-19 23:00:00";
 
-function returnStats3G_daily_bh($pp, $selection, $startDate, $endDate){
+function returnStats3G_cluster_daily_bh($pp, $selection, $startDate, $endDate){
       
   // if (isset($pp, $selection, $startDate, $endDate)) {
 
@@ -47,7 +47,7 @@ function returnStats3G_daily_bh($pp, $selection, $startDate, $endDate){
 
       //=====================================================
 
-      $sql = ("SHOW COLUMNS FROM Acceptance_Stats_3G_daily");
+      $sql = ("SHOW COLUMNS FROM Acceptance_Stats_3G_daily_bh");
 
       $result = $connect->query($sql);
 
@@ -119,17 +119,10 @@ function returnStats3G_daily_bh($pp, $selection, $startDate, $endDate){
       // CREATE BODY OF SQL STRING - average
       //======================================================
 
-
     //   for ($x = 1; $x <= $size_of_KPI_array ; $x++) {
     //     $sql_string_main .= "avg(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_avg`,";
 
-    //     //create KPI name array with just the required KPI is form 18 to 35
-    //     $KPI_name_array[] = $KPI_field_array[$x]['Field'];
-
      // }
-
-
-
 
       //======================================================
       // BUILD ENTIRE SQL STRING
