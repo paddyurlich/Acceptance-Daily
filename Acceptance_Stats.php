@@ -269,6 +269,8 @@
             </select>
         </div>
 
+        <php include 'input_predates.php' ?>
+
         <div class="col-md-3">  
           <h2>Post Dates</h2>
           <hr>
@@ -303,7 +305,7 @@
 
       
 
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
+        <div class="col-md-3" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
           <h2>3G Cells (cluster)</h2>
           <hr>
              <select name="cellCluster2[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
@@ -327,7 +329,7 @@
               </select>
         </div>
 
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
+        <div class="col-md-3" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
           <h2>3G Cells (new site)</h2>
              <hr>
              <select name="cell[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
@@ -365,7 +367,7 @@
           
       
 
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
+        <div class="col-md-3" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
           <h2>4G Cells (cluster)</h2>
              <hr>
              <select name="cell4Gpost[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
@@ -389,7 +391,7 @@
               </select>
         </div>
 
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
+        <div class="col-md-3" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
           <h2>4G Cells (new site)</h2>
              <hr>
              <select name="cell4Gpre[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
