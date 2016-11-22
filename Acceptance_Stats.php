@@ -194,12 +194,16 @@
   <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
     .container {
-      width: 90%;
+      width: 100%;
       /*color: grey;*/
     }
     
     .nav-tabs li a {
       color: #777;
+    }
+
+    .acceptance-heading{
+      text-align: center;
     }
   </style>
 
@@ -417,6 +421,8 @@
     <!-- ========== -->
     <!-- fourth well -->
     <!-- ========== -->
+
+    <!--
       <div class="well">
       <div class="row">
         
@@ -441,6 +447,7 @@
               <?php var_dump($selectedCells_3G_newSite_and_cluster) ?>
               <?php var_dump($selectedCells_4G_newSite_and_cluster) ?>            
         </div>
+        -->
 
         
 
@@ -455,7 +462,7 @@
     <div class="row">
       <div class="col-md-12">
         <hr>
-        <input type="submit" value="Show" class="btn btn-primary">
+        <input type="submit" value="Calculate Stats" class="btn btn-primary btn-lg">
       </div>
     </div> <!--end of third row --> 
 
@@ -473,7 +480,7 @@
 
 
 
-<h3 class="text-center">Performance Stats</h3> 
+<h1 class="text-center">Performance Stats</h1> 
 
 
 <!--  ================================================================= --> 
@@ -482,26 +489,28 @@
 
   <ul class="nav nav-pills">
     <li class="active"><a data-toggle="pill" href="#acceptance">Acceptance</a></li>
+    <!--
     <li><a data-toggle="pill" href="#newsite">New Site</a></li>
     <li><a data-toggle="pill" href="#cluster">Cluster</a></li>
     <li><a data-toggle="pill" href="#carrier">Carrier</a></li>
     <li><a data-toggle="pill" href="#sector">Sector</a></li>
-
+    -->
   </ul>
   
       <div class="tab-content">
 
           <!-- =============================================================================== --> 
-          <!-- ACCEPTANCE STATS --> 
+          <!-- ACCEPTANCE STATS  --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
           <?php include 'stats_acceptance.php' ?>
           </div> <!--end of tab --> 
 
+
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
-          <div id="newsite" class="tab-pane fade in active">
+          <div id="newsite" class="tab-pane fade ">
           <?php include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
@@ -525,7 +534,7 @@
           <div id="sector" class="tab-pane fade">
           <?php include 'stats_sector.php' ?>
           </div> <!--end of tab -->
-  
+
       </div>
 </div>
 
@@ -574,7 +583,7 @@
       })
     </script>
 
-      <script>
+    <script>
       $(function(){
         $("#example1").dataTable();
       })

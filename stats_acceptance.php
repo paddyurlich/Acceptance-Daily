@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <div class="alert alert-info">
+    <div class="alert alert-info acceptance-heading">
       <h4><strong>New Site Revenue</h4></strong>
     </div>
   </div>
@@ -28,7 +28,7 @@
   
 <div class="row">
   <div class="col-md-12">
-    <div class="alert alert-info">
+    <div class="alert alert-info acceptance-heading">
       <h4><strong>Cluster Pre and Post Performance</h4></strong>
     </div>
   </div>
@@ -84,7 +84,7 @@ cell stats
 
 <div class="row">
   <div class="col-md-12">
-    <div class="alert alert-info">
+    <div class="alert alert-info acceptance-heading">
       <h4><strong>Cell level stats</strong></h4>
     </div>
   </div>
@@ -103,7 +103,7 @@ cell stats
 
 <div class="row">
   <div class="col-md-12">
-    <div class="alert alert-info">
+    <div class="alert alert-info acceptance-heading">
       <h4><strong>Sector Carrier Stats</strong></h4>
     </div>
   </div>
