@@ -15,7 +15,8 @@
 <?php include 'main_function_cluster_daily_bh.php' ?> <!-- returnStats3G_cluster_daily_bh -->
 <?php include 'main_function_carrier_daily_bh.php' ?> <!-- returnStats3G_carrier_daily_bh --> 
 <?php include 'main_function_sector_daily_bh.php' ?> <!-- returnStats3G_sector_daily_bh --> 
-
+<?php include 'main_function_3G_sector_carrier.php' ?> <!-- returnStats3G_sector_carrier --> 
+<?php include 'main_function_3G_cell.php' ?> <!-- returnStats3G_cell --> 
 
 <?php
 
@@ -99,6 +100,11 @@
   $stats_post_sector_bh_S2 =  returnStats3G_sector_daily_bh("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   $stats_post_sector_bh_S3 =  returnStats3G_sector_daily_bh("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
+  // stats scto
+  $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate, $endDate);
+  $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate, $endDate);
+
+
 
   // ======================
   // 4G calc
@@ -166,11 +172,10 @@
 <head>
   <meta charset="utf-8">
   <title>Acceptance Stats</title>
+  <!-- chosen -->
   <link rel="stylesheet" href="docsupport/style.css">
   <link rel="stylesheet" href="docsupport/prism.css">
   <link rel="stylesheet" href="chosen.css">
-
-
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -178,8 +183,13 @@
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
+  <!-- Latest compiled bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Data Tables css -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> 
+
+
 
   <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
@@ -471,13 +481,22 @@
 <div class="well">
 
   <ul class="nav nav-pills">
-    <li class="active"><a data-toggle="pill" href="#newsite">New Site</a></li>
+    <li class="active"><a data-toggle="pill" href="#acceptance">Acceptance</a></li>
+    <li><a data-toggle="pill" href="#newsite">New Site</a></li>
     <li><a data-toggle="pill" href="#cluster">Cluster</a></li>
     <li><a data-toggle="pill" href="#carrier">Carrier</a></li>
     <li><a data-toggle="pill" href="#sector">Sector</a></li>
+
   </ul>
   
       <div class="tab-content">
+
+          <!-- =============================================================================== --> 
+          <!-- ACCEPTANCE STATS --> 
+          <!-- =============================================================================== -->
+          <div id="acceptance" class="tab-pane fade in active">
+          <?php include 'stats_acceptance.php' ?>
+          </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
@@ -520,28 +539,46 @@
 
 <footer>
 
-<script src="chosen.jquery.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-  var config = {
-    '.chosen-select'           : {},
-    '.chosen-select-deselect'  : {allow_single_deselect:true},
-    '.chosen-select-no-single' : {disable_search_threshold:10},
-    '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-    '.chosen-select-width'     : {width:"95%"}
-  }
-  for (var selector in config) {
-    $(selector).chosen(config[selector]);
-  }
+    <!-- chose drop down --> 
+    <script src="chosen.jquery.js" type="text/javascript"></script>
 
-</script>
+    <script type="text/javascript">
+      var config = {
+        '.chosen-select'           : {},
+        '.chosen-select-deselect'  : {allow_single_deselect:true},
+        '.chosen-select-no-single' : {disable_search_threshold:10},
+        '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+        '.chosen-select-width'     : {width:"95%"}
+      }
+      for (var selector in config) {
+        $(selector).chosen(config[selector]);
+      }
+    </script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
+    <!-- bootstrap tooltip --> 
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
+  
+    <!-- datatables --> 
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    
+    <script>
+      $(function(){
+        $("#example").dataTable();
+      })
+    </script>
+
+      <script>
+      $(function(){
+        $("#example1").dataTable();
+      })
+    </script>
 
   </footer>
 

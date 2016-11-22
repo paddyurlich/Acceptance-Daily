@@ -1,0 +1,50 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+</head>
+<body>
+  <!--<table id="example">
+    <thead>
+      <tr><th>Sites</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SitePoint</td></tr>
+      <tr><td>Learnable</td></tr>
+      <tr><td>Flippa</td></tr>
+    </tbody>
+  </table>-->
+
+<table table id="example">
+  <thead>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th> 
+        <th>Age</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+        <td>Jill</td>
+        <td>Smith</td> 
+        <td>50</td>
+    </tr>
+    <tr>
+        <td>Eve</td>
+        <td>Jackson</td> 
+        <td>94</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.3.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script>
+  $(function(){
+    $("#example").dataTable();
+  })
+  </script>
+</body>
+</html>
+
