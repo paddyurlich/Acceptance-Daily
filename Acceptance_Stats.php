@@ -201,6 +201,9 @@
     .nav-tabs li a {
       color: #777;
     }
+    .center {
+      text-align: center;
+    }
   </style>
 
 </head>
@@ -226,10 +229,10 @@
     <br><br><br><br>
 
 <div class="container">
+<h1 class="center">Date and Cell selection</h1>
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Date and cell selection</h3>
-  </div>
+
+
 
   <div class="panel-body">
     
@@ -240,222 +243,38 @@
     <!-- first well -->
     <!-- ========== -->
 
-    <div class="well">
       <div class="row">
 
-        <div class="col-md-3">  
-          <h2>Pre Dates</h2>
-          <hr>  
-            <em>Start time/date:</em>
-            <select name="startDate" data-placeholder="Choose a start date..." class="chosen-select" style="width:200px;" tabindex="4">
-            <option value=""></option>       
-                <?php foreach($dateList as $k => $v) { ?>
-                  <option value="<?php echo $dateList[$k] ?>" <?php echo isset($startDate) && $dateList[$k] == $startDate ? ' selected' : '' ?>> <?php echo $dateList[$k]; ?>  </option>                    
-                <?php } ?> 
-            </select>
-
-            <br/><br/>
-
-            <em>End time/date: </em>
-            <select name="endDate" data-placeholder="Choose an end date..." data-toggle="tooltip" title="Hooray!" class="chosen-select" style="width:200px;" tabindex="4">
-              <option value=""></option>       
-                <?php foreach($dateList as $k => $v) { ?>
-                  <option value="<?php echo $dateList[$k]?>" <?php echo isset($endDate) && $dateList[$k] == $endDate ? ' selected' : '' ?>> <?php echo $dateList[$k]; ?>                      
-                <?php } ?> 
-            </select>
-        </div>
-
-        <div class="col-md-3">  
-          <h2>Post Dates</h2>
-          <hr>
-            <em>Start time/date:</em>
-            <select name="startDate_post" data-placeholder="Choose a start date..." class="chosen-select" style="width:200px;" tabindex="4">
-            <option value=""></option>       
-                <?php foreach($dateList as $k => $v) { ?>
-                  <option value="<?php echo $dateList[$k] ?>" <?php echo isset($startDate_post) && $dateList[$k] == $startDate_post ? ' selected' : '' ?>> <?php echo $dateList[$k]; ?>                      
-                <?php } ?> 
-            </select>
-
-            <br/><br/>
-
-            <em>End time/date: </em>
-            <select name="endDate_post" data-placeholder="Choose an end date..." class="chosen-select" style="width:200px;" tabindex="4">
-              <option value=""></option>       
-                <?php foreach($dateList as $k => $v) { ?>
-                  <option value="<?php echo $dateList[$k] ?>" <?php echo isset($endDate_post) && $dateList[$k] == $endDate_post ? ' selected' : '' ?>> <?php echo $dateList[$k]; ?>                      
-                <?php } ?> 
-            </select>
-        </div>
+          <div class="col-md-2">
+            <?php include 'input_predates.php' ?>
+          </div> 
+          <div class="col-md-2">
+            <?php include 'input_postdates.php' ?>
+          </div> 
+          <div class="col-md-2">
+            <?php include 'input_3G_cells_cluster.php' ?>
+          </div> 
+          <div class="col-md-2">
+            <?php include 'input_3G_cells_newsite.php' ?>
+          </div> 
+          <div class="col-md-2">
+            <?php include 'input_4G_cells_cluster.php' ?>
+          </div> 
+          <div class="col-md-2">
+            <?php include 'input_4G_cells_newsite.php' ?>
+          </div> 
 
       </div> <!--end first row --> 
-      </div> <!-- end first well -->
 
-      <!-- ========== -->
-      <!-- second well -->
-      <!-- ========== -->
-      
-      <div class="well">
-      <div class="row">
-
-      
-
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>3G Cells (cluster)</h2>
-          <hr>
-             <select name="cellCluster2[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
-                <option value=""></option>       
-                    <?php foreach($cellList as $k => $v) { ?>
-                        <option value=<?php echo $cellList[$k] ?>
-                          
-                          <?php
-                            if (isset($selectedCells_3G_cluster)) {
-                              foreach ($selectedCells_3G_cluster as $key => $selectedCell) {
-                                echo isset($selectedCells_3G_cluster) && $cellList[$k] == $selectedCell ? ' selected' : '';
-                              }
-                            }
-                          ?>
-
-                          > <!--end of option tag -->
-
-                          <?php echo $cellList[$k]; ?>
-
-                    <?php } ?> 
-              </select>
-        </div>
-
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>3G Cells (new site)</h2>
-             <hr>
-             <select name="cell[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
-                <option value=""></option>       
-                    <?php foreach($cellList as $k => $v) { ?>
-                        <option value=<?php echo $cellList[$k];?>
-                          
-                          <?php
-                            if (isset($selectedCells_3G_newSite)) {
-                              foreach ($selectedCells_3G_newSite as $key => $selectedCell) {
-                                echo isset($selectedCells_3G_newSite) && $cellList[$k] == $selectedCell ? ' selected' : '';
-                              }
-                            }
-                          ?>
-
-                          
-
-                          > <!--end of option tag -->
-
-                          <?php echo $cellList[$k]; ?>  
-
-                    <?php } ?> 
-              </select>
-        </div>
-       
-
-      </div> <!--end second row --> 
-      </div> <!-- end second well -->
-
-      <!-- ========== -->
-      <!-- third well -->
-      <!-- ========== -->
-      <div class="well">
-      <div class="row">
-          
-      
-
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>4G Cells (cluster)</h2>
-             <hr>
-             <select name="cell4Gpost[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
-                <option value=""></option>       
-                    <?php foreach($cellList4G as $k => $v) { ?>
-                        <option value=<?php echo $cellList4G[$k];?>
-                          
-                          <?php
-                            if (isset($selectedCells_4G_cluster)) {
-                              foreach ($selectedCells_4G_cluster as $key => $selectedCell) {
-                                echo isset($selectedCells_4G_cluster) && $cellList4G[$k] == $selectedCell ? ' selected' : '';
-                              }
-                            }
-                          ?>
-
-                          > <!--end of option tag -->
-
-                          <?php echo $cellList4G[$k]; ?>  
-
-                    <?php } ?> 
-              </select>
-        </div>
-
-        <div class="col-md-4" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
-          <h2>4G Cells (new site)</h2>
-             <hr>
-             <select name="cell4Gpre[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
-                <option value=""></option>       
-                    <?php foreach($cellList4G as $k => $v) { ?>
-                        <option value=<?php echo $cellList4G[$k];?>
-                          
-                          <?php
-                            if (isset($selectedCells_4G_newSite)) {
-                              foreach ($selectedCells_4G_newSite as $key => $selectedCell) {
-                                echo isset($selectedCells_4G_newSite) && $cellList4G[$k] == $selectedCell ? ' selected' : '';
-                              }
-                            }
-                          ?>
-
-                          > <!--end of option tag -->
-
-                          <?php echo $cellList4G[$k]; ?>  
-
-                    <?php } ?> 
-              </select>
-        </div>
-
-
-    </div> <!--end third row --> 
-    </div> <!-- end third well -->
 
 
     <!-- ========== -->
-    <!-- fourth well -->
+    <!-- row well - button -->
     <!-- ========== -->
-      <div class="well">
-      <div class="row">
-        
-        <div class="col-md-3">
-          <h2>Cluster cells (pre dates)</h2>
-             <hr>
-              <?php var_dump($selectedCells_3G_cluster) ?>
-              <?php var_dump($selectedCells_4G_cluster) ?>
-        </div>
-          
-        <div class="col-md-3">
-          <h2>New site (post dates) </h2>
-             <hr>
-              <?php var_dump($selectedCells_3G_newSite) ?>
-              <?php var_dump($selectedCells_4G_newSite) ?>            
-        </div>
-
-
-        <div class="col-md-3">
-          <h2>Cluster and new site (post dates) </h2>
-             <hr>
-              <?php var_dump($selectedCells_3G_newSite_and_cluster) ?>
-              <?php var_dump($selectedCells_4G_newSite_and_cluster) ?>            
-        </div>
-
-        
-
-
-    </div> <!--end fourth row --> 
-    </div> <!-- end fourth well -->
-
-
-
-
-
     <div class="row">
       <div class="col-md-12">
         <hr>
-        <input type="submit" value="Show" class="btn btn-primary">
+        <input type="submit" value="Calculate Stats" class="btn btn-primary btn-lg">
       </div>
     </div> <!--end of third row --> 
 
@@ -471,10 +290,7 @@
 ====================================================================================================
 =============================================================================================== -->
 
-
-
-<h3 class="text-center">Performance Stats</h3> 
-
+<h1 class="center">Performance Stats</h1>
 
 <!--  ================================================================= --> 
 
@@ -501,7 +317,7 @@
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
-          <div id="newsite" class="tab-pane fade in active">
+          <div id="newsite" class="tab-pane fade">
           <?php include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
@@ -543,17 +359,21 @@
     <!-- chose drop down --> 
     <script src="chosen.jquery.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
       var config = {
         '.chosen-select'           : {},
         '.chosen-select-deselect'  : {allow_single_deselect:true},
         '.chosen-select-no-single' : {disable_search_threshold:10},
         '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-        '.chosen-select-width'     : {width:"95%"}
+        '.chosen-select-width'     : {width:"200%"}
       }
       for (var selector in config) {
         $(selector).chosen(config[selector]);
       }
+    </script> --> 
+
+      <script type="text/javascript">
+      $(".chosen-select").chosen({width: "100%"}); 
     </script>
 
     <!-- bootstrap tooltip --> 
