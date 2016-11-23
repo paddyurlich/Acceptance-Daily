@@ -197,7 +197,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> 
 
 
-
   <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
     .container {
@@ -234,7 +233,7 @@
     </div>
   </nav>
 
-
+</br></br>
 <div class="container">
 <h1 class="center">Date and Cell selection</h1>
 <div class="panel panel-default">
