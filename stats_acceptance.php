@@ -79,13 +79,13 @@
 </div> <!-- end of row -->
 
 <!-- ===============================
-cell stats
+3G cell stats
 =============================== -->
 
 <div class="row">
   <div class="col-md-12">
     <div class="alert alert-info">
-      <h4 class="center"><strong>Cell level stats</strong></h4>
+      <h4 class="center"><strong>3G Cell level stats</strong></h4>
     </div>
   </div>
 </div>
@@ -98,13 +98,13 @@ cell stats
 </div>
 
 <!-- ===============================
-cell stats
+3G sector carrier stats
 =============================== -->
 
 <div class="row">
   <div class="col-md-12">
     <div class="alert alert-info">
-      <h4 class="center"><strong>Sector Carrier Stats</strong></h4>
+      <h4 class="center"><strong>3G Sector Carrier Stats</strong></h4>
     </div>
   </div>
 </div>
@@ -113,5 +113,24 @@ cell stats
   <div class="col-md-12">
     <?php $thisTable = "traffic"; ?>
     <?php include 'table_sector_carrier_3G.php' ?>        
+  </div>
+</div>
+
+<!-- ===============================
+4G cell stats
+=============================== -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-info">
+      <h4 class="center"><strong>4G Cell level stats</strong></h4>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <?php $thisTable = "traffic"; ?>
+    <?php include 'table_cell_4G.php' ?>        
   </div>
 </div>

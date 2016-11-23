@@ -9,12 +9,13 @@
 // ===========================
 // create headings array
 // ===========================
-foreach($stats_cell as $key=>$value){
+unset($headings);
+foreach($stats_4G_cell as $key=>$value){
     foreach($value as $k=> $v){
       $headings[] = $k; 
-      $headings = array_unique($headings);
       }  
 }
+$headings = array_unique($headings);
 //var_dump($headings);
 //============================
 
@@ -22,7 +23,7 @@ foreach($stats_cell as $key=>$value){
 // ===========================
 // create cell name array
 // ===========================
-$table_cell = array_keys($stats_cell);
+$table_4G_cells = array_keys($stats_cell);
 //var_dump($table_cells);
 // ===========================
 
@@ -30,7 +31,7 @@ $table_cell = array_keys($stats_cell);
 // ===========================
 // table data
 // ===========================
-foreach($stats_cell as $key=>$value){
+foreach($stats_4G_cell as $key=>$value){
     foreach($value as $k=> $v){
       //echo $v." ";
       $tableData[] = $v; 
@@ -44,7 +45,7 @@ foreach($stats_cell as $key=>$value){
 
 
 <!-- <table class="table table-hover table-inverse table-sm table-condensed" > -->
-<table table id="example" class="display" cellspacing="0" width="100%">
+<table table id="example2" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
             <?php foreach ($headings as $heading){
@@ -55,7 +56,7 @@ foreach($stats_cell as $key=>$value){
     </thead>
 
     <tbody>
-        <?php foreach($stats_cell as $key=>$value){
+        <?php foreach($stats_4G_cell as $key=>$value){
             echo "<tr>";
             foreach($value as $k=> $v){
             

@@ -17,6 +17,9 @@
 <?php include 'main_function_sector_daily_bh.php' ?> <!-- returnStats3G_sector_daily_bh --> 
 <?php include 'main_function_3G_sector_carrier.php' ?> <!-- returnStats3G_sector_carrier --> 
 <?php include 'main_function_3G_cell.php' ?> <!-- returnStats3G_cell --> 
+<?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
+
+
 
 <?php
 
@@ -70,7 +73,7 @@
   $stats_3G_post_cluster_and_newSite =  returnStats3G("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
 
-  $stats_3G_bh_post_newSite = returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite, $startDate, $endDate);
+  $stats_3G_bh_post_newSite = returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   $stats_3G_bh_pre_cluster =  returnStats3G_cluster_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
   $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
@@ -100,12 +103,10 @@
   $stats_post_sector_bh_S2 =  returnStats3G_sector_daily_bh("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
   $stats_post_sector_bh_S3 =  returnStats3G_sector_daily_bh("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
-  // stats scto
-  $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate, $endDate);
-  $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate, $endDate);
-
-
-
+  // acceptance stats - used in datatabls 
+  $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate_post, $endDate_post);
+  
   // ======================
   // 4G calc
   // ======================
@@ -139,6 +140,9 @@
   $stats_4G_post_sector_S1 =  returnStats4G_sector("1","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
   $stats_4G_post_sector_S2 =  returnStats4G_sector("2","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
   $stats_4G_post_sector_S3 =  returnStats4G_sector("3","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
+  
+  //4G cells levels stats - used in datatables
+  $stats_4G_cell = returnStats4G_cell($selectedCells_4G_newSite, $startDate_post, $endDate_post);
 
 
 
@@ -177,6 +181,9 @@
   <link rel="stylesheet" href="docsupport/prism.css">
   <link rel="stylesheet" href="chosen.css">
 
+  <!-- main styles --> 
+  <link rel="stylesheet" href="styles.css">
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -194,7 +201,7 @@
   <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
     .container {
-      width: 90%;
+      width: 98%;
       /*color: grey;*/
     }
     
@@ -211,28 +218,26 @@
 <body>
 
 
+<!-- Fixed navbar --> 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Acceptance Stats</a>
-        </div>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Acceptance Stats</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <br><br><br><br>
 
 <div class="container">
 <h1 class="center">Date and Cell selection</h1>
 <div class="panel panel-default">
-
-
 
   <div class="panel-body">
     
@@ -240,7 +245,7 @@
     
     
     <!-- ========== -->
-    <!-- first well -->
+    <!-- well -->
     <!-- ========== -->
 
       <div class="row">
@@ -372,7 +377,7 @@
       }
     </script> --> 
 
-      <script type="text/javascript">
+    <script type="text/javascript">
       $(".chosen-select").chosen({width: "100%"}); 
     </script>
 
@@ -389,15 +394,21 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     
     <script>
-      $(function(){
-        $("#example").dataTable();
-      })
+        $(function(){
+          $("#example").dataTable();
+        })
     </script>
 
       <script>
-      $(function(){
-        $("#example1").dataTable();
-      })
+        $(function(){
+          $("#example1").dataTable();
+        })
+    </script>
+
+    <script>
+        $(function(){
+          $("#example2").dataTable();
+        })
     </script>
 
   </footer>
