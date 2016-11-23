@@ -82,7 +82,7 @@ function returnStats3G_carrier($carrier, $selection, $startDate, $endDate){
         // Total Revenue ($)
       $sql_string_first .= "(sum(VS_HSDPA_MeanChThroughput_TotalMBytes) + sum(VS_HSUPA_MeanChThroughput_TotalMBytes)) *
                             revenue_figures.data +
-                            (sum(VS_AMR_RB_Erlang_Sum) * revenue_figures.voice)
+                            ((sum(VS_AMR_RB_Erlang_Sum)/2) * revenue_figures.voice)
                             AS 'Total Revenue ($)',";
 
         //CS RAB congestion (summed)
