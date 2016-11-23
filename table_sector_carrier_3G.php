@@ -38,7 +38,7 @@ foreach($stats_sector_carrier as $key=>$value){
 
 
 <!-- <table class="table table-hover table-inverse table-sm table-condensed" > -->
-<table table id="example1" class="display" cellspacing="0" width="100%">
+<table table id="sector_carrier" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
             <?php foreach ($headings as $heading){

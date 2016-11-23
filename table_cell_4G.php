@@ -23,20 +23,23 @@ $headings = array_unique($headings);
 // ===========================
 // create cell name array
 // ===========================
-$table_4G_cells = array_keys($stats_cell);
-//var_dump($table_cells);
+unset($table_4G_cells);
+$table_4G_cells = array_keys($stats_4G_cell);
+//var_dump($stats_4G_cell);
 // ===========================
 
 
 // ===========================
 // table data
 // ===========================
+unset($tableData);
 foreach($stats_4G_cell as $key=>$value){
     foreach($value as $k=> $v){
       //echo $v." ";
       $tableData[] = $v; 
     }  
 }
+//var_dump($tableData);
 // ===========================
 
 
@@ -45,7 +48,7 @@ foreach($stats_4G_cell as $key=>$value){
 
 
 <!-- <table class="table table-hover table-inverse table-sm table-condensed" > -->
-<table table id="example2" class="display" cellspacing="0" width="100%">
+<table table id="cell_4G" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
             <?php foreach ($headings as $heading){

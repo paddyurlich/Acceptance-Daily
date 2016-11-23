@@ -20,7 +20,7 @@ function getCellList4G(){
     //get list of cells from Acceptance Stats table
     //==========================================
 
-    $sql = "SELECT Object from `ranPU`.`".$table."`"." ORDER BY $table.Object ASC";
+    $sql = "SELECT Object from `ranPU`.`".$table."`"." GROUP BY Object ORDER BY $table.Object ASC";
 
     $result = $connect->query($sql);
 

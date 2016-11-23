@@ -156,7 +156,7 @@ function returnStats4G_cell($selection, $startDate, $endDate){
       if ($result->num_rows > 0) {
       // output data of each row
           while($row = $result->fetch_assoc()) {
-              $result_array['Cellname'] = $row;
+              $result_array[] = $row;
           }
       } else {
           echo "0 results";

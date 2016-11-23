@@ -20,7 +20,7 @@ function getCellList(){
     //get list of cells from Acceptance Stats table
     //==========================================
 
-    $sql = "SELECT CELLNAME from `ranPU`.`".$table."`"." ORDER BY $table.CELLNAME ASC";
+    $sql = "SELECT CELLNAME from `ranPU`.`".$table."`"." GROUP BY CELLNAME ORDER BY $table.CELLNAME ASC";
 
     $result = $connect->query($sql);
 

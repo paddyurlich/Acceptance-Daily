@@ -20,7 +20,7 @@ function getDateList(){
     //get date list from Acceptance stats table - and use for dropdown menus.
     //==========================================
 
-    $sql = "SELECT Date from `ranPU`.`".$table."`"." ORDER BY $table.Date ASC";
+    $sql = "SELECT Date from `ranPU`.`".$table."`"." GROUP BY Date ORDER BY $table.Date ASC";
     $result = $connect->query($sql);
 
     if ($result->num_rows > 0) {
@@ -45,5 +45,6 @@ function getDateList(){
    		return $dateList_array;
 
 }
+getDateList()
 
 ?>

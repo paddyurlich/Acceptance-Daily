@@ -1,5 +1,4 @@
 
-
 <?php include 'functions.php' ?>
 <?php include 'main_function.php' ?> <!-- returnStats3G -->
 <?php include 'main_function_4G.php' ?>
@@ -184,8 +183,9 @@
   <!-- main styles --> 
   <link rel="stylesheet" href="styles.css">
 
+
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -194,8 +194,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<!-- Data Tables css -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
+
+<!-- <script src="./datatables/datatables.css"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="./datatables/datatables.js"> -->
 
   <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
@@ -306,6 +309,7 @@
     <li><a data-toggle="pill" href="#cluster">Cluster</a></li>
     <li><a data-toggle="pill" href="#carrier">Carrier</a></li>
     <li><a data-toggle="pill" href="#sector">Sector</a></li>
+    <li><a data-toggle="pill" href="#cell">Cell</a></li>
 
   </ul>
   
@@ -346,6 +350,12 @@
           <?php include 'stats_sector.php' ?>
           </div> <!--end of tab -->
   
+            <!-- =============================================================================== --> 
+          <!-- SECTCELLOR STATS --> 
+          <!-- =============================================================================== --> 
+          <div id="cell" class="tab-pane fade">
+          <?php include 'stats_cell.php' ?>
+          </div> <!--end of tab -->
       </div>
 </div>
 
@@ -394,21 +404,28 @@
     
     <script>
         $(function(){
-          $("#example").dataTable();
+          $("#cell_3G").dataTable();
         })
     </script>
 
       <script>
         $(function(){
-          $("#example1").dataTable();
+          $("#cell_4G").dataTable();
         })
     </script>
 
     <script>
         $(function(){
-          $("#example2").dataTable();
+          $("#cell_4G_celltab").dataTable();
         })
     </script>
+    
+    <script>
+        $(function(){
+          $("#sector_carrier").dataTable();
+        })
+    </script>
+
 
   </footer>
 

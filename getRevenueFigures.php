@@ -22,7 +22,7 @@ function getRevenueFigures(){
     $sql = "SELECT * from `ranPU`.`".$table."`";
     $result = $connect->query($sql);
 
-    var_dump($result);
+    //var_dump($result);
 
     if ($result->num_rows > 0) {
         // output data of each row

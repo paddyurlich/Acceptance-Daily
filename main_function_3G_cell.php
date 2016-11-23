@@ -42,7 +42,7 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       }
       $selectedCells = substr($selectedCells, 0, -3); //remove last "OR" from end of SQL string
 
-      var_dump($selectedCells);
+      //var_dump($selectedCells);
 
       //=====================================================
       // GET FIELD NAMES FROM TABLE

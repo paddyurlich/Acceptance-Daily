@@ -66,36 +66,17 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h3> Congestion </h3> 
+    <h3> 3G Congestion </h3> 
     <?php $thisTable = "congestion"; ?>
     <?php include 'table_cluster_3G.php' ?>        
   </div>
 
   <div class="col-md-6">
-    <h3>4G Basic</h3>
-    <?php $thisTable = "basic"; ?>
-    <?php include 'table_cluster_4G.php' ?> 
+    <h3>4G Congestion</h3>
+    <?php //$thisTable = "basic"; ?>
+    <?php //include 'table_cluster_4G.php' ?> 
   </div>
 </div> <!-- end of row -->
-
-<!-- ===============================
-3G cell stats
-=============================== -->
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="alert alert-info">
-      <h4 class="center"><strong>3G Cell level stats</strong></h4>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <?php $thisTable = "traffic"; ?>
-    <?php include 'table_cell_3G.php' ?>        
-  </div>
-</div>
 
 <!-- ===============================
 3G sector carrier stats
