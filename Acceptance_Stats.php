@@ -408,7 +408,13 @@
         })
     </script>
 
-      <script>
+    <script>
+        $(function(){
+          $("#cell_3G_acceptance").dataTable();
+        })
+    </script>
+    
+    <script>
         $(function(){
           $("#cell_4G").dataTable();
         })

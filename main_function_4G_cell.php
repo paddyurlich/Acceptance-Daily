@@ -1,5 +1,5 @@
 <?php
-    
+   
 function returnStats4G_cell($selection, $startDate, $endDate){
 
     if (isset($selection, $startDate, $endDate)) {
@@ -143,8 +143,8 @@ function returnStats4G_cell($selection, $startDate, $endDate){
 
     $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
     
-    //   echo "</br></br></br>";
-    //   echo $SQL_string;
+      echo "</br></br></br>";
+      echo $SQL_string;
 
       //======================================================
       // GET RESULT OF QUERY AND PUT INTO ARRAY 
@@ -169,16 +169,13 @@ function returnStats4G_cell($selection, $startDate, $endDate){
       return($result_array);
      }
 
+ else return null;
 
-     // $pp = 'pre';
-     // $selection[] = "060-RCTN-L18-1-1";
-     // $startDate = "2016-09-12";
-     // $endDate = "2016-09-12";
-
-     // returnStats4G($pp, $selection, $startDate, $endDate);
   }
- return null;
 
+    //  $selection[] = "060-RCTN-L18-1-1";
+    //  $startDate = "2016-10-12";
+    //  $endDate = "2016-10-12";
 
+    //  returnStats4G_cell($selection, $startDate, $endDate);
 ?>
-

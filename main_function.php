@@ -1,10 +1,5 @@
 <?php
     
-// $pp = "post";
-// $selection = array("060-TWRJ-U09-1-1","060-TWRJ-U09-1-2");
-// $startDate = "2016-09-22";
-// $endDate = "2016-09-23";
-
 function returnStats3G($pp, $selection, $startDate, $endDate){
       
   // if (isset($pp, $selection, $startDate, $endDate)) {
@@ -89,6 +84,17 @@ function returnStats3G($pp, $selection, $startDate, $endDate){
                             (sum(VS_AMR_RB_Erlang_Sum) * revenue_figures.voice)
                             AS 'Total Revenue ($)',";
 
+        //RRC congestion (summed)
+      $sql_string_first .= "(sum('VS.RRC.Rej.Code.Cong') +
+                            sum(`VS.RRC.Rej.DLCE.Cong`) +
+                            sum(`VS.RRC.Rej.DLPower.Cong`) +
+                            sum(`VS.RRC.Rej.DLIUBBand.Cong`) +
+                            sum(`VS.RRC.Rej.TNL.Fail`) +
+                            sum(`VS.RRC.Rej.ULCE.Cong`) +
+                            sum(`VS.RRC.Rej.ULIUBBand.Cong`) +
+                            sum(`VS.RRC.Rej.ULPower.Cong`))
+                            AS 'RRC Failures',";             
+        
         //CS RAB congestion (summed)
       $sql_string_first .= "(sum(VS_RAB_FailEstabCS_Code_Cong) + 
                             sum(VS_RAB_FailEstabCS_DLCE_Cong) +
@@ -110,8 +116,9 @@ function returnStats3G($pp, $selection, $startDate, $endDate){
         //total data volume mb
       $sql_string_first .= "((sum(VS_HSDPA_MeanChThroughput_TotalMBytes) + sum(VS_HSUPA_MeanChThroughput_TotalMBytes))/1024)
                             AS 'Total Traffic (GB)',";
-
-
+                            
+                            
+     
       //======================================================
       // CREATE BODY OF SQL STRING - sum
       //======================================================
@@ -149,13 +156,13 @@ function returnStats3G($pp, $selection, $startDate, $endDate){
       $sql_string_select = "SELECT ";
 
       $sql_string_main = substr($sql_string_main,0,-1);
-    
+      
       $sql_string_end = " FROM ranPU.Acceptance_Stats_3G_daily, ranPU.revenue_figures WHERE (Acceptance_Stats_3G_daily.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.")"; 
-
+      
       $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
 
-    //   echo "<br><br><br><br>";
-    //         echo "3G SQL = ".$SQL_string;
+      // echo "<br><br><br><br>";
+      //       echo "3G SQL - main_function.php  = ".$SQL_string;
 
       //======================================================
       // GET RESULT OF QUERY AND PUT INTO ARRAY 
@@ -178,10 +185,15 @@ function returnStats3G($pp, $selection, $startDate, $endDate){
       $connect->close();
 
       return $result_array;
-     }
+}
  // } 
  // return null;
 
+
+// $pp = "post";
+// $selection = array("060-TWRJ-U09-1-1","060-TWRJ-U09-1-2");
+// $startDate = "2016-09-22";
+// $endDate = "2016-09-23";
 //var_dump(returnStats3G($pp, $selection, $startDate, $endDate));
 ?>
 

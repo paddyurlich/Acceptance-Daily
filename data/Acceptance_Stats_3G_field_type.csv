@@ -40,30 +40,30 @@ VS_RAB_AbnormRel_CS_avg,Drops (CS),raw,inverse,,0
 VS_RAB_AbnormRel_CS_sum,Drops (CS),raw,inverse,drops,0
 VS_RAB_AbnormRel_PS_avg,Drops (PS),raw,inverse,,0
 VS_RAB_AbnormRel_PS_sum,Drops (PS),raw,inverse,drops,0
-VS_RAB_FailEstabCS_Code_Cong_avg,Congestion - Code,raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_Code_Cong_sum,Congestion - Code,raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_DLCE_Cong_avg,Congestion - DLCE (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_DLCE_Cong_sum,Congestion - DLCE (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_DLPower_Cong_avg,Congestion - DL Power (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_DLPower_Cong_sum,Congestion - DL Power (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_ULCE_Cong_avg,Congestion - ULCE (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_ULCE_Cong_sum,Congestion - ULCE (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_ULPower_Cong_avg,Congestion - UL Power (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabCS_ULPower_Cong_sum,Congestion - UL Power (CS),raw,inverse,cs_rab_fails,0
-VS_RAB_FailEstabPS_Code_Cong_avg,Congestion - Code,raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_Code_Cong_sum,Congestion - Code,raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_DLCE_Cong_avg,Congestion - DLCE (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_DLCE_Cong_sum,Congestion - DLCE (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_DLPower_Cong_avg,Congestion - DL Power (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_DLPower_Cong_sum,Congestion - DL Power (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_HSDPAUser_Cong_avg,Congestion - HSDPA User,raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_HSDPAUser_Cong_sum,Congestion - HSDPA User,raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_HSUPAUser_Cong_avg,Congestion - HSUPA User,raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_HSUPAUser_Cong_sum,Congestion - HSUPA User,raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_ULCE_Cong_avg,Congestion - ULCE (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_ULCE_Cong_sum,Congestion - ULCE (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_ULPower_Cong_avg,Congestion - UL Power (PS),raw,inverse,ps_rab_fails,0
-VS_RAB_FailEstabPS_ULPower_Cong_sum,Congestion - UL Power (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabCS_Code_Cong_avg,RAB Congestion - Code,raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_Code_Cong_sum,RAB Congestion - Code,raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_DLCE_Cong_avg,RAB Congestion - DLCE (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_DLCE_Cong_sum,RAB Congestion - DLCE (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_DLPower_Cong_avg,RAB Congestion - DL Power (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_DLPower_Cong_sum,RAB Congestion - DL Power (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_ULCE_Cong_avg,RAB Congestion - ULCE (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_ULCE_Cong_sum,RAB Congestion - ULCE (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_ULPower_Cong_avg,RAB Congestion - UL Power (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabCS_ULPower_Cong_sum,RAB Congestion - UL Power (CS),raw,inverse,cs_rab_fails,0
+VS_RAB_FailEstabPS_Code_Cong_avg,RAB Congestion - Code,raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_Code_Cong_sum,RAB Congestion - Code,raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_DLCE_Cong_avg,RAB Congestion - DLCE (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_DLCE_Cong_sum,RAB Congestion - DLCE (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_DLPower_Cong_avg,RAB Congestion - DL Power (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_DLPower_Cong_sum,RAB Congestion - DL Power (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_HSDPAUser_Cong_avg,RAB Congestion - HSDPA User,raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_HSDPAUser_Cong_sum,RAB Congestion - HSDPA User,raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_HSUPAUser_Cong_avg,RAB Congestion - HSUPA User,raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_HSUPAUser_Cong_sum,RAB Congestion - HSUPA User,raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_ULCE_Cong_avg,RAB Congestion - ULCE (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_ULCE_Cong_sum,RAB Congestion - ULCE (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_ULPower_Cong_avg,RAB Congestion - UL Power (PS),raw,inverse,ps_rab_fails,0
+VS_RAB_FailEstabPS_ULPower_Cong_sum,RAB Congestion - UL Power (PS),raw,inverse,ps_rab_fails,0
 CS RAB Failures,CS RAB Failures,raw,normal,congestion,0
 PS RAB Failures,PS RAB Failures,raw,normal,congestion,0
 Total Traffic (GB),Total Data Volume (GB) ,raw,normal,traffic,2
@@ -71,3 +71,12 @@ TCP Util(%),TCP Util(%),perc,inverse,Resource,2
 Non-HS TCP Util(%),Non-HS TCP Util(%),perc,inverse,Resource,2
 UL Load (%),UL Load (%),perc,inverse,Resource,2
 UL Load (fixed floor) (%),UL Load (fixed floor) (%),perc,inverse,Resource,2
+VS.RRC.Rej.Code.Cong_SUM,RRC Congestion Code,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.DLCE.Cong_SUM,RRC Congestion DLCE,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.DLPower.Cong_SUM,RRC Congestion DL Power,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.DLIUBBand.Cong_SUM,RRC Congestion DL IUB,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.TNL.Fail_SUM,RRC Congestion TNL,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.ULCE.Cong_SUM,RRC Congestion ULCL,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.ULIUBBand.Cong_SUM,RRC Congestion UL IUB,raw,inverse,ps_rab_fails,0
+VS.RRC.Rej.ULPower.Cong_SUM,RRC Congestion UL Power,raw,inverse,ps_rab_fails,0
+RRC Failures,RRC Failures,raw,inverse,congestion,0
