@@ -17,6 +17,7 @@
 <?php include 'main_function_3G_sector_carrier.php' ?> <!-- returnStats3G_sector_carrier --> 
 <?php include 'main_function_3G_cell.php' ?> <!-- returnStats3G_cell --> 
 <?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
+<?php include 'modal_help.php' ?>
 
 
 
@@ -222,22 +223,26 @@
 
 <!-- Fixed navbar --> 
     <!-- Fixed navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Acceptance Stats</a>
-      </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><strong>Acceptance Stats | </strong> Performance Analysis </a>
     </div>
-  </nav>
+    <ul class="nav navbar-nav">
+    <!--  <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li> -->
+    </ul>
+    <button class="btn btn-primary navbar-btn pull-right" data-toggle="modal" data-target="#myModal">Help</button>
+  </div>
+</nav>
 
 </br></br>
 <div class="container">
+
+
+
+
 <h1 class="center">Date and Cell selection</h1>
 <div class="panel panel-default">
 
