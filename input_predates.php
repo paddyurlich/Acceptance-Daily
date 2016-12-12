@@ -25,14 +25,13 @@
         $startDate = strtotime($startDate);
         $endDate = strtotime($endDate);
         $deltaPreDate =  $endDate - $startDate;
-        $deltaPreDate = $deltaPreDate/60/60/24; // convert to days
-
-    if (isset($startDate,$endDate)){
-        echo '<span class="label label-success">';
-        echo $deltaPreDate;
-        echo "</strong> Day(s) selected</span>";
-    }
-
+        $deltaPreDate = round($deltaPreDate/60/60/24); // convert to days
+        
+        if ($startDate_post>0 && $endDate_post>0){
+            echo '<span class="label label-success"><strong>';
+            echo $deltaPreDate;
+            echo "</strong> Day(s) selected</span>";
+        }
     ?>
 
  
