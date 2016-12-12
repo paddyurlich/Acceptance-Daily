@@ -18,4 +18,23 @@
             <option value="<?php echo $dateList[$k] ?>" <?php echo isset($endDate_post) && $dateList[$k] == $endDate_post ? ' selected' : '' ?>> <?php echo $dateList[$k]; ?>                      
         <?php } ?> 
     </select>
+
+    <br><br>
+
+    <?php
+        $startDate_post = strtotime($startDate_post);
+        $endDate_post = strtotime($endDate_post);
+        $deltaPostDate =  $endDate_post - $startDate_post;
+        $deltaPostDate = $deltaPostDate/60/60/24; // convert to days
+
+    if (isset($startDate_post,$endDate_post)){
+        echo '<span class="label label-success">';
+        echo $deltaPostDate;
+        echo "</strong> Day(s) selected</span>";
+    }
+
+    ?>
+
+
+
 </div>

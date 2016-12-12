@@ -104,7 +104,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="alert alert-info">
-      <h4 class="center"><strong>3G Cell Stats</strong></h4>
+      <h4 class="center"><strong>3G Cell level Stats</strong></h4>
     </div>
   </div>
 </div>

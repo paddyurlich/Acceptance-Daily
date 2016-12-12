@@ -45,11 +45,11 @@ L.E-RAB.NormRel.QCI.9,,,,,
 Service Drop Call Times,,,,,
 Service Drop Rate (All),,,,,
 Service Drop Times,,,,,
-L.E-RAB.FailEst.MME,,raw,normal,congestion_4G,0
-L.E-RAB.FailEst.NoRadioRes,,raw,normal,congestion_4G,0
-L.E-RAB.FailEst.NoReply,,raw,normal,congestion_4G,0
-L.E-RAB.FailEst.SecurModeFail,,raw,normal,congestion_4G,0
-L.E-RAB.FailEst.TNL,,raw,normal,congestion_4G,0
+L.E-RAB.FailEst.MME_sum,L.E-RAB.FailEst.MME,raw,inverse,congestion_4G_detailed,0
+L.E-RAB.FailEst.NoRadioRes_sum,L.E-RAB.FailEst.NoRadioRes,raw,inverse,congestion_4G_detailed,0
+L.E-RAB.FailEst.NoReply_sum,L.E-RAB.FailEst.NoReply,raw,inverse,congestion_4G_detailed,0
+L.E-RAB.FailEst.SecurModeFail_sum,L.E-RAB.FailEst.SecurModeFail,raw,inverse,congestion_4G_detailed,0
+L.E-RAB.FailEst.TNL_sum,L.E-RAB.FailEst.TNL,raw,inverse,congestion_4G_detailed,0
 L.Cell.Unavail.Dur.Manual(s),,,,,
 L.Cell.Unavail.Dur.Sys(s),,,,,
 L.LC.DLCong.Dur.Cell(s),,,,,
@@ -161,4 +161,4 @@ L.ChMeas.PRB.DL.Avail,,,,,
 L.ChMeas.PRB.UL.Avail,,,,,
 DL PRB Utilisation (%),DL PRB Utilisation (%),calc,normal,resources,2
 UL PRB Utilisation (%),UL PRB Utilisation (%),calc,normal,resources,2
-LTE Congestion (ALL),LTE Congestion (ALL),calc,normal,congestion_4G_sum,0
+LTE Congestion (ALL),LTE Congestion (ALL),calc,inverse,congestion_4G_sum,0
