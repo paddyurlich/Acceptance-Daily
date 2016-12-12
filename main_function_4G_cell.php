@@ -143,8 +143,8 @@ function returnStats4G_cell($selection, $startDate, $endDate){
 
     $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
     
-      echo "</br></br></br>";
-      echo $SQL_string;
+    //   echo "</br></br></br>";
+    //   echo $SQL_string;
 
       //======================================================
       // GET RESULT OF QUERY AND PUT INTO ARRAY 

@@ -84,6 +84,17 @@ function returnStats3G_sector($sector, $pp, $selection, $startDate, $endDate){
                             ((sum(VS_AMR_RB_Erlang_Sum)/2) * revenue_figures.voice)
                             AS 'Total Revenue ($)',";
 
+        //RRC congestion (summed)
+      $sql_string_first .= "(sum('VS.RRC.Rej.Code.Cong') +
+                            sum(`VS.RRC.Rej.DLCE.Cong`) +
+                            sum(`VS.RRC.Rej.DLPower.Cong`) +
+                            sum(`VS.RRC.Rej.DLIUBBand.Cong`) +
+                            sum(`VS.RRC.Rej.TNL.Fail`) +
+                            sum(`VS.RRC.Rej.ULCE.Cong`) +
+                            sum(`VS.RRC.Rej.ULIUBBand.Cong`) +
+                            sum(`VS.RRC.Rej.ULPower.Cong`))
+                            AS 'RRC Failures',";                              
+
         //CS RAB congestion (summed)
       $sql_string_first .= "(sum(VS_RAB_FailEstabCS_Code_Cong) + 
                             sum(VS_RAB_FailEstabCS_DLCE_Cong) +

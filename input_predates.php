@@ -1,7 +1,7 @@
 <div class="well">  
     <h3 class="center">Pre Dates</h3>
     <hr>  
-    <em>Start time/date:</em>
+    <label>Start time/date:</label>
     <select name="startDate" data-placeholder="Choose a start date..." class="chosen-select" style="width:200px;" tabindex="4">
     <option value=""></option>       
         <?php foreach($dateList as $k => $v) { ?>
@@ -11,7 +11,7 @@
 
     <br/><br/>
 
-    <em>End time/date: </em>
+    <label>End time/date: </label>
     <select name="endDate" data-placeholder="Choose an end date..." data-toggle="tooltip" title="Hooray!" class="chosen-select" style="width:200px;" tabindex="4">
         <option value=""></option>       
         <?php foreach($dateList as $k => $v) { ?>

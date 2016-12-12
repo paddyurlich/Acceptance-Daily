@@ -101,6 +101,15 @@ function returnStats4G($pp, $selection, $startDate, $endDate){
                             AS 'DL PRB Utilisation (%)',";   
 
 
+    $sql_string_first .=    "(SUM(`L.E-RAB.FailEst.NoReply`)+
+                            SUM(`L.E-RAB.FailEst.MME`)+
+                            SUM(`L.E-RAB.FailEst.NoRadioRes`)+
+                            SUM(`L.E-RAB.FailEst.TNL`)+
+                            SUM(`L.E-RAB.FailEst.SecurModeFail`))  
+                            as 'LTE Congestion (ALL)',";
+
+
+
       //======================================================
       // CREATE BODY OF SQL STRING - sum
       //======================================================
@@ -140,7 +149,7 @@ function returnStats4G($pp, $selection, $startDate, $endDate){
     
       $sql_string_end = " FROM ranPU.Acceptance_Stats_4G_daily, ranPU.revenue_figures WHERE (Acceptance_Stats_4G_daily.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.")"; 
 
-    $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
+        $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
       
     //   echo "</br></br></br>";
     //   echo $SQL_string;

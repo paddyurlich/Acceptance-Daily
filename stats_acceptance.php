@@ -73,8 +73,8 @@
 
   <div class="col-md-6">
     <h3>4G Congestion</h3>
-    <?php //$thisTable = "basic"; ?>
-    <?php //include 'table_cluster_4G.php' ?> 
+    <?php $thisTable = "congestion_4G_sum"; ?>
+    <?php include 'table_cluster_4G.php' ?> 
   </div>
 </div> <!-- end of row -->
 

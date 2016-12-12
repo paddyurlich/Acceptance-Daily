@@ -404,35 +404,47 @@
     
     <script>
         $(function(){
-          $("#cell_3G").dataTable();
+          $("#cell_3G").dataTable({
+            "paging":   false,
+            "info":     false
+          });
         })
     </script>
 
     <script>
         $(function(){
-          $("#cell_3G_acceptance").dataTable();
+          $("#cell_3G_acceptance").dataTable({
+            "paging":   false,
+            "info":     false
+          });
         })
     </script>
     
     <script>
         $(function(){
-          $("#cell_4G").dataTable();
+          $("#cell_4G").dataTable({
+            "paging":   false,
+            "info":     false
+          });
         })
     </script>
 
     <script>
         $(function(){
-          $("#cell_4G_celltab").dataTable();
+          $("#cell_4G_celltab").dataTable({
+            "paging":   false,
+            "info":     false
+          });
         })
     </script>
     
     <script>
         $(function(){
-          $("#sector_carrier").dataTable();
+          $("#sector_carrier").dataTable({
+            "paging":   false,
+            "info":     false
+          });
         })
     </script>
-
-
   </footer>
-
 </html>
