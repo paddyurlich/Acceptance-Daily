@@ -27,7 +27,7 @@
         $deltaPostDate =  $endDate_post - $startDate_post;
         $deltaPostDate = 1 + round($deltaPostDate/60/60/24); // convert to days
 
-        if($deltaPreDate == $deltaPostDate){
+        if($deltaPostDate == 14){
             $label_color = "success";
         } else {
             $label_color = "danger";
@@ -35,7 +35,6 @@
 
 
         if ($startDate_post>0 && $endDate_post>0){
-         //   echo '<span class="label label-".$label_color.">';
             echo '<span class="label label-';
             echo $label_color;
             echo '"><strong>';

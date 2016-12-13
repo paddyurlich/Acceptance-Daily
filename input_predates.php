@@ -26,9 +26,17 @@
         $endDate = strtotime($endDate);
         $deltaPreDate =  $endDate - $startDate;
         $deltaPreDate = 1 + round($deltaPreDate/60/60/24); // convert to days
+
+        if($deltaPreDate == 14){
+            $label_color = "success";
+        } else {
+            $label_color = "danger";
+        }
         
         if ($startDate_post>0 && $endDate_post>0){
-            echo '<span class="label label-success"><strong>';
+            echo '<span class="label label-';
+            echo $label_color;
+            echo '"><strong>';
             echo $deltaPreDate;
             echo "</strong> Day(s) selected</span>";
         }

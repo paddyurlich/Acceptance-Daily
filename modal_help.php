@@ -36,7 +36,7 @@
             POST-integration stats shoe the performance of the new site AND the surrounding network.   
             <br>
             <h4>Pre and Post Dates</h4>
-            Select both a "pre site on air" and "post site on air" date range of <span class="standout"> 7 </span> days. This needs to be sendisble i.e. ensure that the new site came on air between the pre 
+            Select both a "pre site on air" and "post site on air" date range of <span class="standout"> 14 </span> days. This needs to be sendisble i.e. ensure that the new site came on air between the pre 
             end post periods and that there are no outliers or anomolies in either of the periods.  Use DOT Reporting to confirm that dates selected are appropriate.  
             <br>
             <h4>3G Cells (Cluster)</h4>
