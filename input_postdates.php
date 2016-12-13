@@ -25,7 +25,7 @@
         $startDate_post = strtotime($startDate_post);
         $endDate_post = strtotime($endDate_post);
         $deltaPostDate =  $endDate_post - $startDate_post;
-        $deltaPostDate = round($deltaPostDate/60/60/24); // convert to days
+        $deltaPostDate = 1 + round($deltaPostDate/60/60/24); // convert to days
 
         if($deltaPreDate == $deltaPostDate){
             $label_color = "success";

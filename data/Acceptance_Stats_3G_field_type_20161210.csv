@@ -52,8 +52,8 @@ VS_RAB_FailEstabPS_ULPower_Cong_sum,RAB Congestion - UL Power (PS),raw,inverse,c
 VS_RAB_FailEstabPS_DLPower_Cong_sum,RAB Congestion - DL Power (PS),raw,inverse,congestion_3G_detailed,0
 VS_RAB_FailEstabPS_HSDPAUser_Cong_sum,RAB Congestion - HSDPA User,raw,inverse,congestion_3G_detailed,0
 VS_RAB_FailEstabPS_HSUPAUser_Cong_sum,RAB Congestion - HSUPA User,raw,inverse,congestion_3G_detailed,0
-CS RAB Failures,CS RAB Failures,raw,normal,congestion,0
-PS RAB Failures,PS RAB Failures,raw,normal,congestion,0
+CS RAB Failures,CS RAB Failures,raw,inverse,congestion,0
+PS RAB Failures,PS RAB Failures,raw,inverse,congestion,0
 Total Traffic (GB),Total Data Volume (GB) ,raw,normal,traffic,2
 TCP Util(%),TCP Util(%),perc,inverse,Resource,2
 Non-HS TCP Util(%),Non-HS TCP Util(%),perc,inverse,Resource,2

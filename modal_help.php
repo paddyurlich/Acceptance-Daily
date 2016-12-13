@@ -7,7 +7,10 @@
   .standout {
     color: red;
     font-weight: bold;
+  }
 
+  .underline {
+    text-decoration: underline;
   }
 
 </style>
@@ -27,6 +30,11 @@
         <!-- ========================================================= -->
             <p>
 
+            <h3>What are acceptance stats for ?</h3>
+            Acceptance stats provide a snapshot of performance of a new site and its impact on the surrounding network.  
+            PRE-integration stats show the performance of the network prior to the integration of the new site. 
+            POST-integration stats shoe the performance of the new site AND the surrounding network.   
+            <br>
             <h4>Pre and Post Dates</h4>
             Select both a "pre site on air" and "post site on air" date range of <span class="standout"> 7 </span> days. This needs to be sendisble i.e. ensure that the new site came on air between the pre 
             end post periods and that there are no outliers or anomolies in either of the periods.  Use DOT Reporting to confirm that dates selected are appropriate.  
@@ -42,6 +50,8 @@
             <br>
             <h4>4G Cells (new site)</h4>
             Select the 4G cells of the new site only.
+            <h4 class="underline">Notes</h4>
+            Data is collected daily around 4am. Date resolution is 90 days. 
 
                                      
             </p>

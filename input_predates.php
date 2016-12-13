@@ -25,7 +25,7 @@
         $startDate = strtotime($startDate);
         $endDate = strtotime($endDate);
         $deltaPreDate =  $endDate - $startDate;
-        $deltaPreDate = round($deltaPreDate/60/60/24); // convert to days
+        $deltaPreDate = 1 + round($deltaPreDate/60/60/24); // convert to days
         
         if ($startDate_post>0 && $endDate_post>0){
             echo '<span class="label label-success"><strong>';
