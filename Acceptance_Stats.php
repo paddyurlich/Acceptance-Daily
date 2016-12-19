@@ -197,6 +197,9 @@
 	<!-- Data Tables css -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
+  <!-- loader stylesheet --> 
+  <link rel="stylesheet" type="text/css" href="styleLoader.css">
+
 
 <!-- <script src="./datatables/datatables.css"></script> -->
 <!-- <link rel="stylesheet" type="text/css" href="./datatables/datatables.js"> -->
@@ -452,5 +455,24 @@
           });
         })
     </script>
+
+
+    <script>
+            // We define the function
+        function validate(){
+        console.log('validated!');
+        }
+
+        $(document).ready(function(){
+        // we call the function
+        validate();
+        //document.getElementById("loader").style.display = "none";
+        //document.getElementById("myDiv").style.display = "block";
+
+        });
+
+    </script>
+
+
   </footer>
 </html>
