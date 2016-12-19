@@ -36,6 +36,9 @@
 
   set_time_limit(360);
 
+
+
+
   //=============================
   // set selected start and end dates
   //=============================
@@ -47,126 +50,110 @@
   $endDate_post = isset($_GET['endDate_post']) ? $_GET['endDate_post'] : null ;
 
   // ======================
-  // 3G calc
+  // Get 3G input data
   // ======================
 
   $selectedCells_3G_newSite = isset($_GET['cell']) ? $_GET['cell'] : null ;
 
   $selectedCells_3G_cluster = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;
-
-  //$selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
-  
+ 
   if(isset($selectedCells_3G_cluster)){
     $selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
   } else {
     $selectedCells_3G_newSite_and_cluster = $selectedCells_3G_newSite;
   }
 
-  // notes: 
-  //=================
-  //pre stats = cluster
-  //post stats = cluster and new_site
 
-
-  $stats_3G_post_newSite =  returnStats3G("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_3G_pre_cluster =  returnStats3G("pre", $selectedCells_3G_cluster, $startDate, $endDate);
-  $stats_3G_post_cluster_and_newSite =  returnStats3G("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
-
-
-  $stats_3G_bh_post_newSite = returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_3G_bh_pre_cluster =  returnStats3G_cluster_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
-  $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
-
-
-  // carrier daily
-  $stats_post_carrier_u09f1 =  returnStats3G_carrier("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_u09f2 =  returnStats3G_carrier("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_u21f1 =  returnStats3G_carrier("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_u21f2 =  returnStats3G_carrier("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_u21f3 =  returnStats3G_carrier("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-
-  // carrier busy hour
-  $stats_post_carrier_bh_u09f1 =  returnStats3G_carrier_daily_bh("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_bh_u09f2 =  returnStats3G_carrier_daily_bh("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_bh_u21f1 =  returnStats3G_carrier_daily_bh("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_bh_u21f2 =  returnStats3G_carrier_daily_bh("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_carrier_bh_u21f3 =  returnStats3G_carrier_daily_bh("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-
-
-  // sector daily
-  $stats_post_sector_S1 =  returnStats3G_sector("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_sector_S2 =  returnStats3G_sector("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_sector_S3 =  returnStats3G_sector("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
- 
-   // sector daily - busy hour
-  $stats_post_sector_bh_S1 =  returnStats3G_sector_daily_bh("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_sector_bh_S2 =  returnStats3G_sector_daily_bh("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_post_sector_bh_S3 =  returnStats3G_sector_daily_bh("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-
-  // acceptance stats - used in datatabls 
-  $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate_post, $endDate_post);
-  
   // ======================
-  // 4G calc
+  // Get 4G input data
   // ======================
-
-  
-  // notes: 
-  //=================
-  //pre stats = cluster
-  //post stats = cluster and new_site
 
   $selectedCells_4G_newSite = isset($_GET['cell4Gpre']) ? $_GET['cell4Gpre'] : null ;
 
   $selectedCells_4G_cluster = isset($_GET['cell4Gpost']) ? $_GET['cell4Gpost'] : null ;
 
-  //$selectedCells_4G_newSite_and_cluster = array_merge($selectedCells_4G_newSite, $selectedCells_4G_cluster);
-  
   if(isset($selectedCells_4G_cluster)){
     $selectedCells_4G_newSite_and_cluster = array_merge($selectedCells_4G_newSite, $selectedCells_4G_cluster);
   } else {
     $selectedCells_4G_newSite_and_cluster = $selectedCells_4G_newSite;
   }
 
+  // notes: 
+  //=================
+  //pre stats = cluster
+  //post stats = cluster and new_site
 
-  //$stats_4G_pre =  returnStats4G("pre", $selectedCells_4G_pre, $startDate, $endDate);
-  //$stats_4G_post =  returnStats4G("post", $selectedCells_4G_post, $startDate_post, $endDate_post);
+  $formTouched = ( isset($startDate) || isset($endDate) || isset($startDate_post) || isset($endDate_post) || isset($selectedCells_3G_newSite) || isset($selectedCells_3G_cluster) || isset($selectedCells_4G_newSite) || isset($selectedCells_4G_cluster) ) ;
 
-  $stats_4G_post_newSite =  returnStats4G("post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
-  $stats_4G_pre_cluster =  returnStats4G("pre", $selectedCells_4G_cluster, $startDate, $endDate);
-  $stats_4G_post_cluster_and_newSite =  returnStats4G("post", $selectedCells_4G_newSite_and_cluster, $startDate_post, $endDate_post);
-
-  $stats_4G_post_sector_S1 =  returnStats4G_sector("1","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
-  $stats_4G_post_sector_S2 =  returnStats4G_sector("2","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
-  $stats_4G_post_sector_S3 =  returnStats4G_sector("3","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
-  
-  //4G cells levels stats - used in datatables
-  $stats_4G_cell = returnStats4G_cell($selectedCells_4G_newSite, $startDate_post, $endDate_post);
+  if ($formTouched){
+      $stats_3G_post_newSite =  returnStats3G("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_3G_pre_cluster =  returnStats3G("pre", $selectedCells_3G_cluster, $startDate, $endDate);
+      $stats_3G_post_cluster_and_newSite =  returnStats3G("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
 
-
-  // ======================
-  // helper vars
-  // ======================
-
-  $formComplete = (is_null($selectedCells_3G_newSite)  || is_null($startDate) || is_null($endDate)) ? false : true ;
+      $stats_3G_bh_post_newSite = returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_3G_bh_pre_cluster =  returnStats3G_cluster_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
+      $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
 
-  // var_dump($startDate);
-  // var_dump($startDate);
-  // var_dump($stats_pre);
+      // carrier daily
+      $stats_post_carrier_u09f1 =  returnStats3G_carrier("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_u09f2 =  returnStats3G_carrier("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_u21f1 =  returnStats3G_carrier("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_u21f2 =  returnStats3G_carrier("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_u21f3 =  returnStats3G_carrier("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+
+      // carrier busy hour
+      $stats_post_carrier_bh_u09f1 =  returnStats3G_carrier_daily_bh("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_bh_u09f2 =  returnStats3G_carrier_daily_bh("U09-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_bh_u21f1 =  returnStats3G_carrier_daily_bh("U21-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_bh_u21f2 =  returnStats3G_carrier_daily_bh("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_carrier_bh_u21f3 =  returnStats3G_carrier_daily_bh("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
 
-  // var_dump($selectedCells_post);
-  // var_dump($startDate_post);
-  // var_dump($endDate_post);
-  // var_dump($stats_post);
+      // sector daily
+      $stats_post_sector_S1 =  returnStats3G_sector("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_sector_S2 =  returnStats3G_sector("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_sector_S3 =  returnStats3G_sector("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+    
+      // sector daily - busy hour
+      $stats_post_sector_bh_S1 =  returnStats3G_sector_daily_bh("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_sector_bh_S2 =  returnStats3G_sector_daily_bh("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_post_sector_bh_S3 =  returnStats3G_sector_daily_bh("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
-  // var_dump($selectedCells_3G_newSite);
-  // var_dump($selectedCells_3G_cluster);
-  // var_dump($selectedCells_3G_newSite_and_cluster);
+      // acceptance stats - used in datatabls 
+      $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate_post, $endDate_post);
+      
+      // ======================
+      // 4G calc
+      // ======================
+
+      
+      // notes: 
+      //=================
+      //pre stats = cluster
+      //post stats = cluster and new_site
+
+      //$stats_4G_pre =  returnStats4G("pre", $selectedCells_4G_pre, $startDate, $endDate);
+      //$stats_4G_post =  returnStats4G("post", $selectedCells_4G_post, $startDate_post, $endDate_post);
+
+      $stats_4G_post_newSite =  returnStats4G("post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
+      $stats_4G_pre_cluster =  returnStats4G("pre", $selectedCells_4G_cluster, $startDate, $endDate);
+      $stats_4G_post_cluster_and_newSite =  returnStats4G("post", $selectedCells_4G_newSite_and_cluster, $startDate_post, $endDate_post);
+
+      $stats_4G_post_sector_S1 =  returnStats4G_sector("1","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
+      $stats_4G_post_sector_S2 =  returnStats4G_sector("2","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
+      $stats_4G_post_sector_S3 =  returnStats4G_sector("3","post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
+      
+      //4G cells levels stats - used in datatables
+      $stats_4G_cell = returnStats4G_cell($selectedCells_4G_newSite, $startDate_post, $endDate_post);
+}
+
 ?>
+
+
+
 
 <!doctype html>
 <html lang="en">
@@ -181,6 +168,7 @@
   <!-- main styles --> 
   <link rel="stylesheet" href="styles.css">
 
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 
@@ -190,11 +178,18 @@
   <!-- Latest compiled bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- include index.js -->
+  <script src="index.js"></script>
+
 	<!-- Data Tables css -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
-  <!-- <script src="./datatables/datatables.css"></script> -->
-  <!-- <link rel="stylesheet" type="text/css" href="./datatables/datatables.js"> -->
+  <!-- loader stylesheet --> 
+  <link rel="stylesheet" type="text/css" href="styleLoader.css">
+
+
+<!-- <script src="./datatables/datatables.css"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="./datatables/datatables.js"> -->
 
   <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
@@ -215,6 +210,7 @@
 
 <body>
 
+<div id="loader"></div>
 
 <!-- Fixed navbar --> 
     <!-- Fixed navbar -->
@@ -233,10 +229,7 @@
 </nav>
 
 </br></br>
-<div class="container">
-
-
-
+<div id="container" class="container">
 
 <h1 class="center">Date and Cell selection</h1>
 <div class="panel panel-default">
@@ -252,7 +245,7 @@
 
       <div class="row">
 
-          <div class="col-md-2">
+          <div class="col-md-2" data-toggle="tooltip" title="Hooray!">
             <?php include 'input_predates.php' ?>
           </div> 
           <div class="col-md-2">
@@ -281,7 +274,7 @@
     <div class="row">
       <div class="col-md-12">
         <hr>
-        <input type="submit" value="Calculate Stats" class="btn btn-primary btn-lg">
+        <input id="submit" type="submit" value="Calculate Stats" class="btn btn-primary btn-lg">
       </div>
     </div> <!--end of third row --> 
 
@@ -320,42 +313,42 @@
           <!-- ACCEPTANCE STATS --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
-          <?php include 'stats_acceptance.php' ?>
+          <?php //include 'stats_acceptance.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
           <div id="newsite" class="tab-pane fade">
-          <?php include 'stats_newsite.php' ?>
+          <?php //include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CLUSTER STATS --> 
           <!-- =============================================================================== --> 
           <div id="cluster" class="tab-pane fade">
-          <?php include 'stats_cluster.php' ?>
+          <?php //include 'stats_cluster.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CARRIER STATS --> 
           <!-- =============================================================================== --> 
           <div id="carrier" class="tab-pane fade">
-          <?php include 'stats_carrier.php' ?>
+          <?php //include 'stats_carrier.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- SECTOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="sector" class="tab-pane fade">
-          <?php include 'stats_sector.php' ?>
+          <?php //include 'stats_sector.php' ?>
           </div> <!--end of tab -->
   
             <!-- =============================================================================== --> 
           <!-- SECTCELLOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
-          <?php include 'stats_cell.php' ?>
+          <?php //include 'stats_cell.php' ?>
           </div> <!--end of tab -->
       </div>
 </div>
@@ -369,82 +362,18 @@
 
 <footer>
 
-    <!-- chose drop down --> 
-    <script src="chosen.jquery.js" type="text/javascript"></script>
 
-    <!--<script type="text/javascript">
-      var config = {
-        '.chosen-select'           : {},
-        '.chosen-select-deselect'  : {allow_single_deselect:true},
-        '.chosen-select-no-single' : {disable_search_threshold:10},
-        '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-        '.chosen-select-width'     : {width:"200%"}
-      }
-      for (var selector in config) {
-        $(selector).chosen(config[selector]);
-      }
-    </script> --> 
+    <!-- chosen drop down --> 
+    <script src="chosen.jquery.js" type="text/javascript"></script>
 
     <script type="text/javascript">
       $(".chosen-select").chosen({width: "100%"}); 
     </script>
-
-    <!-- bootstrap tooltip --> 
-    <script type="text/javascript">
-        $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
-
   
     <!-- datatables --> 
     <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.3.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     
-    <script>
-        $(function(){
-          $("#cell_3G").dataTable({
-            "paging":   false,
-            "info":     false
-          });
-        })
-    </script>
-
-    <script>
-        $(function(){
-          $("#cell_3G_acceptance").dataTable({
-            "paging":   false,
-            "info":     false
-          });
-        })
-    </script>
-    
-    <script>
-        $(function(){
-          $("#cell_4G").dataTable({
-            "paging":   false,
-            "info":     false
-          });
-        })
-    </script>
-
-    <script>
-        $(function(){
-          $("#cell_4G_celltab").dataTable({
-            "paging":   false,
-            "info":     false
-          });
-        })
-    </script>
-    
-    <script>
-        $(function(){
-          $("#sector_carrier").dataTable({
-            "paging":   false,
-            "info":     false
-          });
-        })
-    </script>
 
   </footer>
 </html>
