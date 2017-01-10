@@ -210,7 +210,7 @@
 
 <body>
 
-<div id="loader"></div>
+<!--<div id="loader"></div> --> 
 
 <!-- Fixed navbar --> 
     <!-- Fixed navbar -->
@@ -245,7 +245,7 @@
 
       <div class="row">
 
-          <div class="col-md-2" data-toggle="tooltip" title="Hooray!">
+          <div id="preDateInputBox" class="col-md-2" data-toggle="tooltip" title="Hooray!">
             <?php include 'input_predates.php' ?>
           </div> 
           <div class="col-md-2">
