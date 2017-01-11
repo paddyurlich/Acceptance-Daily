@@ -1,7 +1,7 @@
 <div class="well" data-toggle="tooltip" title="Hold CNTRL to select multiple cells">
     <h3 class="center">3G Cells</h3><h4 class="center">(Cluster)</h4>
     <hr>
-        <select name="cellCluster2[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
+        <select id=cells_3G_Cluster name="cellCluster2[]" data-placeholder="Choose a cell..." class="chosen-select" multiple style="width:300px;" tabindex="4">
         <option value=""></option>       
             <?php foreach($cellList as $k => $v) { ?>
                 <option value=<?php echo $cellList[$k] ?>

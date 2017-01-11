@@ -18,7 +18,7 @@
 <?php include 'main_function_3G_cell.php' ?> <!-- returnStats3G_cell --> 
 <?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
 <?php include 'modal_help.php' ?>
-
+<?php include 'selectedCellsGAP.php' ?>
 
 
 <?php
@@ -400,7 +400,7 @@ if ($tableComplete == TRUE) {
     </script> --> 
 
     <script type="text/javascript">
-       $(".chosen-select").chosen({width: "100%"}); 
+      //  $(".chosen-select").chosen({width: "100%"}); 
     </script>
 
     <!-- bootstrap tooltip --> 

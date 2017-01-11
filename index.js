@@ -143,8 +143,17 @@ $(document).ready(function(){
             }
         }
 
+    //=========================
+    // get seleted cells
+    //=========================
 
 
+        $("#cells_3G_Cluster").chosen({width: "100%"}).change(function(){
+            selected_postDateStart = ($("#startDate_post option:selected").val()); 
+      
+
+                   
+        });
 
 
 
