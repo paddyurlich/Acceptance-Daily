@@ -149,9 +149,13 @@ $(document).ready(function(){
 
 
         $("#cells_3G_Cluster").chosen({width: "100%"}).change(function(){
-            selected_postDateStart = ($("#startDate_post option:selected").val()); 
-      
+            
+            // selected_postDateStart = ($("#cells_3G_Cluster option:selected").val()); 
+            // console.log(selected_postDateStart);
 
+            $("#cells_3G_Cluster").each(function() {
+                console.log(($("#cells_3G_Cluster option:selected").val())
+            }
                    
         });
 
