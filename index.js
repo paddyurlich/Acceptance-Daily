@@ -141,24 +141,50 @@ $(document).ready(function(){
 
                 $("#postDateDeltaDiv").html(label_message);
             }
-        }
+        };
 
     //=========================
-    // get seleted cells
+    // get seleted cells and put into selected cells div with GAP stats
     //=========================
 
 
-        $("#cells_3G_Cluster").chosen({width: "100%"}).change(function(){
+            //  initialize the Chosen select
+            $('#cells_3G_Cluster').chosen({width: "100%"});
+
+            //  handle the change event
+            $('#cells_3G_Cluster').chosen().change(function(){
+                cells_3G_Cluster_selected_new = "";
+                var cells_3G_Cluster_selected = $('#cells_3G_Cluster').chosen().val();
+                                
+                $.each(cells_3G_Cluster_selected, function(i, l){
+                    cells_3G_Cluster_selected_new += l + ",3G Clust,orange </br>";
+                });              
+
+                $("#cells_3G_ClusterDisplay").html(cells_3G_Cluster_selected_new);
+
+                // put selected cells into local storage.  
+                
+                localStorage.setItem("cells_3G_Cluster_selected_new", cells_3G_Cluster_selected_new);
+           });
+
+
             
-            // selected_postDateStart = ($("#cells_3G_Cluster option:selected").val()); 
-            // console.log(selected_postDateStart);
 
-            $("#cells_3G_Cluster").each(function() {
-                console.log(($("#cells_3G_Cluster option:selected").val())
-            }
-                   
-        });
+    //=========================
+    // get seleted cells and put into selected cells div with GAP stats - data from PHP query sting prams
+    //=========================
 
+                GAPStats_cells_list = "";
+                //var GAPStats_cells = $('#cells_3G_Cluster').chosen().val();              
+                
+                $.each(GAPStats_cells_3G_cluster, function(i, l){
+                    GAPStats_cells_list += l + ",3G Clust,orange </br>";
+                });             
+
+                $("#cells_3G_ClusterDisplay").html(GAPStats_cells_list);           
+
+
+                console.log(GAPStats_cells_3G_newsite);
 
 
 });
