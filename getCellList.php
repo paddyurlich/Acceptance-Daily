@@ -2,26 +2,24 @@
 
 function getCellList(){
 
-  	$servername = "172.21.200.37";
-    $username = "patrickurlich";
-    $password = "forPUonly";
-    $dbname = "ranPU";
+
     $table = "Acceptance_Stats_3G_daily";
 
-    // Create connection
-    //$connect = new mysqli($servername, $username, $password, $dbname);
-     $connect = mysqli_connect($servername, $username,$password,$dbname); 
-    // Check connection
-    if ($connect->connect_error) {
-        die("Connection failed: " . $connect->connect_error);
-    }     
+    global $dbname; 
+    global $servername;
+    global $username;
+    global $password;
+    global $connect;
+
+    $connect = mysqli_connect($servername, $username,$password,$dbname); 
 
     //==========================================
     //get list of cells from Acceptance Stats table
     //==========================================
 
-    $sql = "SELECT CELLNAME from `ranPU`.`".$table."`"." GROUP BY CELLNAME ORDER BY $table.CELLNAME ASC";
+    $sql = "SELECT CELLNAME from `".$dbname."`.`".$table."`"." GROUP BY CELLNAME ORDER BY $table.CELLNAME ASC";
 
+    //echo $sql;
     $result = $connect->query($sql);
 
     if ($result->num_rows > 0) {

@@ -1,25 +1,25 @@
 <?php
 function getRevenueFigures(){
+
+    connection();
 	
-	$servername = "172.21.200.37";
-    $username = "patrickurlich";
-    $password = "forPUonly";
-    $dbname = "ranPU";
     $table = "revenue_figures";
 
-    // Create connection
-    //$connect = new mysqli($servername, $username, $password, $dbname);
-     $connect = mysqli_connect($servername, $username,$password,$dbname); 
-    // Check connection
-    if ($connect->connect_error) {
-        die("Connection failed: " . $connect->connect_error);
-    }     
+    global $dbname; 
+    global $servername;
+    global $username;
+    global $password;
+    global $connect;
+
+    $connect = mysqli_connect($servername, $username,$password,$dbname);    
 
     //==========================================
     //get date list from Acceptance stats table - and use for dropdown menus.
     //==========================================
 
-    $sql = "SELECT * from `ranPU`.`".$table."`";
+    
+    $table = "revenue_figures";
+    $sql = "SELECT * from `".$dbname."`.`".$table."`";
     $result = $connect->query($sql);
 
     //var_dump($result);

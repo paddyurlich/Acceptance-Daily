@@ -2,25 +2,26 @@
 
 function getFieldType4G(){
 
-  	$servername = "172.21.200.37";
-    $username = "patrickurlich";
-    $password = "forPUonly";
-    $dbname = "ranPU";
+
+connection();
+
     $table = "Acceptance_Stats_4G_field_type";
 
-    // Create connection
-    //$connect = new mysqli($servername, $username, $password, $dbname);
-     $connect = mysqli_connect($servername, $username,$password,$dbname); 
-    // Check connection
-    if ($connect->connect_error) {
-        die("Connection failed: " . $connect->connect_error);
-    }     
+    global $dbname; 
+    global $servername;
+    global $username;
+    global $password;
+    global $connect;
+
+    $connect = mysqli_connect($servername, $username,$password,$dbname); 
 
     //==========================================
     //get list of cells from Acceptance Stats table
     //==========================================
 
-    $sql = "SELECT * from `ranPU`.`".$table."`";
+    
+    $table = "Acceptance_Stats_4G_field_type";
+    $sql = "SELECT * from `".$dbname."`.`".$table."`";
     //echo $sql;
 
     $result = $connect->query($sql);

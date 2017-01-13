@@ -14,18 +14,20 @@ function returnStats3G_sector_daily_bh($sector, $pp, $selection, $startDate, $en
       // database connection
       //=============================  
 
-      $servername = "172.21.200.37";
-      $username = "patrickurlich";
-      $password = "forPUonly";
-      $dbname = "ranPU";
-      $table = "Acceptance_Stats_3G_daily";
+      global $dbname; 
+      global $servername;
+      global $username;
+      global $password;
+      global $connect;
 
-      // Create connection
-      $connect = mysqli_connect($servername, $username,$password,$dbname); 
-      // Check connection
-      if ($connect->connect_error) {
-          die("Connection failed: " . $connect->connect_error);
-      } 
+      $connect = mysqli_connect($servername, $username,$password,$dbname);
+
+    //   // Create connection
+    //   $connect = mysqli_connect($servername, $username,$password,$dbname); 
+    //   // Check connection
+    //   if ($connect->connect_error) {
+    //       die("Connection failed: " . $connect->connect_error);
+    //   } 
 
       //======================================================
       // BUILD SELECTED CELLS STRING
@@ -126,7 +128,7 @@ function returnStats3G_sector_daily_bh($sector, $pp, $selection, $startDate, $en
 
       $sql_string_main = substr($sql_string_main,0,-1);
     
-      $sql_string_end = " FROM ranPU.Acceptance_Stats_3G_daily_bh, ranPU.revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND right(Acceptance_Stats_3G_daily_bh.CELLNAME,1)='".$sector."' AND (".$selectedCells.")"; 
+      $sql_string_end = " FROM ".$dbname.".Acceptance_Stats_3G_daily_bh, ".$dbname.".revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND right(Acceptance_Stats_3G_daily_bh.CELLNAME,1)='".$sector."' AND (".$selectedCells.")"; 
 
       $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
 

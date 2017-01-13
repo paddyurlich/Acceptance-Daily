@@ -1,26 +1,25 @@
 <?php
 
 function getDateList(){
-	
-	$servername = "172.21.200.37";
-    $username = "patrickurlich";
-    $password = "forPUonly";
-    $dbname = "ranPU";
-    $table = "Acceptance_Stats_3G_daily";
-
-    // Create connection
-    //$connect = new mysqli($servername, $username, $password, $dbname);
-     $connect = mysqli_connect($servername, $username,$password,$dbname); 
-    // Check connection
-    if ($connect->connect_error) {
-        die("Connection failed: " . $connect->connect_error);
-    }     
-
+    
     //==========================================
     //get date list from Acceptance stats table - and use for dropdown menus.
     //==========================================
 
-    $sql = "SELECT Date from `ranPU`.`".$table."`"." GROUP BY Date ORDER BY $table.Date ASC";
+    global $dbname; 
+    global $servername;
+    global $username;
+    global $password;
+    global $connect;
+
+    $connect = mysqli_connect($servername, $username,$password,$dbname); 
+    
+    $table = "Acceptance_Stats_3G_daily";
+
+    //$sql = "SELECT Date from `ranPU`.`".$table."`"." GROUP BY Date ORDER BY $table.Date ASC";
+    $sql = 'SELECT Date from '.$dbname.".".$table." GROUP BY Date ORDER BY ".$table.".Date ASC";
+    //echo $sql;
+
     $result = $connect->query($sql);
 
     if ($result->num_rows > 0) {
@@ -30,7 +29,7 @@ function getDateList(){
 
         }
     } else {
-        echo "ERROR: problem with getDateList function !!";
+        echo "<br/>ERROR: problem with getDateList function !!";
     }
 
      foreach($result_array as $k => $v) {

@@ -1,4 +1,4 @@
-
+<?php include 'config.php' ?>
 <?php include 'functions.php' ?>
 <?php include 'main_function.php' ?> <!-- returnStats3G -->
 <?php include 'main_function_4G.php' ?>
@@ -19,6 +19,7 @@
 <?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
 <?php include 'modal_help.php' ?>
 <?php include 'selectedCellsGAP.php' ?>
+
 
 
 <?php

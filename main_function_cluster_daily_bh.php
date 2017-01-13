@@ -18,18 +18,13 @@ function returnStats3G_cluster_daily_bh($pp, $selection, $startDate, $endDate){
       // database connection
       //=============================  
 
-      $servername = "172.21.200.37";
-      $username = "patrickurlich";
-      $password = "forPUonly";
-      $dbname = "ranPU";
-      $table = "Acceptance_Stats_3G_daily_bh";
+      global $dbname; 
+      global $servername;
+      global $username;
+      global $password;
+      global $connect;
 
-      // Create connection
-      $connect = mysqli_connect($servername, $username,$password,$dbname); 
-      // Check connection
-      if ($connect->connect_error) {
-          die("Connection failed: " . $connect->connect_error);
-      } 
+      $connect = mysqli_connect($servername, $username,$password,$dbname);
 
       //======================================================
       // BUILD SELECTED CELLS STRING
@@ -134,7 +129,7 @@ function returnStats3G_cluster_daily_bh($pp, $selection, $startDate, $endDate){
       $sql_string_main = "";
       
     
-      $sql_string_end = " FROM ranPU.Acceptance_Stats_3G_daily_bh, ranPU.revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.")"; 
+      $sql_string_end = " FROM ".$dbname.".Acceptance_Stats_3G_daily_bh, ".$dbname.".revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.")"; 
 
       $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
 
