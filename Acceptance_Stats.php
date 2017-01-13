@@ -41,7 +41,7 @@
   // set selected start and end dates
   //=============================
 
-$tableComplete = TRUE;
+$tableComplete = true;
 
 if ($tableComplete == TRUE) {
       $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null ;
@@ -57,6 +57,7 @@ if ($tableComplete == TRUE) {
       $selectedCells_3G_newSite = isset($_GET['cell']) ? $_GET['cell'] : null ;
 
       $selectedCells_3G_cluster = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;
+      
 
       //$selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
       
@@ -260,10 +261,10 @@ if ($tableComplete == TRUE) {
       <div class="row">
 
           <div class="col-md-2">
-            <?php include 'input_predates.php' ?>
+            <?php //include 'input_predates.php' ?>
           </div> 
           <div class="col-md-2">
-            <?php include 'input_postdates.php' ?>
+            <?php //include 'input_postdates.php' ?>
           </div> 
           <div class="col-md-2">
             <?php include 'input_3G_cells_cluster.php' ?>
@@ -284,6 +285,15 @@ if ($tableComplete == TRUE) {
           <div class="col-md-4">
             <div class="alert alert-danger">
               <strong>Reminder!</strong> Select 14 Days for Acceptance Stats.
+            </div>
+          </div> 
+      </div>
+
+
+      <div  class="row">
+          <div class="col-md-12">
+            <div id="cells_3G_ClusterDisplay" class="alert alert-warning">
+      
             </div>
           </div> 
       </div>
@@ -335,42 +345,42 @@ if ($tableComplete == TRUE) {
           <!-- ACCEPTANCE STATS --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
-          <?php include 'stats_acceptance.php' ?>
+          <?php //include 'stats_acceptance.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
           <div id="newsite" class="tab-pane fade">
-          <?php include 'stats_newsite.php' ?>
+          <?php //include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CLUSTER STATS --> 
           <!-- =============================================================================== --> 
           <div id="cluster" class="tab-pane fade">
-          <?php include 'stats_cluster.php' ?>
+          <?php //include 'stats_cluster.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CARRIER STATS --> 
           <!-- =============================================================================== --> 
           <div id="carrier" class="tab-pane fade">
-          <?php include 'stats_carrier.php' ?>
+          <?php //include 'stats_carrier.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- SECTOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="sector" class="tab-pane fade">
-          <?php include 'stats_sector.php' ?>
+          <?php //include 'stats_sector.php' ?>
           </div> <!--end of tab -->
   
             <!-- =============================================================================== --> 
-          <!-- SECTCELLOR STATS --> 
+          <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
-          <?php include 'stats_cell.php' ?>
+          <?php //include 'stats_cell.php' ?>
           </div> <!--end of tab -->
       </div>
 </div>
@@ -410,8 +420,16 @@ if ($tableComplete == TRUE) {
         //   $('[data-toggle="tooltip"]').tooltip();
         // });
     </script>
+ 
+    
+ 
+    <script type="text/javascript"> 
+      var GAPStats_cells_3G_cluster=<?php echo json_encode($selectedCells_3G_cluster); ?>;
+      var GAPStats_cells_3G_newsite=<?php echo json_encode($selectedCells_3G_newSite); ?>;
+      var GAPStats_cells_4G_cluster=<?php echo json_encode($selectedCells_4G_cluster); ?>;
+      var GAPStats_cells_4G_newsite=<?php echo json_encode($selectedCells_4G_newSite); ?>;
+    </script>   
 
-  
 
 
 
