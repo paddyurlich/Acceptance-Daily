@@ -149,47 +149,52 @@ $(document).ready(function(){
 
 
             //  initialize the Chosen select
-            $('#cells_3G_Cluster').chosen({width: "100%"});
+            $('.chosen-select').chosen({width: "100%"});
 
             //  handle the change event
-            $('#cells_3G_Cluster').chosen().change(function(){
+            $('#cells_3G_cluster').chosen().change(function(){
                 putSelectedCellsInDiv();        
-           });   
+            }); 
 
-            //run of page load or refresh
+            $('#cells_3G_newSite').chosen().change(function(){
+                putSelectedCellsInDiv();        
+            });   
+
+            $('#cells_4G_cluster').chosen().change(function(){
+                putSelectedCellsInDiv();        
+            });
+
+            $('#cells_4G_newSite').chosen().change(function(){
+                putSelectedCellsInDiv();        
+            });      
+
+            // create GAP cells page load or refresh ie on document ready, not change.
             putSelectedCellsInDiv();
 
             
-            
             function putSelectedCellsInDiv(){
-                cells_3G_Cluster_selected_new = "";
-                var cells_3G_Cluster_selected = $('#cells_3G_Cluster').chosen().val();
-                                
-                $.each(cells_3G_Cluster_selected, function(i, l){
-                    cells_3G_Cluster_selected_new += l + ",3G Clust,orange </br>";
-                });              
+                var selectedCellsAllGAP = "";
+                var cells_3G_cluster_selected = $('#cells_3G_cluster').chosen().val();
+                var cells_3G_newSite_selected = $('#cells_3G_newSite').chosen().val();
+                var cells_4G_cluster_selected = $('#cells_4G_cluster').chosen().val();
+                var cells_4G_newSite_selected = $('#cells_4G_newSite').chosen().val();      
 
-                $("#cells_3G_ClusterDisplay").html(cells_3G_Cluster_selected_new);
+                $.each(cells_3G_cluster_selected, function(i, l){
+                    selectedCellsAllGAP += l + ", 3G Clust, green </br>";
+                });     
+                $.each(cells_3G_newSite_selected, function(i, l){
+                    selectedCellsAllGAP += l + ", 3G NewSite, orange </br>";
+                });     
+                $.each(cells_4G_cluster_selected, function(i, l){
+                    selectedCellsAllGAP += l + ", 4G Clust, yellow </br>";
+                });     
+                $.each(cells_4G_newSite_selected, function(i, l){
+                    selectedCellsAllGAP += l + ", 4G NewSite, red </br>";
+                });     
+   
+                $("#cells_3G_ClusterDisplay").html(selectedCellsAllGAP);
             };
  
-
-
-
-
-    //=========================
-    // get seleted cells and put into selected cells div with GAP stats - data from PHP query sting prams
-    //=========================
-
-                // GAPStats_cells_list = "";
-                // //var GAPStats_cells = $('#cells_3G_Cluster').chosen().val();              
-                
-                // $.each(GAPStats_cells_3G_cluster, function(i, l){
-                //     GAPStats_cells_list += l + ",3G Clust,orange </br>";
-                // });             
-
-                // $("#cells_3G_ClusterDisplay").html(GAPStats_cells_list);     
-
-                // //console.log(GAPStats_cells_3G_newsite);
 });
 
 

@@ -261,10 +261,10 @@ if ($tableComplete == TRUE) {
       <div class="row">
 
           <div class="col-md-2">
-            <?php //include 'input_predates.php' ?>
+            <?php include 'input_predates.php' ?>
           </div> 
           <div class="col-md-2">
-            <?php //include 'input_postdates.php' ?>
+            <?php include 'input_postdates.php' ?>
           </div> 
           <div class="col-md-2">
             <?php include 'input_3G_cells_cluster.php' ?>
