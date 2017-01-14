@@ -1,4 +1,4 @@
-<div class="well">  
+<div class="well" data-toggle="tooltip" title="Select a 14 day range for Acceptance Stats">  
     <h3 class="center">Pre Dates</h3>
     <hr>  
     

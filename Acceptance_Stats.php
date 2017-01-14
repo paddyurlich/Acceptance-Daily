@@ -281,22 +281,25 @@ if ($tableComplete == TRUE) {
 
       </div> <!--end first row --> 
 
-      <div class= "row">
-          <div class="col-md-4">
-            <div class="alert alert-danger">
-              <strong>Reminder!</strong> Select 14 Days for Acceptance Stats.
-            </div>
-          </div> 
-      </div>
 
+    <!-- ========== -->
+    <!-- div to display GAP cells -->
+    <!-- ========== -->
 
-      <div  class="row">
-          <div class="col-md-12">
-            <div id="cells_3G_ClusterDisplay" class="alert alert-warning">
-      
-            </div>
-          </div> 
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          GAP Cells <en>(Click to hide)</em>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div id="cells_3G_ClusterDisplay" class="panel-body">
+
       </div>
+    </div>
+  </div>
 
 
 
@@ -345,42 +348,42 @@ if ($tableComplete == TRUE) {
           <!-- ACCEPTANCE STATS --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
-          <?php //include 'stats_acceptance.php' ?>
+          <?php include 'stats_acceptance.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
           <div id="newsite" class="tab-pane fade">
-          <?php //include 'stats_newsite.php' ?>
+          <?php include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CLUSTER STATS --> 
           <!-- =============================================================================== --> 
           <div id="cluster" class="tab-pane fade">
-          <?php //include 'stats_cluster.php' ?>
+          <?php include 'stats_cluster.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CARRIER STATS --> 
           <!-- =============================================================================== --> 
           <div id="carrier" class="tab-pane fade">
-          <?php //include 'stats_carrier.php' ?>
+          <?php include 'stats_carrier.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- SECTOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="sector" class="tab-pane fade">
-          <?php //include 'stats_sector.php' ?>
+          <?php include 'stats_sector.php' ?>
           </div> <!--end of tab -->
   
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
-          <?php //include 'stats_cell.php' ?>
+          <?php include 'stats_cell.php' ?>
           </div> <!--end of tab -->
       </div>
 </div>
@@ -392,46 +395,10 @@ if ($tableComplete == TRUE) {
 
 </body>
 
-<footer>
+  <footer>
 
-    <!-- chose drop down --> 
-    <script src="chosen.jquery.js" type="text/javascript"></script>
-
-    <!--<script type="text/javascript">
-      var config = {
-        '.chosen-select'           : {},
-        '.chosen-select-deselect'  : {allow_single_deselect:true},
-        '.chosen-select-no-single' : {disable_search_threshold:10},
-        '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-        '.chosen-select-width'     : {width:"200%"}
-      }
-      for (var selector in config) {
-        $(selector).chosen(config[selector]);
-      }
-    </script> --> 
-
-    <script type="text/javascript">
-      //  $(".chosen-select").chosen({width: "100%"}); 
-    </script>
-
-    <!-- bootstrap tooltip --> 
-    <script type="text/javascript">
-        // $(document).ready(function(){
-        //   $('[data-toggle="tooltip"]').tooltip();
-        // });
-    </script>
- 
-    
- 
-    <script type="text/javascript"> 
-      var GAPStats_cells_3G_cluster=<?php echo json_encode($selectedCells_3G_cluster); ?>;
-      var GAPStats_cells_3G_newsite=<?php echo json_encode($selectedCells_3G_newSite); ?>;
-      var GAPStats_cells_4G_cluster=<?php echo json_encode($selectedCells_4G_cluster); ?>;
-      var GAPStats_cells_4G_newsite=<?php echo json_encode($selectedCells_4G_newSite); ?>;
-    </script>   
-
-
-
+      <!-- chose drop down --> 
+      <script src="chosen.jquery.js" type="text/javascript"></script>
 
   </footer>
 </html>
