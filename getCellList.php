@@ -2,7 +2,6 @@
 
 function getCellList(){
 
-
     $table = "Acceptance_Stats_3G_daily";
 
     global $dbname; 

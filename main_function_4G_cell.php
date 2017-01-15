@@ -131,35 +131,33 @@ function returnStats4G_cell($selection, $startDate, $endDate){
     
       $sql_string_end = " FROM ".$dbname.".Acceptance_Stats_4G_daily, ".$dbname.".revenue_figures WHERE (Acceptance_Stats_4G_daily.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.") GROUP BY Cellname" ; 
 
-    $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
-    
-    //   echo "</br></br></br>";
-    //   echo $SQL_string;
+        $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
+        
+        //   echo "</br></br></br>";
+        //   echo $SQL_string;
 
-      //======================================================
-      // GET RESULT OF QUERY AND PUT INTO ARRAY 
-      //======================================================
+        //======================================================
+        // GET RESULT OF QUERY AND PUT INTO ARRAY 
+        //======================================================
 
-      $result = $connect->query($SQL_string);
+        $result = $connect->query($SQL_string);
 
+        if ($result->num_rows > 0) {
+        // output data of each row
+            while($row = $result->fetch_assoc()) {                
+                $result_array[$row['Cellname']] = $row;
+            }
+        } else {
+            echo "0 results";
+        }
 
-      if ($result->num_rows > 0) {
-      // output data of each row
-          while($row = $result->fetch_assoc()) {
-              $result_array[] = $row;
-          }
-      } else {
-          echo "0 results";
-      }
+        // CLOSE CONNECTION AND RETURN RESULT
 
-      // CLOSE CONNECTION AND RETURN RESULT
+        $connect->close();
 
-      $connect->close();
-
-      return($result_array);
-     }
-
- else return null;
+        return($result_array);
+        }
+    else return null;
 
   }
 

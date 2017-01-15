@@ -1,7 +1,5 @@
 <?php
 function getRevenueFigures(){
-
-    connection();
 	
     $table = "revenue_figures";
 

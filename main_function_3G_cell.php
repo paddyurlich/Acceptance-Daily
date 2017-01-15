@@ -182,7 +182,7 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       $connect->close();
 
       // return json_encode($result_array);
-       return ($result_array);
+      return ($result_array);
 
        
 

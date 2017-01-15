@@ -2,8 +2,6 @@
 
 function getCellList4G(){
 
-
-
     $table = "Acceptance_Stats_4G_daily";
 
     global $dbname; 

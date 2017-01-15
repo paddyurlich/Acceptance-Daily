@@ -1,14 +1,9 @@
 <?php
 
-$testvar = 5;
 
-//connection();
-
-//global $username, $servername, $password, $dbname;
-
-    $work_environment = "local";
+    $work_environment = "work";
  
-    if ($work_environment = "local") {
+    if ($work_environment == "local") {
         $servername = "localhost:8889";
         $username = "root";
         $password = "root";
@@ -29,12 +24,4 @@ $testvar = 5;
         die("Connection failed: " . $connect->connect_error);
     }  
     
-    //var_dump($dbname);
-
-    function connection(){
-
-    }
-
-
-
 ?>

@@ -359,49 +359,49 @@ if ($tableComplete == TRUE) {
           <!-- ACCEPTANCE STATS --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
-          <?php include 'stats_acceptance.php' ?>
+          <?php //include 'stats_acceptance.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
           <div id="newsite" class="tab-pane fade">
-          <?php include 'stats_newsite.php' ?>
+          <?php //include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CLUSTER STATS --> 
           <!-- =============================================================================== --> 
           <div id="cluster" class="tab-pane fade">
-          <?php include 'stats_cluster.php' ?>
+          <?php //include 'stats_cluster.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CARRIER STATS --> 
           <!-- =============================================================================== --> 
           <div id="carrier" class="tab-pane fade">
-          <?php include 'stats_carrier.php' ?>
+          <?php //include 'stats_carrier.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- SECTOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="sector" class="tab-pane fade">
-          <?php include 'stats_sector.php' ?>
+          <?php //include 'stats_sector.php' ?>
           </div> <!--end of tab -->
   
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
-          <?php include 'stats_cell.php' ?>
+          <?php //include 'stats_cell.php' ?>
           </div> <!--end of tab -->
           
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell_delta" class="tab-pane fade">
-          <?php include 'stats_cell_delta.php' ?>
+          <?php //include 'stats_cell_delta.php' ?>
           </div> <!--end of tab -->
       </div>
 </div>

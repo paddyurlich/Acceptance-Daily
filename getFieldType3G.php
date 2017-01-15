@@ -2,10 +2,6 @@
 
 function getFieldType3G(){
 
-connection();
-
-
-
     $table = "Acceptance_Stats_3G_field_type";
 
     global $dbname; 

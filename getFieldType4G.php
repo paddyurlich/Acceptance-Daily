@@ -3,7 +3,7 @@
 function getFieldType4G(){
 
 
-connection();
+
 
     $table = "Acceptance_Stats_4G_field_type";
 
