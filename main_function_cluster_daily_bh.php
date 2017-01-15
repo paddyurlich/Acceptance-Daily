@@ -9,9 +9,6 @@ function returnStats3G_cluster_daily_bh($pp, $selection, $startDate, $endDate){
       
   // if (isset($pp, $selection, $startDate, $endDate)) {
 
-      //include getRevenueFigures();
-      //$data_cost =  $getRevenueFigures['data'];
-
       set_time_limit(360);
 
       //=============================

@@ -57,7 +57,7 @@ if ($tableComplete == TRUE) {
       $selectedCells_3G_newSite = isset($_GET['cell']) ? $_GET['cell'] : null ;
 
       $selectedCells_3G_cluster = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;
-      
+    
 
       //$selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
       
@@ -111,6 +111,12 @@ if ($tableComplete == TRUE) {
       // acceptance stats - used in datatabls 
       $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate_post, $endDate_post);
+
+      //4G cell level stats for cluster cells - used for delta stats
+      $stats_3G_cell_cluster_pre = returnStats3G_cell($selectedCells_3G_cluster, $startDate, $endDate); // added for cell delta stats
+      $stats_3G_cell_cluster_post = returnStats3G_cell($selectedCells_3G_cluster, $startDate_post, $endDate_post); // added for cell delta stats
+      
+
       
       // ======================
       // 4G calc
@@ -143,6 +149,11 @@ if ($tableComplete == TRUE) {
       
       //4G cells levels stats - used in datatables
       $stats_4G_cell = returnStats4G_cell($selectedCells_4G_newSite, $startDate_post, $endDate_post);
+
+      //4G cell level stats for cluster cells - used for delta stats
+      $stats_4G_cell_cluster_pre = returnStats4G_cell($selectedCells_4G_cluster, $startDate, $endDate); // added for cell delta stats
+      $stats_4G_cell_cluster_post = returnStats4G_cell($selectedCells_4G_cluster, $startDate_post, $endDate_post); // added for cell delta stats
+
 }
 
 

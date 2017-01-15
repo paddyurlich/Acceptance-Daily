@@ -1,12 +1,8 @@
 <?php
     
 function returnStats3G_sector($sector, $pp, $selection, $startDate, $endDate){
-
-      
+    
   if (isset($sector, $pp, $selection, $startDate, $endDate)) {
-
-      //include getRevenueFigures();
-      //$data_cost =  $getRevenueFigures['data'];
 
       set_time_limit(360);
 

@@ -3,8 +3,6 @@
 function returnStats4G_cell($selection, $startDate, $endDate){
 
     if (isset($selection, $startDate, $endDate)) {
-      //include getRevenueFigures();
-      //$data_cost =  $getRevenueFigures['data'];
 
       set_time_limit(360);
 

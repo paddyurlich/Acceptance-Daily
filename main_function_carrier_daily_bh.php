@@ -2,11 +2,7 @@
     
 function returnStats3G_carrier_daily_bh($carrier, $selection, $startDate, $endDate){
 
-      
   if (isset($carrier, $selection, $startDate, $endDate)) {
-
-      //include getRevenueFigures();
-      //$data_cost =  $getRevenueFigures['data'];
 
       set_time_limit(360);
 
