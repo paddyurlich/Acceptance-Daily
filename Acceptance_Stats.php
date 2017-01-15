@@ -19,8 +19,7 @@
 <?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
 <?php include 'modal_help.php' ?>
 <?php include 'selectedCellsGAP.php' ?>
-
-
+<?php require 'kint/Kint.class.php'; ?>
 
 <?php
 
@@ -349,6 +348,7 @@ if ($tableComplete == TRUE) {
     <li><a data-toggle="pill" href="#carrier">Carrier</a></li>
     <li><a data-toggle="pill" href="#sector">Sector</a></li>
     <li><a data-toggle="pill" href="#cell">Cell</a></li>
+    <li><a data-toggle="pill" href="#cell_delta">Cell Delta</a></li>
     
 
   </ul>
@@ -395,6 +395,13 @@ if ($tableComplete == TRUE) {
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
           <?php include 'stats_cell.php' ?>
+          </div> <!--end of tab -->
+          
+            <!-- =============================================================================== --> 
+          <!-- CELL STATS --> 
+          <!-- =============================================================================== --> 
+          <div id="cell_delta" class="tab-pane fade">
+          <?php include 'stats_cell_delta.php' ?>
           </div> <!--end of tab -->
       </div>
 </div>
