@@ -1,48 +1,40 @@
 
 <?php
-// echo "<br><br>";
-
-// //echo json_encode($result);
-//var_dump($result);
-
-
-// ===========================
-// create headings array
-// ===========================
-unset($headings);
-foreach($stats_cell as $key=>$value){
-    foreach($value as $k=> $v){
-      $headings[] = $k;
-      
-      }  
-}
-$headings = array_unique($headings);
-//var_dump($headings);
-//============================
+    // ===========================
+    // create headings array
+    // ===========================
+    unset($headings);
+    foreach($stats_cell as $key=>$value){
+        foreach($value as $k=> $v){
+        $headings[] = $k;
+        
+        }  
+    }
+    $headings = array_unique($headings);
+    //var_dump($headings);
+    //============================
 
 
-// ===========================
-// create cell name array
-// ===========================
-unset($table_cell);
-$table_cell = array_keys($stats_cell);
-//var_dump($table_cells);
-// ===========================
+    // ===========================
+    // create cell name array
+    // ===========================
+    unset($table_cell);
+    $table_cell = array_keys($stats_cell);
+    //var_dump($table_cells);
+    // ===========================
 
 
-// ===========================
-// table data
-// ===========================
-unset($tableData);
-foreach($stats_cell as $key=>$value){
-    foreach($value as $k=> $v){
-      //echo $v." ";
-      $tableData[] = $v; 
-    }  
-}
-// ===========================
-
-
+    // ===========================
+    // table data
+    // ===========================
+    unset($tableData);
+    foreach($stats_cell as $key=>$value){
+        foreach($value as $k=> $v){
+        //echo $v." ";
+        $tableData[] = $v; 
+        }  
+    }
+    // ===========================
 ?>
 
 

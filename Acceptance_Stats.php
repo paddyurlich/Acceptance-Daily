@@ -1,14 +1,11 @@
 <?php include 'config.php' ?>
 <?php include 'functions.php' ?>
-<?php include 'main_function.php' ?> <!-- returnStats3G -->
-<?php include 'main_function_4G.php' ?> <!-- returnStats4G --> 
-<?php include 'main_function_4G_sector.php' ?> <!-- returnStats4G_sector -->
-
 <?php include 'getCellList.php' ?>
 <?php include 'getCellList4G.php' ?>
 <?php include 'getDateList.php' ?>
 <?php include 'getFieldType3G.php' ?>
 <?php include 'getFieldType4G.php' ?>
+<?php include 'main_function.php' ?> <!-- returnStats3G -->
 <?php include 'main_function_carrier.php' ?> <!-- returnStats3G_carrier -->
 <?php include 'main_function_sector.php' ?> <!-- returnStats3G_sector -->
 <?php include 'main_function_cluster_daily_bh.php' ?> <!-- returnStats3G_cluster_daily_bh -->
@@ -16,11 +13,15 @@
 <?php include 'main_function_sector_daily_bh.php' ?> <!-- returnStats3G_sector_daily_bh --> 
 <?php include 'main_function_3G_sector_carrier.php' ?> <!-- returnStats3G_sector_carrier --> 
 <?php include 'main_function_3G_cell.php' ?> <!-- returnStats3G_cell --> 
-<?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
+<?php include 'main_function_3G_cell_detailed.php' ?> <!-- returnStats3G_cell_detailed --> 
 <?php include 'main_function_3G_cell_bh.php' ?> <!-- returnStats3G_cell_daily_bh --> 
+<?php include 'main_function_4G.php' ?> <!-- returnStats4G --> 
+<?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
+<?php include 'main_function_4G_sector.php' ?> <!-- returnStats4G_sector -->
 <?php include 'modal_help.php' ?>
 <?php include 'selectedCellsGAP.php' ?>
 <?php require 'kint/Kint.class.php'; ?>
+
 
 <?php
 
@@ -113,8 +114,8 @@ if ($tableComplete == TRUE) {
       $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
       //3G cell level stats for cluster cells - used for delta stats
-      $stats_3G_cell_cluster_pre = returnStats3G_cell($selectedCells_3G_cluster, $startDate, $endDate);
-      $stats_3G_cell_cluster_post = returnStats3G_cell($selectedCells_3G_cluster, $startDate_post, $endDate_post);
+      $stats_3G_cell_cluster_pre = returnStats3G_cell_detailed($selectedCells_3G_cluster, $startDate, $endDate);
+      $stats_3G_cell_cluster_post = returnStats3G_cell_detailed($selectedCells_3G_cluster, $startDate_post, $endDate_post);
 
       //3G cell level busy hour stats for cluster cells - used for delta stats
       $stats_3G_cell_bh_cluster_pre = returnStats3G_cell_daily_bh($selectedCells_3G_cluster, $startDate, $endDate); 

@@ -8,11 +8,11 @@
 <table class="table table-hover table-inverse table-sm table-condensed" >
         <thead>
           <tr>
-          <th></th>
-          <th>Pre</th>
-          <th>Post</th>
-          <th>Delta</th>
-          <th></th>
+            <th></th>
+            <th>Pre</th>
+            <th>Post</th>
+            <th>Delta</th>
+            <th></th>
           </tr>
         </thead>
 

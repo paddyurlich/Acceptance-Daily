@@ -23,9 +23,9 @@
             $decPlaces = $fieldtype4G[$key]['dec'];
             $arrowType = $fieldtype4G[$key]['arrow'];
             $KPI = $fieldtype4G[$key]['alias'];
-            $pre = (float)($stats_4G_pre_cluster['pre'][$key]);
-            $post = (float)($stats_4G_post_cluster_and_newSite['post'][$key]);
-            $delta = (float)($post - $pre); 
+            $pre = round($stats_4G_pre_cluster['pre'][$key],$decPlaces);
+            $post = round($stats_4G_post_cluster_and_newSite['post'][$key],$decPlaces);
+            $delta = round(($post - $pre),$decPlaces); 
 
             // SET ARROW DIRECTION = NORMAL
             
@@ -69,10 +69,21 @@
         
             echo "<tr>";
               echo "<th>".$KPI."</th>";
-              echo "<td>".number_format($pre,$decPlaces)."</th>";        
-              echo "<td>".number_format($post,$decPlaces)."</th>"; 
-              echo "<td>".number_format($delta,$decPlaces)."</th>"; 
-              echo "<td>".$glyph."</th>";        
+              echo "<td>".$pre."</th>";        
+              echo "<td>".$post."</th>"; 
+              echo "<td>".$delta."</th>"; 
+
+              if ($table == "traffic") {
+
+                if ($pre > 0) { 
+                  $percentage_delta = round((($post-$pre)/$pre)*100,2);
+                } else $percentage_delta = 0;
+
+                echo "<td>".$glyph."<span style='font-size:75%;color:".$arrow_color.";'>"." (".$percentage_delta." %)</span></th>";        
+              } else {
+                  echo "<td>".$glyph."</th>";
+              }       
+  
             echo "</tr>";
           }
       ?>
