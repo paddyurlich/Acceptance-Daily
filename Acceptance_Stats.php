@@ -1,7 +1,7 @@
 <?php include 'config.php' ?>
 <?php include 'functions.php' ?>
 <?php include 'main_function.php' ?> <!-- returnStats3G -->
-<?php include 'main_function_4G.php' ?>
+<?php include 'main_function_4G.php' ?> <!-- returnStats4G --> 
 <?php include 'main_function_4G_sector.php' ?> <!-- returnStats4G_sector -->
 
 <?php include 'getCellList.php' ?>
@@ -17,6 +17,7 @@
 <?php include 'main_function_3G_sector_carrier.php' ?> <!-- returnStats3G_sector_carrier --> 
 <?php include 'main_function_3G_cell.php' ?> <!-- returnStats3G_cell --> 
 <?php include 'main_function_4G_cell.php' ?> <!-- returnStats4G_cell --> 
+<?php include 'main_function_3G_cell_bh.php' ?> <!-- returnStats3G_cell_daily_bh --> 
 <?php include 'modal_help.php' ?>
 <?php include 'selectedCellsGAP.php' ?>
 <?php require 'kint/Kint.class.php'; ?>
@@ -111,12 +112,14 @@ if ($tableComplete == TRUE) {
       $stats_sector_carrier = returnStats3G_sector_carrier($selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_cell = returnStats3G_cell($selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
-      //4G cell level stats for cluster cells - used for delta stats
-      $stats_3G_cell_cluster_pre = returnStats3G_cell($selectedCells_3G_cluster, $startDate, $endDate); // added for cell delta stats
-      $stats_3G_cell_cluster_post = returnStats3G_cell($selectedCells_3G_cluster, $startDate_post, $endDate_post); // added for cell delta stats
-      
+      //3G cell level stats for cluster cells - used for delta stats
+      $stats_3G_cell_cluster_pre = returnStats3G_cell($selectedCells_3G_cluster, $startDate, $endDate);
+      $stats_3G_cell_cluster_post = returnStats3G_cell($selectedCells_3G_cluster, $startDate_post, $endDate_post);
 
-      
+      //3G cell level busy hour stats for cluster cells - used for delta stats
+      $stats_3G_cell_bh_cluster_pre = returnStats3G_cell_daily_bh($selectedCells_3G_cluster, $startDate, $endDate); 
+      $stats_3G_cell_bh_cluster_post = returnStats3G_cell_daily_bh($selectedCells_3G_cluster, $startDate_post, $endDate_post); 
+        
       // ======================
       // 4G calc
       // ======================
@@ -150,8 +153,8 @@ if ($tableComplete == TRUE) {
       $stats_4G_cell = returnStats4G_cell($selectedCells_4G_newSite, $startDate_post, $endDate_post);
 
       //4G cell level stats for cluster cells - used for delta stats
-      $stats_4G_cell_cluster_pre = returnStats4G_cell($selectedCells_4G_cluster, $startDate, $endDate); // added for cell delta stats
-      $stats_4G_cell_cluster_post = returnStats4G_cell($selectedCells_4G_cluster, $startDate_post, $endDate_post); // added for cell delta stats
+      $stats_4G_cell_cluster_pre = returnStats4G_cell($selectedCells_4G_cluster, $startDate, $endDate); 
+      $stats_4G_cell_cluster_post = returnStats4G_cell($selectedCells_4G_cluster, $startDate_post, $endDate_post);
 
 }
 
@@ -300,7 +303,7 @@ if ($tableComplete == TRUE) {
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          GAP Cells <en>(Click to hide)</em>
+          GAP Cells <en>(Click to hide/show)</em>
         </a>
       </h4>
     </div>
@@ -359,57 +362,55 @@ if ($tableComplete == TRUE) {
           <!-- ACCEPTANCE STATS --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
-          <?php //include 'stats_acceptance.php' ?>
+          <?php include 'stats_acceptance.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
           <div id="newsite" class="tab-pane fade">
-          <?php //include 'stats_newsite.php' ?>
+          <?php include 'stats_newsite.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CLUSTER STATS --> 
           <!-- =============================================================================== --> 
           <div id="cluster" class="tab-pane fade">
-          <?php //include 'stats_cluster.php' ?>
+          <?php include 'stats_cluster.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CARRIER STATS --> 
           <!-- =============================================================================== --> 
           <div id="carrier" class="tab-pane fade">
-          <?php //include 'stats_carrier.php' ?>
+          <?php include 'stats_carrier.php' ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- SECTOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="sector" class="tab-pane fade">
-          <?php //include 'stats_sector.php' ?>
+          <?php include 'stats_sector.php' ?>
           </div> <!--end of tab -->
   
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
-          <?php //include 'stats_cell.php' ?>
+          <?php include 'stats_cell.php' ?>
           </div> <!--end of tab -->
           
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell_delta" class="tab-pane fade">
-          <?php //include 'stats_cell_delta.php' ?>
+          <?php include 'stats_cell_delta.php' ?>
           </div> <!--end of tab -->
       </div>
 </div>
 
 <!-- ===================================================================== --> 
-
- 
-</div> <!-- end of container -->
+ </div> <!-- end of container -->
 
 </body>
 

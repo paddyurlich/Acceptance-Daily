@@ -4,44 +4,56 @@ $(document).ready(function(){
     
     //========= tooltip initialisation =============
     $('[data-toggle="tooltip"]').tooltip();
+
+
+    $('#collapseOne').collapse("hide");
     
     
     //========= datatable initialisation =============
 
+    // $(function(){
+    //     $("#cell_3G").dataTable({
+    //     "paging":   false,
+    //     "info":     false
+    //     });
+    // })
+
+    // $(function(){
+    //     $("#cell_3G_acceptance").dataTable({
+    //     "paging":   false,
+    //     "info":     false
+    //     });
+    // })
+
+    // $(function(){
+    //     $("#cell_4G").dataTable({
+    //     "paging":   false,
+    //     "info":     false
+    //     });
+    // })
+
+    // $(function(){
+    //     $("#cell_4G_celltab").dataTable({
+    //     "paging":   false,
+    //     "info":     false
+    //     });
+    // })
+
+    // $(function(){
+    //     $("#sector_carrier").dataTable({
+    //     "paging":   false,
+    //     "info":     false
+    //     });
+    // })    
+
     $(function(){
-        $("#cell_3G").dataTable({
+        $(".display").dataTable({
         "paging":   false,
         "info":     false
         });
     })
 
-    $(function(){
-        $("#cell_3G_acceptance").dataTable({
-        "paging":   false,
-        "info":     false
-        });
-    })
 
-    $(function(){
-        $("#cell_4G").dataTable({
-        "paging":   false,
-        "info":     false
-        });
-    })
-
-    $(function(){
-        $("#cell_4G_celltab").dataTable({
-        "paging":   false,
-        "info":     false
-        });
-    })
-
-    $(function(){
-        $("#sector_carrier").dataTable({
-        "paging":   false,
-        "info":     false
-        });
-    })
 
 
 
@@ -172,7 +184,9 @@ $(document).ready(function(){
 
     $('#cells_4G_newSite').chosen().change(function(){
         putSelectedCellsInDiv();        
-    });      
+    });   
+
+    
 
     // create GAP cells page load or refresh ie on document ready, not change.
     putSelectedCellsInDiv();

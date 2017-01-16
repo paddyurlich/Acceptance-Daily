@@ -109,41 +109,6 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       $sql_string_first .= "ROUND(sum(VS_AMR_RB_Erlang_Sum),2)
                             AS 'Voice Traffic (Erl)'";
 
-                            
-
-
-
-
-      //======================================================
-      // CREATE BODY OF SQL STRING - sum
-      //======================================================
-
-      /*
-      $sql_string_main = "";
-
-      for ($x = 18; $x <= $size_of_KPI_array ; $x++) {
-       $sql_string_main .= "sum(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_sum`,";
-
-
-      }
-
-      //======================================================
-      // CREATE BODY OF SQL STRING - average
-      //======================================================
-
-
-      for ($x = 18; $x <= $size_of_KPI_array ; $x++) {
-        $sql_string_main .= "avg(`".$KPI_field_array[$x]['Field']."`) AS `".$KPI_field_array[$x]['Field']."_avg`,";
-
-        //create KPI name array with just the required KPI is form 18 to 35
-        $KPI_name_array[] = $KPI_field_array[$x]['Field'];
-
-      }
-      */
-
-
-
-
       //======================================================
       // BUILD ENTIRE SQL STRING
       //======================================================
@@ -159,6 +124,7 @@ function returnStats3G_cell($selection, $startDate, $endDate){
 
     //   echo "<br><br><br><br>";
     //         echo "3G SQL main_function_3G_cell = ".$SQL_string;
+    //d($SQL_string);
 
       //======================================================
       // GET RESULT OF QUERY AND PUT INTO ARRAY 
@@ -178,7 +144,6 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       }
 
       // CLOSE CONNECTION AND RETURN RESULT
-
       $connect->close();
 
       // return json_encode($result_array);

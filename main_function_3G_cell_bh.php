@@ -1,8 +1,8 @@
 <?php
     
-function returnStats3G_carrier_daily_bh($carrier, $selection, $startDate, $endDate){
+function returnStats3G_cell_daily_bh($selection, $startDate, $endDate){
 
-  if (isset($carrier, $selection, $startDate, $endDate)) {
+  if (isset($selection, $startDate, $endDate)) {
 
       set_time_limit(360);
 
@@ -51,7 +51,9 @@ function returnStats3G_carrier_daily_bh($carrier, $selection, $startDate, $endDa
       // CREATE SQL QUERRY STRING - FOR CALULATED KPIS
       //======================================================
              
-      $sql_string_first =   "AVG((( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Mean(dBm)` / 10))
+      $sql_string_first = "Acceptance_Stats_3G_daily_bh.CELLNAME,";
+
+      $sql_string_first .=   "AVG((( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Mean(dBm)` / 10))
                             / 1000)
                             / if((`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Max(dBm)` > 43), 40, 20))
                             * 100)
@@ -117,8 +119,10 @@ function returnStats3G_carrier_daily_bh($carrier, $selection, $startDate, $endDa
 
       $sql_string_main = substr($sql_string_main,0,-1);
     
-      $sql_string_end = " FROM ".$dbname.".Acceptance_Stats_3G_daily_bh, ".$dbname.".revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND mid(Acceptance_Stats_3G_daily_bh.CELLNAME,10,5)='".$carrier."' AND (".$selectedCells.")"; 
+      $sql_string_end = " FROM ".$dbname.".Acceptance_Stats_3G_daily_bh, ".$dbname.".revenue_figures WHERE (Acceptance_Stats_3G_daily_bh.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.")"; 
 
+      $sql_string_end .= " GROUP BY Acceptance_Stats_3G_daily_bh.CELLNAME";
+      
       $SQL_string =  $sql_string_select.$sql_string_first.$sql_string_main.$sql_string_end;
 
       //echo "<br><br><br>".$SQL_string;
@@ -132,7 +136,7 @@ function returnStats3G_carrier_daily_bh($carrier, $selection, $startDate, $endDa
       if ($result->num_rows > 0) {
       // output data of each row
           while($row = $result->fetch_assoc()) {
-              $result_array[] = $row;
+              $result_array[$row['CELLNAME']] = $row;
           }
       } else {
           echo "0 results";

@@ -1,8 +1,11 @@
-
-
-</br>
-
-
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-danger">
+      <strong>Note:</strong> Cell level stats - performance of "new site" during the "post" time period.</br>
+    </div>
+  </div>
+</div>
 <!-- ===============================
 3G cell stats
 =============================== -->

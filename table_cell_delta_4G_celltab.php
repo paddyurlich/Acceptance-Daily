@@ -1,15 +1,11 @@
-<table table id="cell_3G" class="display" cellspacing="0" width="100%">
+<table table id="cell_4G_delta" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>   
             <th>Cell Name</th>
             <th>Total Revenue Delta ($)</th>
         </tr>
     </thead>
-
-    <?php
-
-    ?>
-
+    
     <tbody>
         <?php
             foreach ($stats_4G_cell_cluster_pre as $key=>$value ){  
@@ -19,7 +15,7 @@
                 $total_revenue_delta = $total_revenue_post - $total_revenue_pre;
      
                 echo "<tr>";       
-                    echo "<th>".$cell."</th>";  
+                    echo "<td>".$cell."</td>";  
                     echo "<td>".$total_revenue_delta."</td>";                
                 echo "</tr>";                
             }
