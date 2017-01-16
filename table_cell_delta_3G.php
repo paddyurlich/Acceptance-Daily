@@ -15,12 +15,12 @@
                 $total_revenue_pre =  $stats_3G_cell_cluster_pre[$key]['Total Revenue ($)'];
                 $total_revenue_post =  $stats_3G_cell_cluster_post[$key]['Total Revenue ($)'];
                 $total_revenue_delta = $total_revenue_post - $total_revenue_pre;
-                number_format($total_revenue_delta,2);
+                $total_revenue_delta = number_format($total_revenue_delta,2);
 
                 $tcpUtil_pre =  $stats_3G_cell_bh_cluster_pre[$key]['TCP Util(%)'];
                 $tcpUtil_post =  $stats_3G_cell_bh_cluster_post[$key]['TCP Util(%)'];
                 $tcpUtil_delta = $tcpUtil_post - $tcpUtil_pre;
-                number_format($tcpUtil_delta,2);
+                $tcpUtil_delta = number_format($tcpUtil_delta,2);
     
                 echo "<tr>";       
                     echo "<td>".$cell."</td>";  

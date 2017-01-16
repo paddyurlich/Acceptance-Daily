@@ -123,7 +123,6 @@ if ($tableComplete == TRUE) {
       // ======================
       // 4G calc
       // ======================
-
       
       // notes: 
       //=================
@@ -155,9 +154,7 @@ if ($tableComplete == TRUE) {
       //4G cell level stats for cluster cells - used for delta stats
       $stats_4G_cell_cluster_pre = returnStats4G_cell($selectedCells_4G_cluster, $startDate, $endDate); 
       $stats_4G_cell_cluster_post = returnStats4G_cell($selectedCells_4G_cluster, $startDate_post, $endDate_post);
-
 }
-
 
   // ======================
   // helper vars
@@ -199,10 +196,6 @@ if ($tableComplete == TRUE) {
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-
-
-
-
   <!-- Latest compiled bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -213,7 +206,6 @@ if ($tableComplete == TRUE) {
   <!--<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.3.js"></script>-->
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     
-
   <!-- <script src="./datatables/datatables.css"></script> -->
   <!-- <link rel="stylesheet" type="text/css" href="./datatables/datatables.js"> -->
 
