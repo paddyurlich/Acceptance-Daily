@@ -16,10 +16,8 @@ $stats_3G_cell_bh_cluster_post = returnStats3G_cell_daily_bh($selectedCells_3G_c
 main_function_3G_cell.php
 
 main_function_3G_cell_bh.php
-
-
-
 -->
+
 <table table id="cell_3G_delta" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>   

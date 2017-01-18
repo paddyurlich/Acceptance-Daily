@@ -1,18 +1,18 @@
 
 <?php
-
     // ===========================
     // create headings array
     // ===========================
     unset($headings);
     foreach($stats_cell as $key=>$value){
         foreach($value as $k=> $v){
-        $headings[] = $k;        
+        $headings[] = $k;
+        
         }  
     }
     $headings = array_unique($headings);
+    //var_dump($headings);
     //============================
-
 ?>
 
 <table table id="cell_3G" class="display" cellspacing="0" width="100%">
@@ -30,9 +30,10 @@
         <?php 
             foreach($stats_cell as $key=>$value){
                 echo "<tr>";
-                    foreach($value as $k=> $v){                    
-                        echo "<td>".$v." "."</td>";
-                    }  
+                foreach($value as $k=> $v){                    
+                    echo "<td>".$v." "."</td>";
+       
+                }  
                 echo "</tr>";
             }
         ?>

@@ -80,7 +80,13 @@ function returnStats4G_cell($selection, $startDate, $endDate){
 
         // total data volume
     $sql_string_first .=    "ROUND(((sum(`DL Traffic Volume`) + sum(`UL Traffic Volume`)) /8/1024/1024/1024),2)
-                            AS '4G Data Volume (GB)'";
+                            AS '4G Data Volume (GB)',";
+
+    $sql_string_first .=    "ROUND(AVG(`DL Average Throughput (Kbps)`),2)
+                            AS 'DL Average Throughput (Kbps)'";                            
+
+
+
                             
         // UL PRB Utilisation
     //  $sql_string_first .=    "((SUM(`L.ChMeas.PRB.UL.Used.Avg`) / SUM(`L.ChMeas.PRB.UL.Avail`)) *100 )

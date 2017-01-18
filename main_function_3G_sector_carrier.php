@@ -104,7 +104,10 @@ function returnStats3G_sector_carrier($selection, $startDate, $endDate){
 
         //total voice volume volume mb
       $sql_string_first .= "ROUND(sum(VS_AMR_RB_Erlang_Sum),2)
-                            AS 'Voice Traffic (Erl)'";
+                            AS 'Voice Traffic (Erl)',";
+
+      $sql_string_first .= "ROUND(avg(VS_HSDPA_MeanChThroughput),2)
+                            AS 'Mean HSDPA Throughput (Kbps)'";
 
                             
 
