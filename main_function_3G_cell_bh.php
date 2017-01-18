@@ -53,15 +53,15 @@ function returnStats3G_cell_daily_bh($selection, $startDate, $endDate){
              
       $sql_string_first = "Acceptance_Stats_3G_daily_bh.CELLNAME,";
 
-      $sql_string_first .=   "AVG((( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Mean(dBm)` / 10))
+      $sql_string_first .=   "AVG((( pow(10, (`Acceptance_Stats_3G_daily_bh`.`TCP Mean(dBm)` / 10))
                             / 1000)
-                            / if((`ranPU`.`Acceptance_Stats_3G_daily_bh`.`TCP Max(dBm)` > 43), 40, 20))
+                            / if((`Acceptance_Stats_3G_daily_bh`.`TCP Max(dBm)` > 43), 40, 20))
                             * 100)
                             AS `TCP Util(%)`,";
 
-      $sql_string_first .=  "AVG((( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`Non-HS TCP Mean(dBm)` / 10))
+      $sql_string_first .=  "AVG((( pow(10, (`Acceptance_Stats_3G_daily_bh`.`Non-HS TCP Mean(dBm)` / 10))
                             / 1000)
-                            / if((`ranPU`.`Acceptance_Stats_3G_daily_bh`.`Non-HS TCP Max(dBm)` > 43), 40, 20))
+                            / if((`Acceptance_Stats_3G_daily_bh`.`Non-HS TCP Max(dBm)` > 43), 40, 20))
                             * 100)
                             AS `Non-HS TCP Util(%)`,";
           
@@ -69,10 +69,10 @@ function returnStats3G_cell_daily_bh($selection, $startDate, $endDate){
                             #RTWP UTIL (%) - based on RTWP min
                             # 100 - ((min(W)/mean(W) * 100)
       $sql_string_first .=  "AVG((100 - 
-                            (( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`RTWP Min(dBm)` / 10))
+                            (( pow(10, (`Acceptance_Stats_3G_daily_bh`.`RTWP Min(dBm)` / 10))
                             / 1000)         
                             /         
-                            ( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`RTWP Mean(dBm)` / 10))
+                            ( pow(10, (`Acceptance_Stats_3G_daily_bh`.`RTWP Mean(dBm)` / 10))
                             / 1000))*100))   
                             AS `UL Load (%)`,";
                             
@@ -81,7 +81,7 @@ function returnStats3G_cell_daily_bh($selection, $startDate, $endDate){
       $sql_string_first .=  "AVG((100 - 
                             (( pow(10,(-107/10))/ 1000)         
                             /         
-                            ( pow(10, (`ranPU`.`Acceptance_Stats_3G_daily_bh`.`RTWP Mean(dBm)`/10))/1000))
+                            ( pow(10, (`Acceptance_Stats_3G_daily_bh`.`RTWP Mean(dBm)`/10))/1000))
                             *100))   
                             AS `UL Load (fixed floor) (%)`";
 

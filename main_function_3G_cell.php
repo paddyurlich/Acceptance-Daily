@@ -92,13 +92,13 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       //                       AS 'CS RAB Failures',";
 
         //PS RAB congestion (summed)
-      // $sql_string_first .= "(sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_Code_Cong) +
-      //                       sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_DLCE_Cong) +
-      //                       sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_ULCE_Cong) +
-      //                       sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_DLPower_Cong) +
-      //                       sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_ULPower_Cong) +
-      //                       sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_HSDPAUser_Cong) +
-      //                       sum(`ranPU`.`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_HSUPAUser_Cong))
+      // $sql_string_first .= "(sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_Code_Cong) +
+      //                       sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_DLCE_Cong) +
+      //                       sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_ULCE_Cong) +
+      //                       sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_DLPower_Cong) +
+      //                       sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_ULPower_Cong) +
+      //                       sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_HSDPAUser_Cong) +
+      //                       sum(`Acceptance_Stats_3G_daily`.VS_RAB_FailEstabPS_HSUPAUser_Cong))
       //                       AS 'PS RAB Failures',";
 
         //total data volume mb
@@ -112,14 +112,12 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       $sql_string_first .= "ROUND(avg(Acceptance_Stats_3G_daily.VS_HSDPA_MeanChThroughput),2)
                             AS 'Mean HSDPA Throughput (Kbps)',";
 
-      // $sql_string_first .=   "AVG((( pow(10, (Acceptance_Stats_3G_daily_bh.`TCP Mean(dBm)` / 10))
-      //                       / 1000)
-      //                       / if((Acceptance_Stats_3G_daily_bh.`TCP Max(dBm)` > 43), 40, 20))
-      //                       * 100)
-      //                       AS `TCP Util(%) - BH`";
+      $sql_string_first .=   "ROUND(AVG((( pow(10, (Acceptance_Stats_3G_daily_bh.`TCP Mean(dBm)` / 10))
+                            / 1000)
+                            / if((Acceptance_Stats_3G_daily_bh.`TCP Max(dBm)` > 43), 40, 20))
+                            * 100),2)
+                            AS `TCP Util bh (%)`";
 
-        $sql_string_first .=   "ROUND(AVG(Acceptance_Stats_3G_daily_bh.`TCP Mean(dBm)`),2)
-                              AS `TCP Util bh (%)`";
 
 
 
@@ -138,8 +136,8 @@ function returnStats3G_cell($selection, $startDate, $endDate){
 
       $sql_string_end = " FROM " .$dbname.".revenue_figures 
                           CROSS JOIN
-                            ranPU.Acceptance_Stats_3G_daily_bh Acceptance_Stats_3G_daily_bh
-                          INNER JOIN ranPU.Acceptance_Stats_3G_daily Acceptance_Stats_3G_daily
+                            " .$dbname.".Acceptance_Stats_3G_daily_bh Acceptance_Stats_3G_daily_bh
+                          INNER JOIN " .$dbname.".Acceptance_Stats_3G_daily Acceptance_Stats_3G_daily
                             ON (Acceptance_Stats_3G_daily_bh.CELLNAME = Acceptance_Stats_3G_daily.CELLNAME)
                           WHERE (Acceptance_Stats_3G_daily.Date BETWEEN '".$startDate."' AND '".$endDate."') AND (".$selectedCells.") GROUP BY Acceptance_Stats_3G_daily.CELLNAME"; 
       
