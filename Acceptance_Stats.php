@@ -25,42 +25,42 @@
 
 <?php
 
+  set_time_limit(360);
+
   //=============================
   // get values for drops downs (cells and dates)
   //=============================
-  
-  
+              
   $dateList = getDateList();
   $cellList = getCellList();
   $cellList4G = getCellList4G();
   $fieldtype3G = getFieldType3G();
   $fieldtype4G = getFieldType4G();
 
-  set_time_limit(360);
+//=============================
+// set form fields from URL GET globals
+//=============================
 
-  //=============================
-  // set selected start and end dates
-  //=============================
+  $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null ;
+  $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null ;
+  $startDate_post = isset($_GET['startDate_post']) ? $_GET['startDate_post'] : null ;
+  $endDate_post = isset($_GET['endDate_post']) ? $_GET['endDate_post'] : null ;
+  $selectedCells_3G_newSite = isset($_GET['cell']) ? $_GET['cell'] : null ;
+  $selectedCells_3G_cluster = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;  
+  $selectedCells_4G_newSite = isset($_GET['cell4Gpre']) ? $_GET['cell4Gpre'] : null ;
+  $selectedCells_4G_cluster = isset($_GET['cell4Gpost']) ? $_GET['cell4Gpost'] : null ;
+  $formComplete = (is_null($selectedCells_3G_newSite)  || is_null($startDate) || is_null($endDate)) ? false : true ;
 
-$tableComplete = true;
+ 
+  if ($formComplete == true){
+      
+      //=============================
+      // get results for each table/result type
+      //=============================
 
-if ($tableComplete == TRUE) {
-      $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null ;
-      $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null ;
-
-      $startDate_post = isset($_GET['startDate_post']) ? $_GET['startDate_post'] : null ;
-      $endDate_post = isset($_GET['endDate_post']) ? $_GET['endDate_post'] : null ;
-
-      // ======================
-      // 3G calc
-      // ======================
-
-      $selectedCells_3G_newSite = isset($_GET['cell']) ? $_GET['cell'] : null ;
-
-      $selectedCells_3G_cluster = isset($_GET['cellCluster2']) ? $_GET['cellCluster2'] : null ;
-    
-
-      //$selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
+      //=====
+      // 3G
+      //=====
       
       if(isset($selectedCells_3G_cluster)){
         $selectedCells_3G_newSite_and_cluster = array_merge($selectedCells_3G_newSite, $selectedCells_3G_cluster);
@@ -68,21 +68,13 @@ if ($tableComplete == TRUE) {
         $selectedCells_3G_newSite_and_cluster = $selectedCells_3G_newSite;
       }
 
-      // notes: 
-      //=================
-      //pre stats = cluster
-      //post stats = cluster and new_site
-
-
       $stats_3G_post_newSite =  returnStats3G("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_3G_pre_cluster =  returnStats3G("pre", $selectedCells_3G_cluster, $startDate, $endDate);
       $stats_3G_post_cluster_and_newSite =  returnStats3G("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
 
-
       $stats_3G_bh_post_newSite = returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_3G_bh_pre_cluster =  returnStats3G_cluster_daily_bh("pre", $selectedCells_3G_cluster, $startDate, $endDate);
       $stats_3G_bh_post_cluster_and_newSite =  returnStats3G_cluster_daily_bh("post", $selectedCells_3G_newSite_and_cluster, $startDate_post, $endDate_post);
-
 
       // carrier daily
       $stats_post_carrier_u09f1 =  returnStats3G_carrier("U09-1", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
@@ -98,12 +90,11 @@ if ($tableComplete == TRUE) {
       $stats_post_carrier_bh_u21f2 =  returnStats3G_carrier_daily_bh("U21-2", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_post_carrier_bh_u21f3 =  returnStats3G_carrier_daily_bh("U21-3", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
 
-
       // sector daily
       $stats_post_sector_S1 =  returnStats3G_sector("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_post_sector_S2 =  returnStats3G_sector("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_post_sector_S3 =  returnStats3G_sector("3","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
-    
+
       // sector daily - busy hour
       $stats_post_sector_bh_S1 =  returnStats3G_sector_daily_bh("1","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
       $stats_post_sector_bh_S2 =  returnStats3G_sector_daily_bh("2","post", $selectedCells_3G_newSite, $startDate_post, $endDate_post);
@@ -121,25 +112,20 @@ if ($tableComplete == TRUE) {
       $stats_3G_cell_bh_cluster_pre = returnStats3G_cell_daily_bh($selectedCells_3G_cluster, $startDate, $endDate); 
       $stats_3G_cell_bh_cluster_post = returnStats3G_cell_daily_bh($selectedCells_3G_cluster, $startDate_post, $endDate_post); 
         
-      // ======================
-      // 4G calc
-      // ======================
-      
+      //=====
+      // 4G
+      //=====
+        
       // notes: 
       //=================
       //pre stats = cluster
       //post stats = cluster and new_site
-
-      $selectedCells_4G_newSite = isset($_GET['cell4Gpre']) ? $_GET['cell4Gpre'] : null ;
-
-      $selectedCells_4G_cluster = isset($_GET['cell4Gpost']) ? $_GET['cell4Gpost'] : null ;
       
       if(isset($selectedCells_4G_cluster)){
         $selectedCells_4G_newSite_and_cluster = array_merge($selectedCells_4G_newSite, $selectedCells_4G_cluster);
       } else {
         $selectedCells_4G_newSite_and_cluster = $selectedCells_4G_newSite;
       }
-
 
       $stats_4G_post_newSite =  returnStats4G("post", $selectedCells_4G_newSite, $startDate_post, $endDate_post);
       $stats_4G_pre_cluster =  returnStats4G("pre", $selectedCells_4G_cluster, $startDate, $endDate);
@@ -155,26 +141,9 @@ if ($tableComplete == TRUE) {
       //4G cell level stats for cluster cells - used for delta stats
       $stats_4G_cell_cluster_pre = returnStats4G_cell($selectedCells_4G_cluster, $startDate, $endDate); 
       $stats_4G_cell_cluster_post = returnStats4G_cell($selectedCells_4G_cluster, $startDate_post, $endDate_post);
-}
+  }
 
-  // ======================
-  // helper vars
-  // ======================
 
-  //$formComplete = (is_null($selectedCells_3G_newSite)  || is_null($startDate) || is_null($endDate)) ? false : true ;
-
-  // var_dump($startDate);
-  // var_dump($startDate);
-  // var_dump($stats_pre);
-
-  // var_dump($selectedCells_post);
-  // var_dump($startDate_post);
-  // var_dump($endDate_post);
-  // var_dump($stats_post);
-
-  // var_dump($selectedCells_3G_newSite);
-  // var_dump($selectedCells_3G_cluster);
-  // var_dump($selectedCells_3G_newSite_and_cluster);
 ?>
 
 <!doctype html>
@@ -240,11 +209,6 @@ if ($tableComplete == TRUE) {
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><strong>Acceptance Stats | </strong> Performance Analysis </a>
     </div>
-    <ul class="nav navbar-nav">
-    <!--  <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li> -->
-    </ul>
     <button class="btn btn-primary navbar-btn pull-right" data-toggle="modal" data-target="#myModal">Help</button>
   </div>
 </nav>
@@ -307,8 +271,6 @@ if ($tableComplete == TRUE) {
     </div>
   </div>
 
-
-
     <!-- ========== -->
     <!-- row well - button -->
     <!-- ========== -->
@@ -355,49 +317,49 @@ if ($tableComplete == TRUE) {
           <!-- ACCEPTANCE STATS --> 
           <!-- =============================================================================== -->
           <div id="acceptance" class="tab-pane fade in active">
-          <?php include 'stats_acceptance.php' ?>
+             <?php if ($formComplete == true) { include 'stats_acceptance.php'; } ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- NEW SITE STATS --> 
           <!-- =============================================================================== -->
           <div id="newsite" class="tab-pane fade">
-          <?php include 'stats_newsite.php' ?>
+            <?php if ($formComplete == true) { include 'stats_newsite.php'; } ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CLUSTER STATS --> 
           <!-- =============================================================================== --> 
           <div id="cluster" class="tab-pane fade">
-          <?php include 'stats_cluster.php' ?>
+            <?php if ($formComplete == true) { include 'stats_cluster.php'; } ?>
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- CARRIER STATS --> 
           <!-- =============================================================================== --> 
           <div id="carrier" class="tab-pane fade">
-          <?php include 'stats_carrier.php' ?>
+            <?php if ($formComplete == true) { include 'stats_carrier.php'; } ?>       
           </div> <!--end of tab --> 
 
           <!-- =============================================================================== --> 
           <!-- SECTOR STATS --> 
           <!-- =============================================================================== --> 
           <div id="sector" class="tab-pane fade">
-          <?php include 'stats_sector.php' ?>
+            <?php if ($formComplete == true) { include 'stats_sector.php'; } ?>        
           </div> <!--end of tab -->
   
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell" class="tab-pane fade">
-          <?php include 'stats_cell.php' ?>
+            <?php if ($formComplete == true) { include 'stats_cell.php'; } ?>          
           </div> <!--end of tab -->
           
             <!-- =============================================================================== --> 
           <!-- CELL STATS --> 
           <!-- =============================================================================== --> 
           <div id="cell_delta" class="tab-pane fade">
-          <?php include 'stats_cell_delta.php' ?>
+            <?php if ($formComplete == true) { include 'stats_cell_delta.php'; } ?>         
           </div> <!--end of tab -->
       </div>
 </div>
@@ -405,10 +367,13 @@ if ($tableComplete == TRUE) {
 <!-- ===================================================================== --> 
  </div> <!-- end of container -->
 
+
+
+
+
 </body>
 
   <footer>
-
       <!-- chose drop down --> 
       <script src="chosen.jquery.js" type="text/javascript"></script>
 
