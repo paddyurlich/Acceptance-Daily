@@ -81,7 +81,7 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       $sql_string_first .= "ROUND((sum(Acceptance_Stats_3G_daily.VS_HSDPA_MeanChThroughput_TotalMBytes) + sum(Acceptance_Stats_3G_daily.VS_HSUPA_MeanChThroughput_TotalMBytes)) *
                             revenue_figures.data +
                             ((sum(Acceptance_Stats_3G_daily.VS_AMR_RB_Erlang_Sum)/2) * revenue_figures.voice),2)
-                            AS 'Total Revenue ($) - cell delta',";
+                            AS 'Total Revenue ($)',";
 
         //CS RAB congestion (summed)
       // $sql_string_first .= "(sum(VS_RAB_FailEstabCS_Code_Cong) + 
