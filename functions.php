@@ -1,10 +1,5 @@
 <?php
 
-function hello(){
-	echo "hello";
-}
-
-
 function connect(){
 	$servername = "172.21.200.37";
     $username = "patrickurlich";

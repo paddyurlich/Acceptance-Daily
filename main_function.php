@@ -143,9 +143,6 @@ function returnStats3G($pp, $selection, $startDate, $endDate){
 
       }
 
-
-
-
       //======================================================
       // BUILD ENTIRE SQL STRING
       //======================================================
