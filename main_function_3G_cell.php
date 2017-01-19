@@ -81,7 +81,7 @@ function returnStats3G_cell($selection, $startDate, $endDate){
       $sql_string_first .= "ROUND((sum(Acceptance_Stats_3G_daily.VS_HSDPA_MeanChThroughput_TotalMBytes) + sum(Acceptance_Stats_3G_daily.VS_HSUPA_MeanChThroughput_TotalMBytes)) *
                             revenue_figures.data +
                             ((sum(Acceptance_Stats_3G_daily.VS_AMR_RB_Erlang_Sum)/2) * revenue_figures.voice),2)
-                            AS 'Total Revenue ($)',";
+                            AS 'Total Revenue ($) - cell delta',";
 
         //CS RAB congestion (summed)
       // $sql_string_first .= "(sum(VS_RAB_FailEstabCS_Code_Cong) + 
@@ -110,9 +110,9 @@ function returnStats3G_cell($selection, $startDate, $endDate){
                             AS 'Voice Traffic (Erl)',";
 
       $sql_string_first .= "ROUND(avg(Acceptance_Stats_3G_daily.VS_HSDPA_MeanChThroughput),2)
-                            AS 'Mean HSDPA Throughput (Kbps)',";
+                            AS 'Mean HSDPA Throughput (Kbps)'";
 
-      $sql_string_first .=   "ROUND(AVG((( pow(10, (Acceptance_Stats_3G_daily_bh.`TCP Mean(dBm)` / 10))
+      $sql_string_first .=   ", ROUND(AVG((( pow(10, (Acceptance_Stats_3G_daily_bh.`TCP Mean(dBm)` / 10))
                             / 1000)
                             / if((Acceptance_Stats_3G_daily_bh.`TCP Max(dBm)` > 43), 40, 20))
                             * 100),2)
